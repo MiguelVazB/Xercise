@@ -1,3 +1,5 @@
-#root, body {
+#root, body, html {
     background-color: #2b2c32;
+    margin: 0;
+    padding: 0;
 }
