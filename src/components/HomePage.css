@@ -1,0 +1,13 @@
+.homePage{
+    background-color: green;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100svh;
+}
+
+.homePage p {
+    margin: 0;
+}
