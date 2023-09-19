@@ -1,0 +1,29 @@
+nav {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4.5rem;
+    color: #cedad4;
+    padding: 1rem 2rem;
+    align-items: center;
+}
+
+.logoContainer {
+    height: 100%;
+    object-fit: contain;
+}
+
+.logoContainer img {
+    height: 100%;
+}
+
+.navLinks{
+    margin-left: 5rem;
+    display: flex;
+    gap: 5rem;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
