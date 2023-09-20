@@ -5,10 +5,9 @@ nav {
     left: 0;
     right: 0;
     height: 4.5rem;
-    color: #cedad4;
     padding: 1rem 2rem;
     align-items: center;
-    font-size: clamp(1rem, 1.5vw, 5rem);
+    font-size: clamp(1rem, 2vw, 5rem);
 }
 
 .logoContainer {
