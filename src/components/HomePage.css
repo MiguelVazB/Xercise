@@ -1,5 +1,4 @@
 .homePage{
-    background-color: green;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,6 +7,16 @@
     height: 100svh;
 }
 
-.homePage p {
+.homePageHook {
     margin: 0;
+    font-size: clamp(1rem, 3vw, 6rem);
+}
+
+.homePageHook b{
+    color: #ffd746;
+    line-height: 5rem;
+}
+
+.homePage img{
+    height: 80%;
 }
