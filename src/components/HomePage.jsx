@@ -5,8 +5,12 @@ import MainPic from "../assets/manExercising.png";
 const HomePage = () => {
   return (
     <div className="homePage">
-      <p>Xercise: Your Online Exercise Companion</p>
-      <img src={MainPic} />
+      <p className="homePageHook">
+        <b>Xercise</b>
+        <br />
+        Your Online Exercise Companion
+      </p>
+      <img src={MainPic} alt="man exercising with dumbbells (Renegade row)" />
     </div>
   );
 };
