@@ -30,6 +30,16 @@ nav {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.navLinks a{
+    text-decoration: none;
+    color: #cedad4;
+    transition: color 0.2s ease-in-out;
+}
+
+.navLinks a:hover{
+    color: #c77b00;
+}
+
 @media (max-width: 500px) {
     nav{
         padding: 0.5rem;
