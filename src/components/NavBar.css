@@ -13,6 +13,8 @@ nav {
 .logoContainer {
     height: 100%;
     object-fit: contain;
+    display: flex;
+    align-items: center;
 }
 
 .logoContainer img {
@@ -26,4 +28,26 @@ nav {
     justify-content: space-between;
     align-items: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media (max-width: 500px) {
+    nav{
+        padding: 0.5rem;
+    }
+    .navLinks{
+        margin-left: 2rem;
+    }
+    .logoContainer img {
+        height: 80%;
+    }
+}
+
+@media (max-width: 350px) {
+    .navLinks{
+        margin-left: 1rem;
+        gap: 1rem;
+    }
+    .logoContainer img {
+        height: 60%;
+    }
 }
