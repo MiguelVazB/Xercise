@@ -15,15 +15,17 @@
     word-wrap: normal;
     text-shadow: -8px 4px 5px black;
     margin-right: 2rem;
+    text-align: center;
 }
 
 .brandName{
     color: #c77b00;
+    font-size: clamp(1.8rem, 3.5vw, 6.2rem);
 }
 
 .homePage img{
     width: auto;
-    height: clamp(55%, 40vw, 50rem);
+    height: clamp(25%, 80vw, 65%);
 }
 
 @media (max-width: 1000px) {
@@ -33,9 +35,5 @@
     .homePageHook{
         margin: 0;
         margin-bottom: 3rem;
-    }
-    .homePage img{
-        height: auto;
-        width: clamp(95%, 40vw, 50rem);
     }
 }
