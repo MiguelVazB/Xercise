@@ -8,6 +8,7 @@ nav {
     padding: 1rem 2rem;
     align-items: center;
     font-size: clamp(1rem, 2vw, 5rem);
+    z-index: 10;
 }
 
 .logoContainer {
