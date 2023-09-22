@@ -5,11 +5,10 @@ import MainPic from "../assets/manExercising.png";
 const HomePage = () => {
   return (
     <div className="homePage">
-      <p className="homePageHook">
-        <b>Xercise</b>
-        <br />
-        Your Online Exercise Companion
-      </p>
+      <div className="homePageHook">
+        <p className="brandName">Xercise</p>
+        <p>Your Online Exercise Companion</p>
+      </div>
       <img src={MainPic} alt="man exercising with dumbbells (Renegade row)" />
     </div>
   );
