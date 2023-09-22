@@ -1,4 +1,5 @@
 .homePage{
+    z-index: 1;
     margin: 0;
     padding: 0;
     display: flex;
@@ -9,6 +10,7 @@
 }
 
 .homePageHook {
+    z-index: 1;
     margin: 0;
     font-size: clamp(1.5rem, 3vw, 6rem);
     padding: 1rem;
@@ -20,12 +22,13 @@
 
 .brandName{
     color: #c77b00;
-    font-size: clamp(1.8rem, 3.5vw, 6.2rem);
+    font-size: clamp(2rem, 4vw, 6.2rem);
 }
 
 .homePage img{
+    z-index: 1;
     width: auto;
-    height: clamp(25%, 75vw, 65%);
+    height: clamp(10rem, 70vw, 40rem);
 }
 
 .exploreBtn{
@@ -38,9 +41,25 @@
     display: inline-block;
 }
 
+.backSlogan{
+    z-index: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 2rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.04);
+    font-size: clamp(1.5rem, 8vw, 30rem);
+}
+
 @media (max-width: 1000px) {
     .homePage{
         flex-direction: column;
+        justify-content: center;
+    }
+    .homePage img{
+        z-index: 1;
+        width: auto;
+        height: clamp(15rem, 50vw, 30rem);
     }
     .homePageHook{
         margin: 0;

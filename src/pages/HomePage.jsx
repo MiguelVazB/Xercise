@@ -14,6 +14,7 @@ const HomePage = () => {
         </Link>
       </div>
       <img src={MainPic} alt="man exercising with dumbbells (Renegade row)" />
+      <p className="backSlogan">Unleash your Inner Beast</p>
     </div>
   );
 };
