@@ -1,4 +1,9 @@
 .homePage{
+    display: flex;
+    flex-direction: column;
+}
+
+.heroComponent{
     z-index: 1;
     margin: 0;
     padding: 0;
