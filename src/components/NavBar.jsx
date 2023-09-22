@@ -1,16 +1,17 @@
 import React from "react";
 import Logo from "../assets/XerciseLogo_transparent.png";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 const NavBar = () => {
   return (
     <nav>
-      <div className="logoContainer">
+      <Link to="/" className="logoContainer">
         <img src={Logo} alt="Xercise Logo" />
-      </div>
+      </Link>
       <div className="navLinks">
-        <div>Home</div>
-        <div>Exercises</div>
+        <Link to="/">Home</Link>
+        <Link to="/exercises">Exercises</Link>
       </div>
     </nav>
   );
