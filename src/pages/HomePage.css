@@ -25,7 +25,17 @@
 
 .homePage img{
     width: auto;
-    height: clamp(25%, 80vw, 65%);
+    height: clamp(25%, 75vw, 65%);
+}
+
+.exploreBtn{
+    text-decoration: none;
+    color: black;
+    text-shadow: none;
+    background-color: #c77b00;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    display: inline-block;
 }
 
 @media (max-width: 1000px) {
