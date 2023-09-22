@@ -2,21 +2,40 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-direction: row;
     align-items: center;
     height: 100svh;
 }
 
 .homePageHook {
     margin: 0;
-    font-size: clamp(1rem, 3vw, 6rem);
+    font-size: clamp(1.5rem, 3vw, 6rem);
+    padding: 1rem;
+    word-wrap: normal;
+    text-shadow: -8px 4px 5px black;
+    margin-right: 2rem;
 }
 
-.homePageHook b{
-    color: #ffd746;
-    line-height: 5rem;
+.brandName{
+    color: #c77b00;
 }
 
 .homePage img{
-    height: 80%;
+    width: auto;
+    height: clamp(55%, 40vw, 50rem);
+}
+
+@media (max-width: 1000px) {
+    .homePage{
+        flex-direction: column;
+    }
+    .homePageHook{
+        margin: 0;
+        margin-bottom: 3rem;
+    }
+    .homePage img{
+        height: auto;
+        width: clamp(95%, 40vw, 50rem);
+    }
 }
