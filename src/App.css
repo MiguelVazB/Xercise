@@ -1,5 +1,11 @@
 #root, body, html {
-    background-color: #2b2c32;
+    /* background-color: #2b2c32; */
+    background-image: linear-gradient(
+        45deg,
+        hsl(231deg 8% 18%) 0%,
+        hsl(231deg 12% 11%) 49%,
+        hsl(0deg 0% 0%) 100%
+    );
     margin: 0;
     padding: 0;
     color: #cedad4;
