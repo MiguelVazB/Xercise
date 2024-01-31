@@ -1,12 +1,14 @@
 import React from "react";
 import HeroComponent from "../components/HeroComponent";
+import ExerciseSearch from "../components/ExerciseSearch";
 import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <div className="homePage">
+    <main className="homePage">
       <HeroComponent />
-    </div>
+      <ExerciseSearch />
+    </main>
   );
 };
 
