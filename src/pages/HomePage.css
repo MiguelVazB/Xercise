@@ -1,7 +1,10 @@
 .homePage{
     display: flex;
     flex-direction: column;
+    /* background-color: red; */
 }
+
+/* HeroComponent */
 
 .heroComponent{
     z-index: 1;
@@ -70,4 +73,30 @@
         margin: 0;
         margin-bottom: 3rem;
     }
+}
+
+/* ExerciseSearch component */
+
+.searchContainer{
+    display: flex;
+    flex-direction: row;
+    height: 1.5em;
+    margin: 1rem 3rem;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: green;
+    font-size: clamp(1.5rem, 3vw, 5rem);
+}
+
+.searchContainer input{
+    flex: 1;
+    padding-left: 1rem;
+}
+
+.searchContainer button{
+    flex: 0.2;
+    background-color: #c77b00;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
 }
