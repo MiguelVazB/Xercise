@@ -100,3 +100,17 @@
     border: 0;
     cursor: pointer;
 }
+
+/* HorizontalScrollBar component */
+
+.horizontalScrollBar{
+    background-color: red;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* BodyPart component */
+.item{
+    margin: 1em;
+}
