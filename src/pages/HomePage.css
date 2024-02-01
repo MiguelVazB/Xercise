@@ -33,7 +33,7 @@
     font-size: clamp(2rem, 4vw, 6.2rem);
 }
 
-.homePage img{
+.mainPic{
     z-index: 1;
     width: auto;
     height: clamp(10rem, 70vw, 40rem);
@@ -64,7 +64,7 @@
         flex-direction: column;
         justify-content: center;
     }
-    .homePage img{
+    .mainPic{
         z-index: 1;
         width: auto;
         height: clamp(15rem, 50vw, 30rem);
@@ -104,6 +104,10 @@
 
 /* HorizontalScrollBar component */
 
+.horMenuContainer{
+    position: relative;
+}
+
 .horizontalScrollBar{
     /* background-color: green; */
     display: flex;
@@ -111,18 +115,35 @@
     margin: 4em;
 }
 
+.leftArrow, .rightArrow{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    cursor: pointer;
+}
+
+.rightArrow{
+    right: 20px;
+}
+
+.leftArrow{
+    left: 20px;
+}
+
 
 /* BodyPart component */
 .bodyPart{
-    margin: 1em;
+    margin: 4em;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     /* background-color: red; */
 }
 
 .bodyPart:hover{
-    background-color: #c77b00;
+    background-color: rgba(199, 123, 0, 70%);
+    scale: 1.1;
 }
 
 .bodyPart p{
