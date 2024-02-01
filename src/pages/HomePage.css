@@ -104,31 +104,25 @@
 
 /* HorizontalScrollBar component */
 
-.horMenuContainer{
-    position: relative;
-}
-
 .horizontalScrollBar{
     /* background-color: green; */
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
     margin: 4em;
 }
 
 .leftArrow, .rightArrow{
     z-index: 1;
-    position: absolute;
-    top: 0;
-    width: 50px;
+    height: 50px;
     cursor: pointer;
 }
 
 .rightArrow{
-    right: 20px;
+    margin-right: 20px;
 }
 
 .leftArrow{
-    left: 20px;
+    margin-left: 20px;
 }
 
 
