@@ -99,18 +99,40 @@
     font-weight: bold;
     border: 0;
     cursor: pointer;
+    font-size: large;
 }
 
 /* HorizontalScrollBar component */
 
 .horizontalScrollBar{
-    background-color: red;
+    /* background-color: green; */
     display: flex;
     justify-content: center;
+    margin: 4em;
 }
 
 
 /* BodyPart component */
-.item{
+.bodyPart{
     margin: 1em;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out;
+    /* background-color: red; */
+}
+
+.bodyPart:hover{
+    background-color: #c77b00;
+}
+
+.bodyPart p{
+    font-size: x-large;
+    margin: 0;
+}
+
+.bodyPart img{
+    /* background-color: gold; */
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
 }
