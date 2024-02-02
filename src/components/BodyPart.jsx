@@ -2,9 +2,9 @@ import React from "react";
 
 const BodyPart = ({ part, selectedBodyPart, setSelectedBodyPart }) => {
   return (
-    <div className="bodyPart">
+    <div className="bodyPart" onClick={() => setSelectedBodyPart(part)}>
       <img
-        src={`./public/bodyParts/${
+        src={`./bodyParts/${
           part == "lower arms" || part == "upper arms"
             ? "arm"
             : part == "lower legs" || part == "upper legs"
@@ -12,7 +12,7 @@ const BodyPart = ({ part, selectedBodyPart, setSelectedBodyPart }) => {
             : part
         }.png`}
       />
-      <p>{part}</p>
+      <p>{part.charAt(0).toUpperCase() + part.slice(1)}</p>
     </div>
   );
 };
