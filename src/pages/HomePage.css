@@ -153,3 +153,14 @@
     height: 100px;
     object-fit: contain;
 }
+
+/* Exercises Component */
+
+.exercisesComponent{
+    /* background-color: green; */
+    margin: 3em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
