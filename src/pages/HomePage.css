@@ -113,7 +113,7 @@
 
 .leftArrow, .rightArrow{
     z-index: 1;
-    height: 50px;
+    height: 40px;
     cursor: pointer;
 }
 
@@ -136,7 +136,9 @@
 }
 
 .bodyPart:hover{
-    background-color: rgba(199, 123, 0, 70%);
+    /* background-color: rgba(199, 123, 0, 70%); */
+    border-bottom: 3px solid rgba(199, 123, 0, 70%);
+    padding-bottom: 5px;
     scale: 1.1;
 }
 
@@ -147,7 +149,7 @@
 
 .bodyPart img{
     /* background-color: gold; */
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
 }
