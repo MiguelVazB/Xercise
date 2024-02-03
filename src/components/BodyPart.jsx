@@ -2,7 +2,12 @@ import React from "react";
 
 const BodyPart = ({ part, selectedBodyPart, setSelectedBodyPart }) => {
   return (
-    <div className="bodyPart" onClick={() => setSelectedBodyPart(part)}>
+    <div
+      className={`bodyPart ${
+        selectedBodyPart == part ? "categorySelected" : ""
+      }`}
+      onClick={() => setSelectedBodyPart(part)}
+    >
       <img
         src={`./bodyParts/${
           part == "lower arms" || part == "upper arms"
