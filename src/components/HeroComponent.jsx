@@ -6,7 +6,7 @@ const HeroComponent = () => {
   return (
     <div className="heroComponent">
       <div className="homePageHook">
-        <p className="brandName">Xercise</p>
+        <h1 className="brandName">Xercise</h1>
         <p>Your Online Exercise Companion</p>
         <Link to="exercises" className="exploreBtn">
           Explore Exercises
