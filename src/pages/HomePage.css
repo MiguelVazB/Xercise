@@ -154,6 +154,11 @@
     object-fit: contain;
 }
 
+.categorySelected{
+    border-bottom: 3px solid rgba(199, 123, 0, 70%);
+    padding-bottom: 5px;
+}
+
 /* Exercises Component */
 
 .exercisesComponent{
