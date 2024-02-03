@@ -9,7 +9,7 @@ const ExerciseSearch = ({
   setSelectedBodyPart,
 }) => {
   const [textInput, setTextInput] = useState("");
-  const [bodyParts, setBodyParts] = useState([]);
+  const [bodyParts, setBodyParts] = useState(["all"]);
 
   useEffect(() => {
     const fetchBodyParts = async () => {
@@ -18,14 +18,13 @@ const ExerciseSearch = ({
         exerciseOptions
       );
 
-      setBodyParts([...bodyParts]);
+      setBodyParts(["all", ...bodyParts]);
     };
 
     fetchBodyParts();
   }, []);
 
   const handleSearch = async () => {
-    console.log(bodyParts);
     if (textInput) {
       const exercisesData = await fetchData(
         "https://exercisedb.p.rapidapi.com/exercises?limit=-1",
