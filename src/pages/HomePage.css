@@ -132,11 +132,9 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
-    /* background-color: red; */
 }
 
 .bodyPart:hover{
-    /* background-color: rgba(199, 123, 0, 70%); */
     border-bottom: 3px solid rgba(199, 123, 0, 70%);
     padding-bottom: 5px;
     scale: 1.1;
@@ -162,10 +160,65 @@
 /* Exercises Component */
 
 .exercisesComponent{
-    /* background-color: green; */
     margin: 3em 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.exercisesComponent h2{
+    margin: 2em;
+}
+
+.exercisesContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 4em;
+    grid-row-gap: 3em;
+}
+
+/* ExerciseBox Component */
+
+.exerciseBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #c77b00; */
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.exerciseBox img{
+    background-color: white;
+    width: 100%;
+}
+
+.exerciseInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-top: 5px solid #c77b00;
+}
+
+.musclesInvolved{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    margin: 0;
+}
+
+.musclesInvolved p{
+    font-size: small;
+    background-color: gray;
+    padding: 10px 8px;
+    border-radius: 10px;
+    margin-bottom: 0;
 }
