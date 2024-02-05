@@ -7,7 +7,11 @@ const ExerciseBox = ({ exercise }) => {
       <div className="exerciseInfoContainer">
         <div className="musclesInvolved">
           {exercise.secondaryMuscles.map((muscle) => {
-            return <p>{muscle.charAt(0).toUpperCase() + muscle.slice(1)}</p>;
+            return (
+              <p key={`${muscle}${exercise.id}`}>
+                {muscle.charAt(0).toUpperCase() + muscle.slice(1)}
+              </p>
+            );
           })}
         </div>
         <p className="exerciseName">
