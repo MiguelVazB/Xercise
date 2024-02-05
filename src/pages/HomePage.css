@@ -174,9 +174,57 @@
 .exercisesContainer{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 4em;
     grid-row-gap: 3em;
+}
+
+.paginationButtons{
+    margin-top: 2em;
+    display: flex;
+    height: min-content;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    list-style: none;
+    z-index: 10;
+}
+
+.paginationButtons li{
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 10px;
+    transition-property: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.paginationButtons li:hover{
+    background-color: black;
+    color: rgb(231, 192, 54);
+}
+
+.previousButton, .nextButton{
+    color: black;
+    background-color: #c77b00;
+    padding: 6px 10px;
+    border-radius: 10px;
+    transition-property: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.previousButton:hover, .nextButton:hover{
+    background-color: black;
+    color: rgb(231, 192, 54);
+}
+
+.paginationActive{
+    background-color: #c77b00;
+    border-radius: 10px;
+    color: black;
 }
 
 /* ExerciseBox Component */
@@ -212,12 +260,16 @@
 .musclesInvolved{
     display: flex;
     flex-direction: row;
-    gap: 1em;
-    margin: 0;
+    gap: 0.5em;
+    margin: 0px 10px;
+    flex-wrap: wrap;
 }
 
 .musclesInvolved p{
-    font-size: small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-small;
     background-color: rgb(231, 192, 54);
     padding: 8px;
     border-radius: 20px;
