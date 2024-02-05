@@ -3,7 +3,7 @@ import React from "react";
 const ExerciseBox = ({ exercise }) => {
   return (
     <div className="exerciseBox">
-      <img src={exercise.gifUrl} alt={`${exercise.name} gif`} />
+      <img src={exercise.gifUrl} alt={`${exercise.name} gif`} loading="lazy" />
       <div className="exerciseInfoContainer">
         <div className="musclesInvolved">
           {exercise.secondaryMuscles.map((muscle) => {
