@@ -4,7 +4,12 @@ import { exerciseOptions, fetchData } from "../utils/fetchData";
 import ExerciseBox from "./ExerciseBox";
 import ReactPaginate from "react-paginate";
 
-const Exercises = ({ exercises, setExercises, selectedBodyPart }) => {
+const Exercises = ({
+  exercises,
+  setExercises,
+  selectedBodyPart,
+  resultsRef,
+}) => {
   const [pageNumber, setPageNumber] = useState(0);
 
   const exercisesPerPage = 6;
@@ -32,29 +37,29 @@ const Exercises = ({ exercises, setExercises, selectedBodyPart }) => {
     };
 
     fetchBodyParts();
-    console.log("hi");
   }, []);
 
   return (
-    <div className="exercisesComponent">
+    <div className="exercisesComponent" ref={resultsRef}>
       <h2>Showing Results</h2>
       <div className="exercisesContainer">
-        {/* {exercises.map((exercise) => {
-          return <ExerciseBox key={exercise.id} exercise={exercise} />;
-        })} */}
-        {displayExercises}
+        {exercises.length > 0 ? displayExercises : "nah fam"}
       </div>
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName="paginationButtons"
-        previousLinkClassName="previousButton"
-        nextLinkClassName="nextButton"
-        activeClassName="paginationActive"
-        disabledClassName="disabledButtons"
-      />
+      {exercises.length > 0 ? (
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName="paginationButtons"
+          previousLinkClassName="previousButton"
+          nextLinkClassName="nextButton"
+          activeClassName="paginationActive"
+          disabledClassName="disabledButtons"
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
