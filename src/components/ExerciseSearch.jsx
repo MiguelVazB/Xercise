@@ -7,9 +7,11 @@ const ExerciseSearch = ({
   setExercises,
   selectedBodyPart,
   setSelectedBodyPart,
+  resultsRef,
 }) => {
   const [textInput, setTextInput] = useState("");
   const [bodyParts, setBodyParts] = useState(["all"]);
+  const [resultsReady, setResultsReady] = useState(false);
 
   useEffect(() => {
     const fetchBodyParts = async () => {
@@ -24,8 +26,15 @@ const ExerciseSearch = ({
     fetchBodyParts();
   }, []);
 
+  useEffect(() => {
+    if (resultsReady) {
+      resultsRef?.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [resultsReady]);
+
   const handleSearch = async () => {
     if (textInput) {
+      setResultsReady(false);
       const exercisesData = await fetchData(
         "https://exercisedb.p.rapidapi.com/exercises?limit=-1",
         exerciseOptions
@@ -41,6 +50,7 @@ const ExerciseSearch = ({
 
       setTextInput("");
       setExercises(searchedExercises);
+      setResultsReady(true);
     }
   };
 
