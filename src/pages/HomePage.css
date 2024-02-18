@@ -180,7 +180,7 @@
 }
 
 .paginationButtons{
-    margin-top: 2em;
+    margin-top: 3em;
     display: flex;
     height: min-content;
     width: 100%;
@@ -189,10 +189,11 @@
     gap: 2em;
     list-style: none;
     z-index: 10;
+    padding: 0;
 }
 
-.paginationButtons li{
-    padding: 5px;
+.pageButtons{
+    padding: 10px;
     cursor: pointer;
     font-weight: bold;
     border-radius: 10px;
@@ -201,30 +202,32 @@
     transition-timing-function: ease-in-out;
 }
 
-.paginationButtons li:hover{
+.pageButtons:hover{
     background-color: black;
     color: rgb(231, 192, 54);
 }
 
 .previousButton, .nextButton{
+    cursor: pointer;
     color: black;
     background-color: #c77b00;
-    padding: 6px 10px;
+    padding: 10px 14px;
     border-radius: 10px;
     transition-property: background-color, color;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
 }
 
-.previousButton:hover, .nextButton:hover{
-    background-color: black;
-    color: rgb(231, 192, 54);
-}
-
 .paginationActive{
+    display: inline-flex;
     background-color: #c77b00;
     border-radius: 10px;
     color: black;
+}
+
+.previousButton:hover, .nextButton:hover{
+    background-color: black;
+    color: rgb(231, 192, 54);
 }
 
 /* ExerciseBox Component */
