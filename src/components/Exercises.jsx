@@ -88,6 +88,7 @@ const Exercises = ({
     } else {
       fetchBodyParts();
     }
+    setPageNumber(0);
   }, [selectedBodyPart]);
 
   // Scroll to the results section when the results are ready
@@ -114,6 +115,7 @@ const Exercises = ({
           nextLinkClassName="nextButton"
           activeClassName="paginationActive"
           pageLinkClassName="pageButtons"
+          forcePage={pageNumber}
         />
       ) : (
         ""
