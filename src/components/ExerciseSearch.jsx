@@ -21,9 +21,17 @@ const ExerciseSearch = ({
       );
 
       setBodyParts(["all", ...bodyParts]);
+      localStorage.setItem("bodyParts", JSON.stringify(["all", ...bodyParts]));
+      console.log("Got all body parts!");
     };
 
-    fetchBodyParts();
+    if (localStorage.getItem("bodyParts") != null) {
+      let bodyPartsLocal = JSON.parse(localStorage.getItem("bodyParts"));
+      setBodyParts(bodyPartsLocal);
+      console.log("Body parts from local storage!");
+    } else {
+      fetchBodyParts();
+    }
   }, []);
 
   useEffect(() => {
@@ -51,6 +59,7 @@ const ExerciseSearch = ({
       setTextInput("");
       setExercises(searchedExercises);
       setResultsReady(true);
+      console.log("Got all exercises from input!");
     }
   };
 
