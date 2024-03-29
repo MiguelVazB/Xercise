@@ -1,4 +1,5 @@
 .homePage{
+    margin-top: 4.5rem;
     display: flex;
     flex-direction: column;
     /* background-color: red; */
@@ -67,11 +68,17 @@
     .mainPic{
         z-index: 1;
         width: auto;
-        height: clamp(15rem, 50vw, 30rem);
+        height: clamp(5rem, 50vw, 30rem);
     }
     .homePageHook{
         margin: 0;
         margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 1000px) and (orientation: portrait) {
+    .heroComponent{
+        flex-direction: column;
     }
 }
 
@@ -84,8 +91,25 @@
     margin: 1rem 3rem;
     border-radius: 20px;
     overflow: hidden;
-    background-color: green;
     font-size: clamp(1.5rem, 3vw, 5rem);
+}
+
+@media (max-width: 360px){
+    .searchContainer{
+        display: flex;
+        flex-direction: column;
+        height: 3em;
+        margin: 1.5rem 0.5rem;
+    }
+    .searchContainer input{
+        flex: 1 !important;
+        text-align: center !important;
+        padding: 0 !important;
+    }
+    .searchContainer button{
+        width: 100% !important;
+        flex: 1 !important;
+    }
 }
 
 .searchContainer input{
@@ -94,22 +118,16 @@
 }
 
 .searchContainer button{
-    flex: 0.2;
+    width: max-content;
+    padding: 0px 1em;
     background-color: #c77b00;
     font-weight: bold;
     border: 0;
     cursor: pointer;
-    font-size: large;
+    font-size: clamp(1rem, 3vw, 5rem);
 }
 
 /* HorizontalScrollBar component */
-
-.horizontalScrollBar{
-    /* background-color: green; */
-    /* display: flex; */
-    /* justify-content: center; */
-    margin: 4em;
-}
 
 .leftArrow, .rightArrow{
     z-index: 1;
@@ -152,6 +170,40 @@
     object-fit: contain;
 }
 
+@media (max-width: 550px) {
+    .bodyPart{
+        margin: 2em;
+    }
+    .bodyPart img{
+        width: 60px;
+        height: 60px;
+    }
+    .bodyPart p{
+        font-size: larger;
+        margin: 0;
+    }
+    .leftArrow, .rightArrow{
+        height: 30px;
+    }
+}
+
+@media (max-width: 300px) {
+    .bodyPart{
+        margin: 1em;
+    }
+    .bodyPart img{
+        width: 40px;
+        height: 40px;
+    }
+    .bodyPart p{
+        font-size: large;
+        margin: 0;
+    }
+    .leftArrow, .rightArrow{
+        height: 20px;
+    }
+}
+
 .categorySelected{
     border-bottom: 3px solid rgba(199, 123, 0, 70%);
     padding-bottom: 5px;
@@ -179,10 +231,39 @@
     grid-row-gap: 3em;
 }
 
+.exercisesContainerLessThan4{
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-rows: auto !important;
+}
+
+@media (max-width: 800px) {
+    .exercisesContainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 3em;
+        grid-row-gap: 2em;
+    }
+}
+
+@media (max-width: 550px) {
+    .exercisesContainerLessThan4{
+        grid-template-columns: repeat(1, 1fr) !important;
+        grid-template-rows: auto !important;
+    }
+    .exercisesContainer{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+        grid-column-gap: 3em;
+        grid-row-gap: 2em;
+    }
+}
+
 .paginationButtons{
     margin-top: 3em;
     display: flex;
-    height: min-content;
+    font-size: 2vh;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -190,6 +271,37 @@
     list-style: none;
     z-index: 10;
     padding: 0;
+}
+
+@media (max-width: 880px){
+    .paginationButtons{
+        gap: 1em;
+    }
+}
+
+@media (max-width: 700px){
+    .paginationButtons{
+        gap: 0.5em;
+        font-size: 1.8vh;
+    }
+}
+
+@media (max-width: 540px){
+    .paginationButtons{
+        font-size: 1.2vh;
+    }
+}
+
+@media (max-width: 440px){
+    .pageButtons, .break{
+        display: none;
+    }
+    .paginationButtons{
+        font-size: 1.8vh;
+    }
+    .paginationActive .pageButtons{
+        display: flex;
+    }
 }
 
 .pageButtons{
@@ -211,7 +323,7 @@
     cursor: pointer;
     color: black;
     background-color: #c77b00;
-    padding: 10px 14px;
+    padding: 10px 12px;
     border-radius: 10px;
     transition-property: background-color, color;
     transition-duration: 0.2s;
@@ -243,26 +355,24 @@
     font-weight: bold;
     border-radius: 20px;
     overflow: hidden;
-    width: 22em;
-    height: 32em;
 }
 
 .imageContainer{
-    width: 100%;
-    height: 70%;
+    flex: 2;
     object-fit: cover;
     overflow: hidden;
 }
 
 .exerciseBox img{
     background-color: white;
+    height: 100%;
     width: 100%;
-    /* height: 100%; */
 }
 
 .exerciseInfoContainer{
     display: flex;
     flex: 1;
+    height: 50%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -275,7 +385,8 @@
     flex-direction: row;
     gap: 0.5em;
     margin: 0px 10px;
-    flex-wrap: wrap;
+    overflow: auto;
+    width: 100%;
 }
 
 .musclesInvolved p{
@@ -286,12 +397,19 @@
     background-color: rgb(231, 192, 54);
     padding: 8px;
     border-radius: 20px;
-    margin-bottom: 0;
 }
 
 .exerciseName{
-    width: 90%;
+    width: 95%;
     text-align: center;
     word-break: normal;
     font-size: x-large;
+    margin: 10px 0px;
+}
+
+@media (max-width: 700px) {
+    .exerciseName{
+        font-size: large;
+        margin: 5px 0px;
+    }
 }
