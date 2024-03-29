@@ -98,7 +98,7 @@ const Exercises = ({
     if (resultsReady && selectedBodyPart != "all") {
       resultsRef?.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [resultsReady, exercises]);
+  }, [resultsReady, selectedBodyPart]);
 
   return (
     <div className="exercisesComponent" ref={resultsRef}>
