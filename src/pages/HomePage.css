@@ -98,23 +98,29 @@
     .searchContainer{
         display: flex;
         flex-direction: column;
-        height: 3em;
+        height: 4em;
         margin: 1.5rem 0.5rem;
+        border-radius: 0;
     }
     .searchContainer input{
         flex: 1 !important;
         text-align: center !important;
+        margin-bottom: 1rem;
+        border-radius: 10px;
         padding: 0 !important;
     }
     .searchContainer button{
-        width: 100% !important;
+        width: 50% !important;
+        align-self: center;
+        border-radius: 10px;
         flex: 1 !important;
     }
 }
 
 .searchContainer input{
     flex: 1;
-    padding-left: 1rem;
+    padding-left: 0.5rem;
+    font-size: clamp(0.8rem, 1.4vw, 2em);
 }
 
 .searchContainer button{
@@ -217,6 +223,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .exercisesComponent h2{
@@ -229,11 +236,13 @@
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 4em;
     grid-row-gap: 3em;
+    min-height: 100vh;
 }
 
 .exercisesContainerLessThan4{
     grid-template-columns: repeat(3, 1fr) !important;
     grid-template-rows: auto !important;
+    min-height: 0;
 }
 
 @media (max-width: 800px) {
@@ -254,9 +263,12 @@
     .exercisesContainer{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: repeat(auto, 1fr);
         grid-column-gap: 3em;
         grid-row-gap: 2em;
+    }
+    .pulse{
+        flex: none !important;
+        height: 50dvh !important;
     }
 }
 
@@ -355,6 +367,26 @@
     font-weight: bold;
     border-radius: 20px;
     overflow: hidden;
+    max-width: 360px;
+    max-height: 440px;
+}
+
+.pulse {
+    width: 100%;
+    height: 100%;
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      background-color: lightgrey;
+    }
+    50% {
+      opacity: 0.5;
+      background-color: white;
+    }
 }
 
 .imageContainer{
@@ -383,6 +415,7 @@
 .musclesInvolved{
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
     gap: 0.5em;
     margin: 0px 10px;
     overflow: auto;
@@ -394,8 +427,8 @@
     justify-content: center;
     align-items: center;
     font-size: small;
-    background-color: rgb(231, 192, 54);
-    padding: 8px;
+    background-color: #C77B00;
+    padding: 8px 10px;
     border-radius: 20px;
 }
 
