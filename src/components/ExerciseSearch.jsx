@@ -41,7 +41,9 @@ const ExerciseSearch = ({
   }, [resultsReady]);
 
   const handleSearch = async () => {
-    if (textInput) {
+    let textInputWithoutSpaces = textInput.trim().toLowerCase();
+    if (textInputWithoutSpaces) {
+      console.log("searching...", textInputWithoutSpaces);
       setResultsReady(false);
       const exercisesData = await fetchData(
         "https://exercisedb.p.rapidapi.com/exercises?limit=-1",
@@ -50,12 +52,13 @@ const ExerciseSearch = ({
 
       const searchedExercises = exercisesData.filter(
         (exercise) =>
-          exercise.name.toLowerCase().includes(textInput) ||
-          exercise.target.toLowerCase().includes(textInput) ||
-          exercise.equipment.toLowerCase().includes(textInput) ||
-          exercise.bodyPart.toLowerCase().includes(textInput)
+          exercise.name.toLowerCase().includes(textInputWithoutSpaces) ||
+          exercise.target.toLowerCase().includes(textInputWithoutSpaces) ||
+          exercise.equipment.toLowerCase().includes(textInputWithoutSpaces) ||
+          exercise.bodyPart.toLowerCase().includes(textInputWithoutSpaces)
       );
 
+      console.log(searchedExercises);
       setTextInput("");
       setExercises(searchedExercises);
       setResultsReady(true);
