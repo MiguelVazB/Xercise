@@ -17,6 +17,8 @@ const Exercises = ({
   const pageCount = Math.ceil(exercises.length / exercisesPerPage);
   const pagesVisited = pageNumber * exercisesPerPage;
 
+  const exercisesDisplayed = exercises.length - pagesVisited;
+
   const displayExercises =
     exercises.length > 0
       ? exercises
@@ -101,7 +103,13 @@ const Exercises = ({
   return (
     <div className="exercisesComponent" ref={resultsRef}>
       <h2>Showing Results</h2>
-      <div className="exercisesContainer">
+      <div
+        className={`${
+          exercisesDisplayed < 4
+            ? "exercisesContainer exercisesContainerLessThan4"
+            : "exercisesContainer"
+        }`}
+      >
         {exercises.length > 0 ? displayExercises : "Loading..."}
       </div>
       {exercises.length > 0 ? (
