@@ -4,13 +4,13 @@ import "./ExerciseDetailsPage.css";
 import ExerciseDetail from "../components/ExerciseDetail";
 
 const ExerciseDetails = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const location = useLocation();
-  console.log(location.state);
+  const exercise = location.state;
 
   return (
     <div className="exerciseDetailsPage">
-      <ExerciseDetail id={id} />
+      <ExerciseDetail exercise={exercise} />
       <div>Exercise videos</div>
       <div>Similar exercise target</div>
       <div>Similar exercise equipment</div>
