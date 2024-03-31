@@ -10,11 +10,6 @@ const HomePage = () => {
   const [selectedBodyPart, setSelectedBodyPart] = useState("all");
   const resultsRef = useRef(null);
 
-  useEffect(() => {
-    console.log(exercises);
-    console.log(selectedBodyPart);
-  }, [exercises, selectedBodyPart]);
-
   return (
     <main className="homePage">
       <HeroComponent />
