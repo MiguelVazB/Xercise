@@ -41,8 +41,6 @@ const Exercises = ({
           "https://exercisedb.p.rapidapi.com/exercises?limit=-1",
           exerciseOptions
         );
-
-        setExercises(exercisesData);
         console.log("Got all exercises!");
       } else {
         exercisesData = await fetchData(
