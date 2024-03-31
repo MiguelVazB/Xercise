@@ -6,8 +6,8 @@
 .exerciseDetailComponent{
     display: flex;
     height: 60vh;
-    background-color: gray;
-    padding: 2em 3em;
+    padding: 2em 5em;
+    gap: 1rem;
 }
 
 .infoAndPic, .detailsContainer{
@@ -16,15 +16,30 @@
 }
 
 .infoAndPic{
-    flex: 1.2;
+    flex: 1;
 }
 
-.infoAndPic img{
+.exerciseImgContainer{
     width: 100%;
-    height: auto;
+    /* background-color: green; */
+    height: 100%;
+}
+
+.exerciseImgContainer img{
+    height: 100%;
     object-fit: cover;
 }
 
 .detailsContainer{
-    flex: 1;
+    flex: 2;
+    /* justify-content: center; */
+    font-size: x-large;
+}
+
+.detailsContainer h1{
+    margin: 0;
+}
+
+.detailsContainer p{
+    margin: 0;
 }
