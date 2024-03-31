@@ -1,0 +1,30 @@
+.exerciseDetailsPage{
+    margin-top: 5.5rem;
+    height: fit-content;
+}
+
+.exerciseDetailComponent{
+    display: flex;
+    height: 60vh;
+    background-color: gray;
+    padding: 2em 3em;
+}
+
+.infoAndPic, .detailsContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.infoAndPic{
+    flex: 1.2;
+}
+
+.infoAndPic img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.detailsContainer{
+    flex: 1;
+}
