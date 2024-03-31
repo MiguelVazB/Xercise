@@ -1,10 +1,13 @@
 import { React, useEffect, useState } from "react";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const ExerciseBox = ({ exercise }) => {
   const [loaded, setLoaded] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
   const [pulsing, setPulsing] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (loaded) {
@@ -12,6 +15,10 @@ const ExerciseBox = ({ exercise }) => {
       setPulsing(false);
     }
   }, [loaded]);
+
+  const handleClick = () => {
+    navigate(`/exercises/${exercise.id}`, { state: exercise });
+  };
 
   return (
     <AnimatePresence>
@@ -22,6 +29,7 @@ const ExerciseBox = ({ exercise }) => {
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: -500, opacity: 0 }}
         transition={{ duration: 0.3, delay: 0.2 }}
+        onClick={() => handleClick()}
       >
         {/* <div className="exerciseBox"> */}
         <div className={`imageContainer ${pulsing ? "pulse" : ""}`}>
