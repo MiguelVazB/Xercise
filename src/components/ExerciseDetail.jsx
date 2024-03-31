@@ -1,26 +1,32 @@
 import React from "react";
 
-const ExerciseDetail = ({ id }) => {
+const ExerciseDetail = ({ exercise }) => {
+  const { id, name, gifUrl, instructions, target, secondaryMuscles } = exercise;
   return (
     <div className="exerciseDetailComponent">
       <div className="infoAndPic">
-        <h1>Exercise Name</h1>
-        <img alt="exercise image" />
+        <div className="exerciseImgContainer">
+          <img src={gifUrl} alt="exercise image" />
+        </div>
       </div>
       <div className="detailsContainer">
+        <h1>{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
+        <h2>Instructions</h2>
         <div>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis
-          quaerat maiores ipsam culpa animi nesciunt, soluta reiciendis itaque
-          neque aspernatur ullam unde ad minima maxime accusamus quas
-          repellendus laudantium libero?
+          {instructions.map((step) => (
+            <p>{step}</p>
+          ))}
         </div>
         <div>
-          <p>Muscles involved</p>
+          <h3>Muscles involved</h3>
           <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
+            <li>{target}</li>
+          </ul>
+          <h4>Secondary Muscles</h4>
+          <ul>
+            {secondaryMuscles.map((muscle) => (
+              <li key={muscle}>{muscle}</li>
+            ))}
           </ul>
         </div>
       </div>
