@@ -369,6 +369,12 @@
     overflow: hidden;
     max-width: 360px;
     max-height: 440px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.exerciseBox:hover{
+    scale: 1.05;
 }
 
 .pulse {

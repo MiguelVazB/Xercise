@@ -8,12 +8,16 @@ const ExerciseDetails = () => {
   const location = useLocation();
   const exercise = location.state;
 
+  useEffect(() => {
+    window.scrollTo(0, 0, { behavior: "smooth" });
+  }, [location]);
+
   return (
     <div className="exerciseDetailsPage">
       <ExerciseDetail exercise={exercise} />
       <div>Exercise videos</div>
       <div>Similar exercise target</div>
-      <div>Similar exercise equipment</div>
+      <div style={{ height: "100vh" }}>Similar exercise equipment</div>
     </div>
   );
 };
