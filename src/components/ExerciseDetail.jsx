@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 
-const ExerciseDetail = ({ exercise }) => {
+const ExerciseDetail = ({ exercise, exerciseId }) => {
   const [exerciseState, setExerciseState] = useState({
     id: null,
   });
-
-  const { id } = useParams();
 
   useEffect(() => {
     if (exercise != null) {
@@ -16,7 +13,7 @@ const ExerciseDetail = ({ exercise }) => {
     } else {
       const fetchExercise = async () => {
         let exerciseFetched = await fetchData(
-          `https://exercisedb.p.rapidapi.com/exercises/exercise/${id}`,
+          `https://exercisedb.p.rapidapi.com/exercises/exercise/${exerciseId}`,
           exerciseOptions
         );
         setExerciseState(exerciseFetched);
@@ -30,10 +27,8 @@ const ExerciseDetail = ({ exercise }) => {
     <div className="exerciseDetailComponent">
       {exerciseState.id && (
         <>
-          <div className="exercisePic">
-            <div className="exerciseImgContainer">
-              <img src={exerciseState.gifUrl} alt="exercise image" />
-            </div>
+          <div className="exerciseImgContainer">
+            <img src={exerciseState.gifUrl} alt="exercise image" />
           </div>
           <div className="detailsContainer">
             <h1>
