@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import BodyPart from "./BodyPart";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
+import BodyPart from "./BodyPart";
 import LeftArrowImg from "../assets/leftArrow.png";
 import rightArrowImg from "../assets/rightArrow.png";
+import VideoComponent from "./VideoComponent";
 
 const leftArrow = () => {
   const { scrollPrev } = useContext(VisibilityContext);
@@ -30,24 +31,43 @@ const rightArrow = () => {
 };
 
 const HorizontalScrollBar = ({
+  componentToDisplay,
   data,
-  selectedBodyPart,
-  setSelectedBodyPart,
+  selectedItem,
+  setSelectedItem,
 }) => {
+  const componentsInScroll = () => {
+    switch (componentToDisplay) {
+      case "bodyPart":
+        return data.map((item) => (
+          <BodyPart
+            key={item}
+            part={item}
+            setSelectedBodyPart={setSelectedItem}
+            selectedBodyPart={selectedItem}
+          />
+        ));
+      case "exerciseVideos":
+        return data.map((item) => (
+          <VideoComponent
+            key={item}
+            video={item}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          />
+        ));
+      default:
+        break;
+    }
+  };
+
   return (
     <ScrollMenu
       LeftArrow={leftArrow}
       RightArrow={rightArrow}
       className="horizontalScrollBar"
     >
-      {data.map((item) => (
-        <BodyPart
-          key={item}
-          part={item}
-          setSelectedBodyPart={setSelectedBodyPart}
-          selectedBodyPart={selectedBodyPart}
-        />
-      ))}
+      {componentsInScroll()}
     </ScrollMenu>
   );
 };
