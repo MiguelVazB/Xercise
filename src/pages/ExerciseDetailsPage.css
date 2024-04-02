@@ -3,43 +3,54 @@
     height: fit-content;
 }
 
+/* ExerciseDetail component */
+
 .exerciseDetailComponent{
     display: flex;
-    height: 60vh;
-    padding: 2em 5em;
-    gap: 1rem;
-}
-
-.infoAndPic, .detailsContainer{
-    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
     flex-direction: column;
-}
-
-.infoAndPic{
-    flex: 1;
+    font-size: clamp(1rem, 0.5rem + 0.7018vw, 2rem);
 }
 
 .exerciseImgContainer{
-    width: 100%;
-    /* background-color: green; */
-    height: 100%;
+    overflow: hidden;
+    margin: 1rem;
 }
 
 .exerciseImgContainer img{
-    height: 100%;
+    width: 100%;
+    height: auto;
     object-fit: cover;
+    border-radius: 10px;
 }
 
-.detailsContainer{
-    flex: 2;
-    /* justify-content: center; */
-    font-size: x-large;
+@media (min-width: 500px){
+    .exerciseDetailComponent{
+        flex-direction: column-reverse;
+        padding: 1rem 3rem;
+    }
+    .exerciseImgContainer{
+        margin: 2rem;
+    }
 }
 
-.detailsContainer h1{
-    margin: 0;
+@media (min-width: 1024px){
+    .exerciseDetailComponent{
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 2rem 5rem;
+    }
+    .exerciseImgContainer{
+        width: 50%;
+        margin: 0;
+    }
 }
 
-.detailsContainer p{
-    margin: 0;
+@media (min-width: 1300px){
+    .exerciseImgContainer{
+        width: 35%;
+        margin: 0;
+    }
 }
