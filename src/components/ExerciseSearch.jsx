@@ -77,9 +77,10 @@ const ExerciseSearch = ({
         <button onClick={handleSearch}>Search</button>
       </div>
       <HorizontalScrollBar
+        componentToDisplay={"bodyPart"}
         data={bodyParts}
-        setSelectedBodyPart={setSelectedBodyPart}
-        selectedBodyPart={selectedBodyPart}
+        setSelectedItem={setSelectedBodyPart}
+        selectedItem={selectedBodyPart}
       />
     </>
   );
