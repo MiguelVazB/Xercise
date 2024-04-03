@@ -15,7 +15,6 @@ const ExerciseDetails = () => {
   const [exercise, setExercise] = useState(null);
 
   useEffect(() => {
-    console.log(exercise);
     if (exerciseFromState != null) {
       setExercise(exerciseFromState);
       console.log("loaded from localstorage");
@@ -30,22 +29,25 @@ const ExerciseDetails = () => {
 
         sessionStorage.setItem(
           `exerciseID_${id}`,
-          JSON.stringify(exerciseFetched)
+          JSON.stringify(exerciseFetched != null ? exerciseFetched : "dne")
         );
         setExercise(exerciseFetched);
       };
 
       let inSession = sessionStorage.getItem(`exerciseID_${id}`);
-      if (inSession === "undefined") {
+      if (inSession === "undefined" || inSession == null) {
         console.log("fetched exercise from id");
         fetchExercise();
       } else {
         console.log("loaded from session");
-        if (inSession == null || inSession == "null") navigate("/*");
-        setExercise(JSON.parse(inSession));
+        if (JSON.parse(inSession) == "dne") {
+          navigate("/*");
+        } else {
+          setExercise(JSON.parse(inSession));
+        }
       }
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     window.scrollTo(0, 0, { behavior: "smooth" });
@@ -57,8 +59,8 @@ const ExerciseDetails = () => {
         <>
           <ExerciseDetail exercise={exercise} />
           <ExerciseVideos exerciseName={exercise.name} />
-          <SimilarExercises exercise={exercise.target} />
-          <div style={{ height: "100vh" }}>Similar exercise equipment</div>
+          <SimilarExercises exercise={exercise.target} type={"target"} />
+          <SimilarExercises exercise={exercise.equipment} type={"equipment"} />
         </>
       ) : (
         ""
