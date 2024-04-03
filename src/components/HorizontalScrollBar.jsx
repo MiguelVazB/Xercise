@@ -4,6 +4,7 @@ import "react-horizontal-scrolling-menu/dist/styles.css";
 import BodyPart from "./BodyPart";
 import LeftArrowImg from "../assets/leftArrow.png";
 import rightArrowImg from "../assets/rightArrow.png";
+import ExerciseBox from "./ExerciseBox";
 const VideoComponent = lazy(() => import("./VideoComponent"));
 
 const leftArrow = () => {
@@ -55,6 +56,10 @@ const HorizontalScrollBar = ({
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
           />
+        ));
+      case "exerciseBox":
+        return data?.map((item) => (
+          <ExerciseBox key={item.name} exercise={item} />
         ));
       default:
         break;
