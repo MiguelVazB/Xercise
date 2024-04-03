@@ -54,3 +54,132 @@
         margin: 0;
     }
 }
+
+/* ExerciseVideos component */
+
+.exerciseVideos{
+    margin: 1rem;
+    margin-top: 3rem;
+}
+
+@media (max-width: 320px) {
+    .exerciseVideos{
+        margin: 1rem 0.3rem;
+    }
+}
+
+.videosHeading{
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.videoComponentContainer{
+    background-color: rgb(25, 26, 31);
+    height: 16rem;
+    width: 20rem;
+    margin: 2rem;
+    padding: 0.2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.selectedContainer{
+    border: 0.1px solid #C77B00;
+}
+
+.videoComponentContainer:hover{
+    border: 0.1px solid #C77B00;
+    scale: 1.01;
+}
+
+@media (max-width: 768px) {
+    .videoComponentContainer{
+        height: 15rem;
+        width: 19rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .videoComponentContainer{
+        height: 14rem;
+        width: 18rem;
+        margin: 2rem 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .videoComponentContainer{
+        height: 11rem;
+        width: 15rem;
+        margin: 2rem 0.5rem;
+    }
+    .videosHeading{
+        font-size: x-large;
+    }
+}
+
+.thumbnail{
+    position: relative;
+    /* background-color: aqua; */
+    height: 70%;
+    width: 100%;
+}
+
+.thumbnailImg{
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.thumbnail .length{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0.2rem;
+    background-color: black;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.videoInfo{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-radius: 10px;
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    justify-content: space-between;
+    /* background-color: green; */
+}
+
+.videoInfo p{
+    margin: 0;
+}
+
+.videoTitle{
+    font-size: large;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.channelAndViewsContainer{
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+}
+
+.videoChannel{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 50%;
+}
