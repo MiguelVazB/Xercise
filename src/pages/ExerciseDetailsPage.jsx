@@ -4,6 +4,7 @@ import { exerciseOptions, fetchData } from "../utils/fetchData";
 import ExerciseDetail from "../components/ExerciseDetail";
 import ExerciseVideos from "../components/ExerciseVideos";
 import "./ExerciseDetailsPage.css";
+import SimilarExercises from "../components/SimilarExercises";
 
 const ExerciseDetails = () => {
   const location = useLocation();
@@ -14,6 +15,7 @@ const ExerciseDetails = () => {
   const [exercise, setExercise] = useState(null);
 
   useEffect(() => {
+    console.log(exercise);
     if (exerciseFromState != null) {
       setExercise(exerciseFromState);
       console.log("loaded from localstorage");
@@ -54,8 +56,8 @@ const ExerciseDetails = () => {
       {exercise != null ? (
         <>
           <ExerciseDetail exercise={exercise} />
-          <ExerciseVideos exercise={exercise} />
-          <div>Similar exercise target</div>
+          <ExerciseVideos exerciseName={exercise.name} />
+          <SimilarExercises exercise={exercise.target} />
           <div style={{ height: "100vh" }}>Similar exercise equipment</div>
         </>
       ) : (
