@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const ExerciseBox = ({ exercise }) => {
@@ -25,10 +25,9 @@ const ExerciseBox = ({ exercise }) => {
       <motion.div
         key="modal"
         className="exerciseBox"
-        initial={{ x: -500, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: -500, opacity: 0 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
+        initial={{ x: "-100vw" }}
+        animate={{ x: 0 }}
+        transition={{ duration: 1.5, delay: 0.2 }}
         onClick={() => handleClick()}
       >
         {/* <div className="exerciseBox"> */}
