@@ -39,7 +39,7 @@ const ExerciseDetails = () => {
         fetchExercise();
       } else {
         console.log("loaded from session");
-        if (inSession == null) navigate("/*");
+        if (inSession == null || inSession == "null") navigate("/*");
         setExercise(JSON.parse(inSession));
       }
     }
