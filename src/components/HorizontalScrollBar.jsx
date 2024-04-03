@@ -39,7 +39,7 @@ const HorizontalScrollBar = ({
   const componentsInScroll = () => {
     switch (componentToDisplay) {
       case "bodyPart":
-        return data.map((item) => (
+        return data?.map((item) => (
           <BodyPart
             key={item}
             part={item}
@@ -48,9 +48,9 @@ const HorizontalScrollBar = ({
           />
         ));
       case "exerciseVideos":
-        return data.map((item) => (
+        return data?.map((item) => (
           <VideoComponent
-            key={item}
+            key={item.title}
             video={item}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
