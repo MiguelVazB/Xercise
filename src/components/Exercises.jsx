@@ -47,7 +47,7 @@ const Exercises = ({
           `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${selectedBodyPart}?limit=-1`,
           exerciseOptions
         );
-        console.log(`Got all exercises from ${selectedBodyPart}!`);
+        console.log(`Got all exercises for ${selectedBodyPart}!`);
       }
 
       setExercises(exercisesData);
@@ -78,9 +78,7 @@ const Exercises = ({
       if (new Date().getTime() > JSON.parse(inLocalStorage).expiry) {
         fetchBodyParts();
       } else {
-        let exercisesLocal = JSON.parse(
-          localStorage.getItem(`${selectedBodyPart}_exercises`)
-        );
+        let exercisesLocal = JSON.parse(inLocalStorage);
         setExercises(exercisesLocal.value);
         console.log(`exercises for ${selectedBodyPart} local`);
         setResultsReady(true);
