@@ -77,6 +77,7 @@
 
 .videoComponentContainer{
     background-color: rgb(25, 26, 31);
+    border: 1px solid rgb(25, 26, 31);
     height: 16rem;
     width: 20rem;
     margin: 2rem;
