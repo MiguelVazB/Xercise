@@ -58,7 +58,7 @@ const ExerciseSearch = ({
           exercise.bodyPart.toLowerCase().includes(textInputWithoutSpaces)
       );
 
-      console.log(searchedExercises);
+      // console.log(searchedExercises);
       setTextInput("");
       setExercises(searchedExercises);
       setResultsReady(true);
