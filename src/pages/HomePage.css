@@ -135,18 +135,25 @@
 
 /* HorizontalScrollBar component */
 
+
+.scrollBarContainer{
+    position: relative;
+}
+
 .leftArrow, .rightArrow{
     z-index: 1;
     height: 40px;
     cursor: pointer;
+    position: absolute;
+    top: -1rem;
 }
 
 .rightArrow{
-    margin-right: 20px;
+    right: 20px;
 }
 
 .leftArrow{
-    margin-left: 20px;
+    left: 20px;
 }
 
 
