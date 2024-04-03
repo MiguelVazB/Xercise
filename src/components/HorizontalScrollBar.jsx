@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, lazy, Suspense } from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import BodyPart from "./BodyPart";
 import LeftArrowImg from "../assets/leftArrow.png";
 import rightArrowImg from "../assets/rightArrow.png";
-import VideoComponent from "./VideoComponent";
+const VideoComponent = lazy(() => import("./VideoComponent"));
 
 const leftArrow = () => {
   const { scrollPrev } = useContext(VisibilityContext);
@@ -62,13 +62,15 @@ const HorizontalScrollBar = ({
   };
 
   return (
-    <ScrollMenu
-      LeftArrow={leftArrow}
-      RightArrow={rightArrow}
-      className="horizontalScrollBar"
-    >
-      {componentsInScroll()}
-    </ScrollMenu>
+    <Suspense fallback={<div>Loading...</div>}>
+      <ScrollMenu
+        LeftArrow={leftArrow}
+        RightArrow={rightArrow}
+        className="horizontalScrollBar"
+      >
+        {componentsInScroll()}
+      </ScrollMenu>
+    </Suspense>
   );
 };
 
