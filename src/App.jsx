@@ -13,6 +13,7 @@ function App() {
         <Route path="exercises" element={<ExerciseDetailsPage />}>
           <Route path=":id" element={<ExerciseDetailsPage />} />
         </Route>
+        <Route path="*" element={<div>Not found</div>} />
       </Routes>
     </>
   );
