@@ -59,7 +59,7 @@ const HorizontalScrollBar = ({
         ));
       case "exerciseBox":
         return data?.map((item) => (
-          <ExerciseBox key={item.name} exercise={item} />
+          <ExerciseBox key={item.id} exercise={item} />
         ));
       default:
         break;
