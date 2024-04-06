@@ -21,12 +21,17 @@ const ExerciseDetail = ({ exercise }) => {
             <div className="musclesUsed">
               <h3>Muscles involved</h3>
               <ul>
-                <li>{exercise.target}</li>
+                <li>
+                  {exercise.target?.charAt(0).toUpperCase() +
+                    exercise.target?.slice(1)}
+                </li>
               </ul>
               <h4>Secondary Muscles</h4>
               <ul>
                 {exercise.secondaryMuscles?.map((muscle) => (
-                  <li key={muscle}>{muscle}</li>
+                  <li key={muscle}>
+                    {muscle.charAt(0).toUpperCase() + muscle.slice(1)}
+                  </li>
                 ))}
               </ul>
             </div>
