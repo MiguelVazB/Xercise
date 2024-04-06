@@ -6,7 +6,17 @@ import "./NavBar.css";
 function Footer() {
   return (
     <footer>
-      <Link to="/" className="logoContainer">
+      <Link
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+        }
+        to="/"
+        className="logoContainer"
+      >
         <img src={Logo} alt="Xercise Logo" />
       </Link>
       <div
