@@ -45,3 +45,23 @@ body{
       transform: rotate(360deg);
     }
 }
+
+.notFound{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1.5rem, 2.5vw, 5rem);
+    gap: 3rem;
+}
+
+.fourOfour{
+    font-weight: bold;
+    font-size: clamp(3.5rem, 6vw, 10rem);
+}
+
+.goBack{
+    margin-top: 2rem;
+    color: #D57D00;
+}
