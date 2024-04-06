@@ -1,8 +1,9 @@
 import { lazy, Suspense } from "react";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
-import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
 const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="*" element={<div>Not found</div>} />
         </Routes>
       </Suspense>
+      <Footer />
     </>
   );
 }
