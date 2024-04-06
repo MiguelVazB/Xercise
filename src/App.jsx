@@ -3,11 +3,14 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import NotFound from "./components/NotFound";
 const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
       <NavBar />
@@ -18,13 +21,15 @@ function App() {
           </div>
         }
       >
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="exercises" element={<ExerciseDetailsPage />}>
-            <Route path=":id" element={<ExerciseDetailsPage />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AnimatePresence>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="exercises" element={<ExerciseDetailsPage />}>
+              <Route path=":id" element={<ExerciseDetailsPage />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AnimatePresence>
       </Suspense>
       <Footer />
     </>

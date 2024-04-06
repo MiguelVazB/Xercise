@@ -1,9 +1,10 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import HeroComponent from "../components/HeroComponent";
 import ExerciseSearch from "../components/ExerciseSearch";
-import "./HomePage.css";
 import Exercises from "../components/Exercises";
+import { motion } from "framer-motion";
+import "./HomePage.css";
 
 const HomePage = () => {
   const [exercises, setExercises] = useState([]);
@@ -11,7 +12,12 @@ const HomePage = () => {
   const resultsRef = useRef(null);
 
   return (
-    <main className="homePage">
+    <motion.main
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      className="homePage"
+    >
       <HeroComponent />
       <ExerciseSearch
         setExercises={setExercises}
@@ -25,7 +31,7 @@ const HomePage = () => {
         selectedBodyPart={selectedBodyPart}
         resultsRef={resultsRef}
       />
-    </main>
+    </motion.main>
   );
 };
 

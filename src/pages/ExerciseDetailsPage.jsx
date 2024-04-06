@@ -3,6 +3,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import ExerciseDetail from "../components/ExerciseDetail";
 import ExerciseVideos from "../components/ExerciseVideos";
+import { motion } from "framer-motion";
 import "./ExerciseDetailsPage.css";
 import SimilarExercises from "../components/SimilarExercises";
 
@@ -54,7 +55,12 @@ const ExerciseDetails = () => {
   }, [location]);
 
   return (
-    <div className="exerciseDetailsPage">
+    <motion.div
+      className="exerciseDetailsPage"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    >
       {exercise != null ? (
         <>
           <ExerciseDetail exercise={exercise} />
@@ -65,7 +71,7 @@ const ExerciseDetails = () => {
       ) : (
         ""
       )}
-    </div>
+    </motion.div>
   );
 };
 
