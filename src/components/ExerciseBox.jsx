@@ -21,17 +21,17 @@ const ExerciseBox = ({ exercise }) => {
   };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        key="modal"
-        className="exerciseBox"
-        initial={{ x: "-100vw" }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1.5, delay: 0.2 }}
-        onClick={() => handleClick()}
-      >
-        {/* <div className="exerciseBox"> */}
-        <div className={`imageContainer ${pulsing ? "pulse" : ""}`}>
+    // <div className="exerciseBox">
+    <motion.div
+      key="modal"
+      className="exerciseBox"
+      initial={{ x: "-100vw" }}
+      animate={{ x: 0 }}
+      exit={{ x: "100vw" }}
+      onClick={() => handleClick()}
+    >
+      <div className={`imageContainer ${pulsing ? "pulse" : ""}`}>
+        <AnimatePresence>
           <motion.img
             initial={{ opacity: 0 }}
             animate={{
@@ -44,26 +44,25 @@ const ExerciseBox = ({ exercise }) => {
             onLoad={() => setLoaded(true)}
             src={exercise.gifUrl}
             alt={`${exercise.name} gif`}
-            // loading="lazy"
           />
+        </AnimatePresence>
+      </div>
+      <div className="exerciseInfoContainer">
+        <div className="musclesInvolved">
+          {exercise.secondaryMuscles.map((muscle) => {
+            return (
+              <p key={`${muscle}${exercise.id}`}>
+                {muscle.charAt(0).toUpperCase() + muscle.slice(1)}
+              </p>
+            );
+          })}
         </div>
-        <div className="exerciseInfoContainer">
-          <div className="musclesInvolved">
-            {exercise.secondaryMuscles.map((muscle) => {
-              return (
-                <p key={`${muscle}${exercise.id}`}>
-                  {muscle.charAt(0).toUpperCase() + muscle.slice(1)}
-                </p>
-              );
-            })}
-          </div>
-          <p className="exerciseName">
-            {exercise.name.charAt(0).toUpperCase() + exercise.name.slice(1)}
-          </p>
-        </div>
-        {/* </div> */}
-      </motion.div>
-    </AnimatePresence>
+        <p className="exerciseName">
+          {exercise.name.charAt(0).toUpperCase() + exercise.name.slice(1)}
+        </p>
+      </div>
+    </motion.div>
+    // </div>
   );
 };
 
