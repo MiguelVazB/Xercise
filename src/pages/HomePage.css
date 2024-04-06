@@ -235,6 +235,7 @@
 
 .exercisesComponent h2{
     margin: 2em;
+    font-size: clamp(1rem, 2vw, 5rem);
 }
 
 .exercisesContainer{
