@@ -166,7 +166,11 @@ const FullBodyFront = ({ musclesSelected, handleClick }) => {
           points="100,357,102,365,104,375,106,384,103,398,90,398,84,388,84,375,91,367"
           stroke="none"
         />
-        <g id="calves" stroke="none">
+        <g
+          id="calves"
+          className={musclesSelected == "calves" ? "muscleGroupSelected" : ""}
+          onClick={handleClick}
+        >
           <polygon
             id="Left_Tibialis_Anterior"
             title=""
