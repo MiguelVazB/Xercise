@@ -11,20 +11,20 @@ const BodyPage = () => {
   const [flipBody, setFlipBody] = useState(true);
   const [fullBody, setFullBody] = useState(false);
 
+  function updateSize() {
+    window.innerWidth >= 1025 ? setFullBody(true) : setFullBody(false);
+  }
+
   useEffect(() => {
-    const handleResize = () => {
-      window.innerWidth >= 1024 ? setFullBody(true) : setFullBody(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
   }, []);
 
   return (
     <motion.div
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
+      onAnimationStart={updateSize}
       exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
       className="musclesPage"
     >
