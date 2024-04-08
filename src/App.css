@@ -66,3 +66,16 @@ body{
     margin-top: 2rem;
     color: #D57D00;
 }
+
+.scrollHeading{
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+@media (max-width: 320px) {
+    .scrollHeading{
+        font-size: x-large;
+    }
+}
