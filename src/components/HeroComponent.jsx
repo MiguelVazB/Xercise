@@ -8,7 +8,7 @@ const HeroComponent = () => {
       <div className="homePageHook">
         <h1 className="brandName">Xercise</h1>
         <p>Your Online Exercise Companion</p>
-        <Link to="exercises" className="exploreBtn">
+        <Link to="muscles" className="exploreBtn">
           Explore Exercises
         </Link>
       </div>
