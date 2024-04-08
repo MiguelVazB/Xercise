@@ -1,0 +1,38 @@
+/* Similar exercises */
+
+.similarExercises{
+    margin: 1rem;
+    margin-top: 5rem;
+}
+
+.similarExercises .scrollBarContainer{
+    height: max-content;
+    padding-top: 2rem;
+}
+
+.similarExercises .exerciseBox{
+    width: 20rem;
+    height: 95%;
+    margin: 0 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.similarExercises .exerciseBox:hover{
+    scale: .93;
+}
+
+@media (max-width:420px) {
+    .similarExercises .exerciseBox{
+        width: 15rem;
+        margin: 0 1rem;
+    }
+}
+
+@media (max-width:300px) {
+    .similarExercises .exerciseBox{
+        width: 12rem;
+        height: 90%;
+        margin: 0 1rem;
+        transition: all 0.2s ease-in-out;
+    }
+}
