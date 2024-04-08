@@ -80,7 +80,7 @@ footer{
     display: flex;
     gap: 5rem;
     height: 4.5rem;
-    padding: 1rem 2rem 3rem 2rem;
+    padding: 1rem 2rem 2rem 2rem;
     align-items: center;
     justify-content: center;
     font-size: clamp(1rem, 1.5vw, 5rem);
@@ -91,4 +91,5 @@ footer{
 
 .scrollTop{
     cursor: pointer;
+    font-size: clamp(0.5rem, 1.5vw, 5rem);
 }
