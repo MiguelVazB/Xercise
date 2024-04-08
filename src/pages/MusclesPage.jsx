@@ -11,6 +11,12 @@ const BodyPage = () => {
   const [flipBody, setFlipBody] = useState(true);
   const [fullBody, setFullBody] = useState(false);
 
+  const handleClick = (e) => {
+    let muscleGroup = e.target.parentElement;
+    console.log(muscleGroup.id);
+    setMusclesSelected(muscleGroup.id);
+  };
+
   function updateSize() {
     window.innerWidth >= 1025 ? setFullBody(true) : setFullBody(false);
   }
@@ -32,19 +38,25 @@ const BodyPage = () => {
         <>
           <FullBodyFront
             musclesSelected={musclesSelected}
-            setMusclesSelected={setMusclesSelected}
+            handleClick={handleClick}
           />
-          <FullBodyBack />
+          <FullBodyBack
+            musclesSelected={musclesSelected}
+            handleClick={handleClick}
+          />
         </>
       ) : flipBody ? (
         <>
           <FullBodyFront
             musclesSelected={musclesSelected}
-            setMusclesSelected={setMusclesSelected}
+            handleClick={handleClick}
           />
         </>
       ) : (
-        <FullBodyBack />
+        <FullBodyBack
+          musclesSelected={musclesSelected}
+          handleClick={handleClick}
+        />
       )}
       {!fullBody ? (
         <img
