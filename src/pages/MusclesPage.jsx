@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import FullBodyFront from "../components/FullBodyFront";
 import FullBodyBack from "../components/FullBodyBack";
 import SwitchImage from "../assets/switch.png";
+import SimilarExercises from "../components/SimilarExercises";
 import { motion } from "framer-motion";
 import "./MusclesPage.css";
 
@@ -34,41 +35,48 @@ const BodyPage = () => {
       exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
       className="musclesPage"
     >
-      {fullBody ? (
-        <>
-          <FullBodyFront
-            musclesSelected={musclesSelected}
-            handleClick={handleClick}
-          />
+      <div className="bodyContainer">
+        {fullBody ? (
+          <>
+            <FullBodyFront
+              musclesSelected={musclesSelected}
+              handleClick={handleClick}
+            />
+            <FullBodyBack
+              musclesSelected={musclesSelected}
+              handleClick={handleClick}
+            />
+          </>
+        ) : flipBody ? (
+          <>
+            <FullBodyFront
+              musclesSelected={musclesSelected}
+              handleClick={handleClick}
+            />
+          </>
+        ) : (
           <FullBodyBack
             musclesSelected={musclesSelected}
             handleClick={handleClick}
           />
-        </>
-      ) : flipBody ? (
-        <>
-          <FullBodyFront
-            musclesSelected={musclesSelected}
-            handleClick={handleClick}
+        )}
+        {!fullBody ? (
+          <img
+            onClick={() => setFlipBody((prev) => !prev)}
+            className="flip"
+            src={SwitchImage}
+            alt="flip around image"
           />
-        </>
-      ) : (
-        <FullBodyBack
-          musclesSelected={musclesSelected}
-          handleClick={handleClick}
-        />
+        ) : (
+          ""
+        )}
+        <div className="exercises">
+          Select a muscle to show exercises and scroll down
+        </div>
+      </div>
+      {musclesSelected && (
+        <SimilarExercises exercise={musclesSelected} type={"search"} />
       )}
-      {!fullBody ? (
-        <img
-          onClick={() => setFlipBody((prev) => !prev)}
-          className="flip"
-          src={SwitchImage}
-          alt="flip around image"
-        />
-      ) : (
-        ""
-      )}
-      <div className="exercises">Select a muscle to show exercises</div>
     </motion.div>
   );
 };
