@@ -7,6 +7,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import NotFound from "./components/NotFound";
 const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
+const MusclesPage = lazy(() => import("./pages/MusclesPage"));
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function App() {
             <Route path="exercises" element={<ExerciseDetailsPage />}>
               <Route path=":id" element={<ExerciseDetailsPage />} />
             </Route>
+            <Route path="muscles" element={<MusclesPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

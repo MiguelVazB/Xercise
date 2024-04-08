@@ -1,0 +1,21 @@
+.musclesPage{
+    margin-top: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 90dvh;
+    background-color: red;
+    overflow: auto;
+}
+
+.bodyBack, .bodyFront{
+    width: fit-content;
+    padding: 1rem;
+    height: 85%;
+}
+
+@media (min-width: 768px) {
+    .musclesPage{
+        flex-direction: row;
+    }
+}
