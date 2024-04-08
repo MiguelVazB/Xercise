@@ -7,7 +7,7 @@ function NotFound() {
       <div className="fourOfour">{`404 :(`}</div>
       <div>Nothing to see here!</div>
       <Link to="/" className="goBack">
-        Go Back!
+        Click to Go Back
       </Link>
     </div>
   );
