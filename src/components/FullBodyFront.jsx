@@ -1,12 +1,6 @@
 import React from "react";
 
-const FullBodyFront = ({ musclesSelected, setMusclesSelected }) => {
-  const handleClick = (e) => {
-    let muscleGroup = e.target.parentElement;
-    console.log(muscleGroup.id);
-    setMusclesSelected(muscleGroup.id);
-  };
-
+const FullBodyFront = ({ musclesSelected, handleClick }) => {
   return (
     <div className="bodyFront">
       <svg
