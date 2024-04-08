@@ -3,6 +3,7 @@ import React from "react";
 const FullBodyFront = ({ musclesSelected, setMusclesSelected }) => {
   const handleClick = (e) => {
     let muscleGroup = e.target.parentElement;
+    console.log(muscleGroup.id);
     setMusclesSelected(muscleGroup.id);
   };
 
@@ -94,8 +95,10 @@ const FullBodyFront = ({ musclesSelected, setMusclesSelected }) => {
           />
         </g>
         <g
-          id="deltoids"
-          className={musclesSelected == "deltoids" ? "muscleGroupSelected" : ""}
+          id="shoulders"
+          className={
+            musclesSelected == "shoulders" ? "muscleGroupSelected" : ""
+          }
           onClick={handleClick}
         >
           <polygon
@@ -169,11 +172,7 @@ const FullBodyFront = ({ musclesSelected, setMusclesSelected }) => {
           points="100,357,102,365,104,375,106,384,103,398,90,398,84,388,84,375,91,367"
           stroke="none"
         />
-        <g
-          id="calves"
-          className={musclesSelected == "calves" ? "muscleGroupSelected" : ""}
-          onClick={handleClick}
-        >
+        <g id="calves" stroke="none">
           <polygon
             id="Left_Tibialis_Anterior"
             title=""
