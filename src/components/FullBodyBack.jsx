@@ -7,7 +7,7 @@ const FullBodyBack = () => {
         id="Map"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox="310 0 268 538"
+        viewBox="322 0 248 538"
         // width={"100%"}
         height={"95%"}
         xmlSpace="preserve"
