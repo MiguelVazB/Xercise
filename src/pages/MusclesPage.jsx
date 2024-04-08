@@ -1,41 +1,63 @@
-import { React, useEffect, useState, useLayoutEffect } from "react";
+import { React, useEffect, useState } from "react";
 import FullBodyFront from "../components/FullBodyFront";
 import FullBodyBack from "../components/FullBodyBack";
+import SwitchImage from "../assets/switch.png";
+import { motion } from "framer-motion";
 import "./MusclesPage.css";
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-  return size;
-}
-
 const BodyPage = () => {
-  const [width, height] = useWindowSize();
+  const [musclesSelected, setMusclesSelected] = useState("");
+
+  const [flipBody, setFlipBody] = useState(true);
+  const [fullBody, setFullBody] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      window.innerWidth >= 1024 ? setFullBody(true) : setFullBody(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <div className="musclesPage">
-      {/* <svg
-        id="Map"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 578 538"
-        width={"100%"}
-        height={"98%"}
-        xmlSpace="preserve"
-        stroke="white"
-        // fill="white"
-      > */}
-      <FullBodyFront />
-      {/* <FullBodyBack /> */}
-      {/* </svg> */}
-    </div>
+    <motion.div
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      className="musclesPage"
+    >
+      {fullBody ? (
+        <>
+          <FullBodyFront
+            musclesSelected={musclesSelected}
+            setMusclesSelected={setMusclesSelected}
+          />
+          <FullBodyBack />
+        </>
+      ) : flipBody ? (
+        <>
+          <FullBodyFront
+            musclesSelected={musclesSelected}
+            setMusclesSelected={setMusclesSelected}
+          />
+        </>
+      ) : (
+        <FullBodyBack />
+      )}
+      {!fullBody ? (
+        <img
+          onClick={() => setFlipBody((prev) => !prev)}
+          className="flip"
+          src={SwitchImage}
+          alt="flip around image"
+        />
+      ) : (
+        ""
+      )}
+      <div className="exercises">Select a muscle to show exercises</div>
+    </motion.div>
   );
 };
 
