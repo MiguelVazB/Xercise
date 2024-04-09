@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useRef } from "react";
 import FullBodyFront from "../components/FullBodyFront";
 import FullBodyBack from "../components/FullBodyBack";
 import SwitchImage from "../assets/switch.png";
@@ -21,6 +21,10 @@ const BodyPage = () => {
   function updateSize() {
     window.innerWidth >= 1025 ? setFullBody(true) : setFullBody(false);
   }
+
+  const handleFlip = () => {
+    setFlipBody((prev) => !prev);
+  };
 
   useEffect(() => {
     window.addEventListener("resize", updateSize);
@@ -60,15 +64,13 @@ const BodyPage = () => {
             handleClick={handleClick}
           />
         )}
-        {!fullBody ? (
+        {!fullBody && (
           <img
-            onClick={() => setFlipBody((prev) => !prev)}
+            onClick={handleFlip}
             className="flip"
             src={SwitchImage}
             alt="flip around image"
           />
-        ) : (
-          ""
         )}
         <div className="exercises">
           Select a muscle to show exercises and scroll down

@@ -1,8 +1,13 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const FullBodyBack = ({ musclesSelected, handleClick }) => {
   return (
-    <div className="bodyBack">
+    <motion.div
+      initial={{ rotateY: 0 }}
+      animate={{ rotateY: "180deg", transition: { duration: 0.2 } }}
+      className="bodyBack"
+    >
       <svg
         id="Map"
         xmlns="http://www.w3.org/2000/svg"
@@ -255,7 +260,7 @@ const FullBodyBack = ({ musclesSelected, handleClick }) => {
           stroke="none"
         />
       </svg>
-    </div>
+    </motion.div>
   );
 };
 
