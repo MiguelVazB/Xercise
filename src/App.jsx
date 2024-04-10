@@ -2,12 +2,12 @@ import { lazy, Suspense } from "react";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
-import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import NotFound from "./components/NotFound";
 const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
 const MusclesPage = lazy(() => import("./pages/MusclesPage"));
+import "./App.css";
 
 function App() {
   const location = useLocation();

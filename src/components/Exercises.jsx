@@ -41,13 +41,11 @@ const Exercises = ({
           "https://exercisedb.p.rapidapi.com/exercises?limit=-1",
           exerciseOptions
         );
-        console.log("Got all exercises!");
       } else {
         exercisesData = await fetchData(
           `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${selectedBodyPart}?limit=-1`,
           exerciseOptions
         );
-        console.log(`Got all exercises for ${selectedBodyPart}!`);
       }
 
       setExercises(exercisesData);
@@ -68,7 +66,6 @@ const Exercises = ({
         `${selectedBodyPart}_exercises`,
         JSON.stringify(exercisesDataWithExpiration)
       );
-      console.log(`Got exercises for ${selectedBodyPart}`);
       setResultsReady(true);
     };
 
@@ -80,7 +77,6 @@ const Exercises = ({
       } else {
         let exercisesLocal = JSON.parse(inLocalStorage);
         setExercises(exercisesLocal.value);
-        console.log(`exercises for ${selectedBodyPart} local`);
         setResultsReady(true);
       }
     } else {

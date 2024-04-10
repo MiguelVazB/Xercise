@@ -2,7 +2,6 @@
     margin-top: 4.5rem;
     display: flex;
     flex-direction: column;
-    /* background-color: red; */
 }
 
 /* HeroComponent */
@@ -177,7 +176,6 @@
 }
 
 .bodyPart img{
-    /* background-color: gold; */
     width: 100px;
     height: 100px;
     object-fit: contain;
@@ -369,7 +367,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: #c77b00; */
     background-color: white;
     color: black;
     font-weight: bold;

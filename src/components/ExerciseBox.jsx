@@ -21,7 +21,6 @@ const ExerciseBox = ({ exercise }) => {
   };
 
   return (
-    // <div className="exerciseBox">
     <motion.div
       key="modal"
       className="exerciseBox"
@@ -62,7 +61,6 @@ const ExerciseBox = ({ exercise }) => {
         </p>
       </div>
     </motion.div>
-    // </div>
   );
 };
 

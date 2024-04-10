@@ -13,11 +13,9 @@ const FullBodyFront = ({ musclesSelected, handleClick }) => {
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 278 538"
-        // width={"100%"}
         height={"100%"}
         xmlSpace="preserve"
         stroke="white"
-        // fill="white"
       >
         <g
           id="chest"

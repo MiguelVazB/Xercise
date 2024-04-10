@@ -22,13 +22,11 @@ const ExerciseSearch = ({
 
       setBodyParts(["all", ...bodyParts]);
       localStorage.setItem("bodyParts", JSON.stringify(["all", ...bodyParts]));
-      console.log("Got all body parts!");
     };
 
     if (localStorage.getItem("bodyParts") != null) {
       let bodyPartsLocal = JSON.parse(localStorage.getItem("bodyParts"));
       setBodyParts(bodyPartsLocal);
-      console.log("Body parts from local storage!");
     } else {
       fetchBodyParts();
     }
@@ -43,7 +41,6 @@ const ExerciseSearch = ({
   const handleSearch = async () => {
     let textInputWithoutSpaces = textInput.trim().toLowerCase();
     if (textInputWithoutSpaces) {
-      console.log("searching...", textInputWithoutSpaces);
       setResultsReady(false);
       const exercisesData = await fetchData(
         "https://exercisedb.p.rapidapi.com/exercises?limit=-1",
@@ -58,11 +55,9 @@ const ExerciseSearch = ({
           exercise.bodyPart.toLowerCase().includes(textInputWithoutSpaces)
       );
 
-      // console.log(searchedExercises);
       setTextInput("");
       setExercises(searchedExercises);
       setResultsReady(true);
-      console.log("Got all exercises from input!");
     }
   };
 

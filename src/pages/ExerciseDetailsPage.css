@@ -116,7 +116,6 @@
 
 .thumbnail{
     position: relative;
-    /* background-color: aqua; */
     height: 70%;
     width: 100%;
 }
@@ -147,7 +146,6 @@
     margin: 0 0.5rem;
     padding: 0.5rem;
     justify-content: space-between;
-    /* background-color: green; */
 }
 
 .videoInfo p{

@@ -26,10 +26,8 @@ const ExerciseVideos = ({ exerciseName }) => {
       let inSession = sessionStorage.getItem(`${exerciseName}_d`);
       if (inSession != null) {
         setVideoData(JSON.parse(inSession));
-        console.log("loaded videos from session");
       } else {
         getVideosData();
-        console.log("fetched videos");
       }
     }
   }, [exerciseName]);

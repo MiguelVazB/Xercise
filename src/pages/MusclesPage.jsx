@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useRef } from "react";
+import { React, useEffect, useState } from "react";
 import FullBodyFront from "../components/FullBodyFront";
 import FullBodyBack from "../components/FullBodyBack";
 import SwitchImage from "../assets/switch.png";
@@ -14,7 +14,6 @@ const BodyPage = () => {
 
   const handleClick = (e) => {
     let muscleGroup = e.target.parentElement;
-    console.log(muscleGroup.id);
     setMusclesSelected(muscleGroup.id);
   };
 

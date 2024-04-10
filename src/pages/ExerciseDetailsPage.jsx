@@ -4,8 +4,8 @@ import { exerciseOptions, fetchData } from "../utils/fetchData";
 import ExerciseDetail from "../components/ExerciseDetail";
 import ExerciseVideos from "../components/ExerciseVideos";
 import { motion } from "framer-motion";
-import "./ExerciseDetailsPage.css";
 import SimilarExercises from "../components/SimilarExercises";
+import "./ExerciseDetailsPage.css";
 
 const ExerciseDetails = () => {
   const location = useLocation();
@@ -18,7 +18,6 @@ const ExerciseDetails = () => {
   useEffect(() => {
     if (exerciseFromState != null) {
       setExercise(exerciseFromState);
-      console.log("loaded from localstorage");
     } else {
       const fetchExercise = async () => {
         let exerciseFetched = await fetchData(
@@ -37,10 +36,8 @@ const ExerciseDetails = () => {
 
       let inSession = sessionStorage.getItem(`exerciseID_${id}`);
       if (inSession === "undefined" || inSession == null) {
-        console.log("fetched exercise from id");
         fetchExercise();
       } else {
-        console.log("loaded from session");
         if (JSON.parse(inSession) == "dne") {
           navigate("/*");
         } else {

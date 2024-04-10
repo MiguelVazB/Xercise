@@ -16,7 +16,6 @@ const VideoComponent = ({ video, selectedItem, setSelectedItem }) => {
           `https://www.youtube.com/watch?v=${video.video_id}`,
           "_blank"
         );
-        // .focus();
       }}
     >
       <div className="thumbnail">
