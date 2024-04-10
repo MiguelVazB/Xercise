@@ -18,6 +18,11 @@ const SimilarExercises = ({ exercise, type }) => {
     return searchedExercises.slice(0, 10);
   };
 
+  const filterLocal = async (exercisesLocal) => {
+    let filteredLocal = await filterSearch(exercisesLocal);
+    setSimilarExercises(filteredLocal.slice(0, 10));
+  };
+
   const getSimilarExercises = async () => {
     let link;
     if (type == "target") {
@@ -33,7 +38,6 @@ const SimilarExercises = ({ exercise, type }) => {
       similarExercises = await filterSearch(similarExercises);
     }
 
-    console.log(similarExercises);
     sessionStorage.setItem(
       `${
         type == "search" || type == "target" ? "target" : "equipment"
@@ -50,12 +54,24 @@ const SimilarExercises = ({ exercise, type }) => {
           type == "search" || type == "target" ? "target" : "equipment"
         }_${exercise}`
       );
-      if (inSession != null) {
-        setSimilarExercises(JSON.parse(inSession));
-        console.log(`loaded similar ${type} exercises from session`);
+      if (type == "search" && inSession == null) {
+        let inLocalStorage = localStorage.getItem("all_exercises");
+        if (inLocalStorage != null) {
+          if (new Date().getTime() > JSON.parse(inLocalStorage).expiry) {
+            getSimilarExercises();
+          } else {
+            let exercisesLocal = JSON.parse(inLocalStorage);
+            filterLocal(exercisesLocal.value);
+          }
+        } else {
+          getSimilarExercises();
+        }
       } else {
-        getSimilarExercises();
-        console.log(`fetched similar ${type} exercises`);
+        if (inSession != null) {
+          setSimilarExercises(JSON.parse(inSession));
+        } else {
+          getSimilarExercises();
+        }
       }
     }
   }, [exercise]);
