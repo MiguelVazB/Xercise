@@ -5,9 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    // Enable minification
-    minify: 'terser',
-    // Generate source maps for debugging
+    // Use default esbuild minifier
     sourcemap: false,
     // Optimize chunk size
     rollupOptions: {
@@ -18,18 +16,6 @@ export default defineConfig({
           'animation': ['framer-motion'],
           'ui-components': ['react-horizontal-scrolling-menu', 'react-paginate'],
         },
-      },
-    },
-    // Compression
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info'],
-      },
-      mangle: true,
-      format: {
-        comments: false,
       },
     },
     // Chunk size warning limit
