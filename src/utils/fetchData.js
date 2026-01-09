@@ -7,14 +7,18 @@ export const exerciseOptions = {
 }
 
 export const fetchData = async(url, options) => {
-
-    const response = await fetch(url, options);
-
     try {
-        const data = await response.json()
-        return data
+        const response = await fetch(url, options);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
     } catch (error) {
-        return null
+        console.error('Fetch error:', error);
+        throw error;
     }
 }
 
@@ -27,9 +31,17 @@ export const videoOptions = {
 }
 
 export const fetchVideoData = async(url, options) => {
-    const response = await fetch(url, options);
-
-    const data = await response.json()
-
-    return data
+    try {
+        const response = await fetch(url, options);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Video fetch error:', error);
+        throw error;
+    }
 }
