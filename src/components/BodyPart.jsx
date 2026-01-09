@@ -16,6 +16,9 @@ const BodyPart = ({ part, selectedBodyPart, setSelectedBodyPart }) => {
             ? "legs"
             : part
         }.png`}
+        alt={`${part} body part icon`}
+        loading="lazy"
+        decoding="async"
       />
       <p>{part.charAt(0).toUpperCase() + part.slice(1)}</p>
     </div>
