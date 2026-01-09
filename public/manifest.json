@@ -1,0 +1,19 @@
+{
+  "name": "Xercise - Your Online Exercise Companion",
+  "short_name": "Xercise",
+  "description": "Discover over 1000+ exercises organized by muscle groups with detailed instructions and videos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#191a1f",
+  "theme_color": "#D57D00",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/XerciseLogo_transparent.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["health", "fitness", "lifestyle"],
+  "screenshots": []
+}

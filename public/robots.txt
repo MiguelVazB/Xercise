@@ -1,0 +1,3 @@
+# Xercise - Robots.txt
+User-agent: *
+Allow: /
