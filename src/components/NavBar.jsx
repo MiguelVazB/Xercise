@@ -5,13 +5,13 @@ import "./NavBar.css";
 
 const NavBar = () => {
   return (
-    <nav>
-      <Link to="/" className="logoContainer">
-        <img src={Logo} alt="Xercise Logo" />
+    <nav role="navigation" aria-label="Main navigation">
+      <Link to="/" className="logoContainer" aria-label="Xercise home">
+        <img src={Logo} alt="Xercise Logo" width="120" height="120" loading="eager" decoding="async" />
       </Link>
-      <div className="navLinks">
-        <Link to="/">Home</Link>
-        <Link to="/muscles">Exercises</Link>
+      <div className="navLinks" role="menubar">
+        <Link to="/" role="menuitem">Home</Link>
+        <Link to="/muscles" role="menuitem">Exercises</Link>
       </div>
     </nav>
   );
