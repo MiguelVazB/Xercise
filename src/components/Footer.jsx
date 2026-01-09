@@ -4,33 +4,32 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <footer>
+    <footer role="contentinfo">
       <Link
-        onClick={() =>
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          })
-        }
         to="/"
         className="logoContainer"
+        aria-label="Go to home page"
+        onClick={scrollToTop}
       >
-        <img src={Logo} alt="Xercise Logo" />
+        <img src={Logo} alt="Xercise Logo" width="120" height="120" loading="lazy" decoding="async" />
       </Link>
-      <div
+      <button
         className="scrollTop"
-        onClick={() =>
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          })
-        }
+        onClick={scrollToTop}
+        aria-label="Scroll to top of page"
+        type="button"
       >
         Scroll to Top
-      </div>
+      </button>
     </footer>
   );
 }
