@@ -93,8 +93,8 @@ const Exercises = ({
   }, [resultsReady, selectedBodyPart]);
 
   return (
-    <div className="exercisesComponent" ref={resultsRef}>
-      <h2>Showing Results</h2>
+    <section className="exercisesComponent" ref={resultsRef} aria-label="Exercise results">
+      <h2 className="results-heading">Showing Results</h2>
       <div
         className={`${
           exercisesDisplayed < 4
@@ -116,11 +116,14 @@ const Exercises = ({
           activeClassName="paginationActive"
           pageLinkClassName="pageButtons"
           forcePage={pageNumber}
+          ariaLabelBuilder={(page) => `Go to page ${page}`}
+          previousAriaLabel="Go to previous page"
+          nextAriaLabel="Go to next page"
         />
       ) : (
         ""
       )}
-    </div>
+    </section>
   );
 };
 

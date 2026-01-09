@@ -11,11 +11,21 @@ const leftArrow = () => {
   const { scrollPrev } = useContext(VisibilityContext);
 
   return (
-    <img
-      src={LeftArrowImg}
-      className="leftArrow"
+    <button
       onClick={() => scrollPrev()}
-    />
+      className="leftArrow"
+      aria-label="Scroll left"
+      type="button"
+      style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+    >
+      <img
+        src={LeftArrowImg}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
+    </button>
   );
 };
 
@@ -23,11 +33,21 @@ const rightArrow = () => {
   const { scrollNext } = useContext(VisibilityContext);
 
   return (
-    <img
-      src={rightArrowImg}
-      className="rightArrow"
+    <button
       onClick={() => scrollNext()}
-    />
+      className="rightArrow"
+      aria-label="Scroll right"
+      type="button"
+      style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+    >
+      <img
+        src={rightArrowImg}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
+    </button>
   );
 };
 

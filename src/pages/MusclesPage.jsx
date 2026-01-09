@@ -3,7 +3,6 @@ import FullBodyFront from "../components/FullBodyFront";
 import FullBodyBack from "../components/FullBodyBack";
 import SwitchImage from "../assets/switch.png";
 import SimilarExercises from "../components/SimilarExercises";
-import { motion } from "framer-motion";
 import "./MusclesPage.css";
 
 const BodyPage = () => {
@@ -26,17 +25,16 @@ const BodyPage = () => {
   };
 
   useEffect(() => {
+    updateSize();
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
   return (
-    <motion.div
-      initial={{ width: 0 }}
-      animate={{ width: "100%" }}
-      onAnimationStart={updateSize}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    <main
+      id="main-content"
       className="musclesPage"
+      role="main"
     >
       <div className="bodyContainer">
         {fullBody ? (
@@ -64,21 +62,32 @@ const BodyPage = () => {
           />
         )}
         {!fullBody && (
-          <img
+          <button
             onClick={handleFlip}
             className="flip"
-            src={SwitchImage}
-            alt="flip around image"
-          />
+            aria-label="Flip to view back of body"
+            type="button"
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+          >
+            <img
+              src={SwitchImage}
+              alt=""
+              aria-hidden="true"
+              width="100"
+              height="100"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
         )}
-        <div className="exercises">
+        <p className="exercises" role="status" aria-live="polite">
           Select a muscle to show exercises and scroll down
-        </div>
+        </p>
       </div>
       {musclesSelected && (
         <SimilarExercises exercise={musclesSelected} type={"search"} />
       )}
-    </motion.div>
+    </main>
   );
 };
 

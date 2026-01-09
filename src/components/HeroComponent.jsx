@@ -4,21 +4,29 @@ import { Link } from "react-router-dom";
 
 const HeroComponent = () => {
   return (
-    <div className="heroComponent">
+    <section className="heroComponent" aria-label="Hero section">
       <div className="homePageHook">
         <h1 className="brandName">Xercise</h1>
-        <p>Your Online Exercise Companion</p>
-        <Link to="muscles" className="exploreBtn">
+        <p className="tagline">Your Online Exercise Companion</p>
+        <Link 
+          to="muscles" 
+          className="exploreBtn"
+          aria-label="Explore all exercises organized by muscle groups"
+        >
           Explore Exercises
         </Link>
       </div>
       <img
         className="mainPic"
         src={MainPic}
-        alt="man exercising with dumbbells (Renegade row)"
+        alt="Athletic person performing dumbbell renegade row exercise"
+        width="800"
+        height="800"
+        fetchpriority="high"
+        decoding="async"
       />
-      <p className="backSlogan">Unleash your Inner Beast</p>
-    </div>
+      <p className="backSlogan" aria-hidden="true">Unleash your Inner Beast</p>
+    </section>
   );
 };
 

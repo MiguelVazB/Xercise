@@ -6,7 +6,12 @@ const ExerciseDetail = ({ exercise }) => {
       {exercise?.id && (
         <>
           <div className="exerciseImgContainer">
-            <img src={exercise.gifUrl} alt="exercise image" />
+            <img 
+              src={exercise.gifUrl} 
+              alt={`${exercise.name} exercise demonstration`} 
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div className="detailsContainer">
             <h1>
