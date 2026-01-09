@@ -3,7 +3,6 @@ import { useState, useRef } from "react";
 import HeroComponent from "../components/HeroComponent";
 import ExerciseSearch from "../components/ExerciseSearch";
 import Exercises from "../components/Exercises";
-import { motion } from "framer-motion";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -12,11 +11,10 @@ const HomePage = () => {
   const resultsRef = useRef(null);
 
   return (
-    <motion.main
-      initial={{ width: 0 }}
-      animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    <main
+      id="main-content"
       className="homePage"
+      role="main"
     >
       <HeroComponent />
       <ExerciseSearch
@@ -31,7 +29,7 @@ const HomePage = () => {
         selectedBodyPart={selectedBodyPart}
         resultsRef={resultsRef}
       />
-    </motion.main>
+    </main>
   );
 };
 

@@ -29,24 +29,41 @@
 }
 
 .brandName{
-    color: #c77b00;
+    color: #D57D00;
     font-size: clamp(2rem, 4vw, 6.2rem);
+}
+
+.tagline {
+    color: #cedad4;
 }
 
 .mainPic{
     z-index: 1;
     width: auto;
     height: clamp(10rem, 70vw, 40rem);
+    max-width: 100%;
 }
 
 .exploreBtn{
     text-decoration: none;
-    color: black;
+    color: #ffffff;
     text-shadow: none;
-    background-color: #c77b00;
+    background-color: #D57D00;
     padding: 1rem 1.5rem;
     border-radius: 20px;
     display: inline-block;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.exploreBtn:hover {
+    background-color: #B86A00;
+    transform: translateY(-2px);
+}
+
+.exploreBtn:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
 }
 
 .backSlogan{
@@ -68,6 +85,7 @@
         z-index: 1;
         width: auto;
         height: clamp(5rem, 50vw, 30rem);
+        max-width: 100%;
     }
     .homePageHook{
         margin: 0;
@@ -125,11 +143,22 @@
 .searchContainer button{
     width: max-content;
     padding: 0px 1em;
-    background-color: #c77b00;
+    background-color: #D57D00;
+    color: #ffffff;
     font-weight: bold;
     border: 0;
     cursor: pointer;
     font-size: clamp(1rem, 3vw, 5rem);
+    transition: background-color 0.3s ease;
+}
+
+.searchContainer button:hover:not(:disabled) {
+    background-color: #B86A00;
+}
+
+.searchContainer button:focus {
+    outline: 3px solid #D57D00;
+    outline-offset: 2px;
 }
 
 /* HorizontalScrollBar component */
@@ -333,14 +362,14 @@
 }
 
 .pageButtons:hover{
-    background-color: black;
-    color: rgb(231, 192, 54);
+    background-color: #1a1b20;
+    color: #ffffff;
 }
 
 .previousButton, .nextButton{
     cursor: pointer;
-    color: black;
-    background-color: #c77b00;
+    color: #ffffff;
+    background-color: #D57D00;
     padding: 10px 12px;
     border-radius: 10px;
     transition-property: background-color, color;
@@ -350,14 +379,14 @@
 
 .paginationActive{
     display: inline-flex;
-    background-color: #c77b00;
+    background-color: #D57D00;
     border-radius: 10px;
-    color: black;
+    color: #ffffff;
 }
 
 .previousButton:hover, .nextButton:hover{
-    background-color: black;
-    color: rgb(231, 192, 54);
+    background-color: #FFA500;
+    color: #000000;
 }
 
 /* ExerciseBox Component */
@@ -404,12 +433,22 @@
     flex: 2;
     object-fit: cover;
     overflow: hidden;
+    aspect-ratio: 1 / 1;
 }
 
 .exerciseBox img{
     background-color: white;
     height: 100%;
     width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+/* Ensure logos scale properly with CSS */
+.logoContainer img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
 }
 
 .exerciseInfoContainer{
@@ -420,7 +459,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    border-top: 5px solid #c77b00;
+    border-top: 5px solid #D57D00;
 }
 
 .musclesInvolved{
