@@ -2,8 +2,8 @@ import { lazy, Suspense } from "react";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import NotFound from "./components/NotFound";
 const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
 const MusclesPage = lazy(() => import("./pages/MusclesPage"));
@@ -13,7 +13,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <>
+    <ErrorBoundary>
       <NavBar />
       <Suspense
         fallback={
@@ -22,19 +22,17 @@ function App() {
           </div>
         }
       >
-        <AnimatePresence>
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="exercises" element={<ExerciseDetailsPage />}>
-              <Route path=":id" element={<ExerciseDetailsPage />} />
-            </Route>
-            <Route path="muscles" element={<MusclesPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AnimatePresence>
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="exercises" element={<ExerciseDetailsPage />}>
+            <Route path=":id" element={<ExerciseDetailsPage />} />
+          </Route>
+          <Route path="muscles" element={<MusclesPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </Suspense>
       <Footer />
-    </>
+    </ErrorBoundary>
   );
 }
 
