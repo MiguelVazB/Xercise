@@ -256,13 +256,117 @@
 }
 
 .searchSection,
-.exercisesComponent {
+.exercisesComponent,
+.recentlyViewed {
   padding: clamp(1.5rem, 3vw, 2.3rem);
   border-radius: 32px;
   background: var(--surface);
   border: 1px solid var(--surface-border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(16px);
+}
+
+.recentlyViewedHeader {
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.recentlyViewedActions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.recentToggleButton,
+.recentClearButton,
+.recentRemoveButton {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: var(--text-strong);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.recentToggleButton,
+.recentClearButton {
+  min-height: 2.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.recentClearButton {
+  border-color: rgba(255, 145, 155, 0.42);
+  background: rgba(143, 31, 43, 0.28);
+  color: #ffd9dc;
+}
+
+.recentToggleButton:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 179, 71, 0.28);
+}
+
+.recentClearButton:hover {
+  transform: translateY(-2px);
+  background: rgba(177, 38, 51, 0.58);
+  border-color: rgba(255, 171, 179, 0.7);
+}
+
+.recentlyViewedGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.recentExerciseCard {
+  position: relative;
+  min-width: 0;
+}
+
+.recentExerciseCard .exerciseBox {
+  height: 100%;
+}
+
+.recentExerciseCard .exerciseOverlay {
+  right: 7rem;
+}
+
+.recentRemoveButton {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 3;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.75rem 0.55rem 0.6rem;
+  border-radius: 999px;
+  border-color: rgba(255, 165, 174, 0.58);
+  background: linear-gradient(
+    135deg,
+    rgba(177, 38, 51, 0.94),
+    rgba(122, 25, 37, 0.96)
+  );
+  color: #fff;
+  font-size: 0.76rem;
+  backdrop-filter: blur(12px);
+}
+
+.recentRemoveButton:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(
+    135deg,
+    rgba(209, 51, 66, 0.98),
+    rgba(153, 31, 44, 0.98)
+  );
+  border-color: rgba(255, 202, 207, 0.82);
+  box-shadow: 0 12px 24px rgba(92, 13, 23, 0.42);
 }
 
 .exercisesComponent {
@@ -683,6 +787,11 @@
   .exercisesContainer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .recentlyViewedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -731,9 +840,15 @@
   }
 
   .resultsHeader,
-  .filterIntro {
+  .filterIntro,
+  .recentlyViewedHeader {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .recentlyViewedActions {
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .resultsCounter {
@@ -760,6 +875,10 @@
 
   .exercisesContainer,
   .exercisesContainerLessThan4 {
+    grid-template-columns: 1fr;
+  }
+
+  .recentlyViewedGrid {
     grid-template-columns: 1fr;
   }
 
@@ -820,9 +939,14 @@
   }
 
   .searchSection,
-  .exercisesComponent {
+  .exercisesComponent,
+  .recentlyViewed {
     padding: 1.2rem;
     border-radius: 26px;
+  }
+
+  .recentlyViewedActions > * {
+    flex: 1 1 9rem;
   }
 
   .exerciseInfoContainer {
@@ -876,7 +1000,10 @@
   .searchContainer button:hover:not(:disabled),
   .pageButtons:hover,
   .previousButton:hover,
-  .nextButton:hover {
+  .nextButton:hover,
+  .recentToggleButton:hover,
+  .recentClearButton:hover,
+  .recentRemoveButton:hover {
     transform: none;
   }
 }

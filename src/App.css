@@ -85,6 +85,35 @@ button {
   touch-action: manipulation;
 }
 
+.destructiveButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  box-shadow:
+    0 8px 20px rgba(78, 12, 18, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.destructiveButtonIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 1.35rem;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.destructiveButton:active {
+  transform: translateY(0) scale(0.96) !important;
+  box-shadow: 0 4px 10px rgba(78, 12, 18, 0.28);
+}
+
 a,
 button {
   -webkit-tap-highlight-color: transparent;

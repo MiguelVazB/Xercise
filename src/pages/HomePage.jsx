@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import HeroComponent from "../components/HeroComponent";
 import ExerciseSearch from "../components/ExerciseSearch";
 import Exercises from "../components/Exercises";
+import RecentlyViewed from "../components/RecentlyViewed";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
     <main id="main-content" className="homePage" role="main">
       <HeroComponent />
       <div className="homeContent">
+        <RecentlyViewed />
         <ExerciseSearch
           setExercises={setExercises}
           setSelectedBodyPart={setSelectedBodyPart}

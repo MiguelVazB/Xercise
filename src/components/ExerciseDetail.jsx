@@ -7,6 +7,7 @@ import {
   saveExercise,
   subscribeToSavedExercises,
 } from "../utils/savedExercises";
+import { recordRecentlyViewedExercise } from "../utils/recentExercises";
 
 const ExerciseDetail = ({ exercise }) => {
   const navigate = useNavigate();
@@ -26,6 +27,10 @@ const ExerciseDetail = ({ exercise }) => {
 
     return subscribeToSavedExercises(syncSavedState);
   }, [exercise.id]);
+
+  useEffect(() => {
+    recordRecentlyViewedExercise(exercise);
+  }, [exercise]);
 
   const goBack = () => {
     if (location.key !== "default") {

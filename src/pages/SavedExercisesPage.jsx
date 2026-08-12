@@ -292,10 +292,13 @@ const SavedExercisesPage = () => {
             </div>
             <button
               type="button"
-              className="clearSavedButton"
+              className="clearSavedButton destructiveButton"
               onClick={handleClearAll}
             >
-              Clear all
+              <span className="destructiveButtonIcon" aria-hidden="true">
+                &times;
+              </span>
+              <span>Clear all</span>
             </button>
           </section>
 
@@ -337,13 +340,16 @@ const SavedExercisesPage = () => {
                     <ExerciseBox exercise={exercise} />
                     <button
                       type="button"
-                      className="savedRemoveButton"
+                      className="savedRemoveButton destructiveButton"
                       onClick={() => removeSavedExercise(exercise.id)}
                       aria-label={`Remove ${formatLabel(
                         exercise.name
                       )} from saved exercises`}
                     >
-                      Remove
+                      <span className="destructiveButtonIcon" aria-hidden="true">
+                        &times;
+                      </span>
+                      <span>Remove</span>
                     </button>
                   </article>
                 ))}

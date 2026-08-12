@@ -153,14 +153,15 @@
 }
 
 .clearSavedButton {
-  border: 1px solid rgba(255, 120, 120, 0.22);
-  background: rgba(255, 107, 107, 0.09);
-  color: #ffc5c5;
+  border: 1px solid rgba(255, 145, 155, 0.42);
+  background: rgba(143, 31, 43, 0.28);
+  color: #ffd9dc;
 }
 
 .clearSavedButton:hover {
-  background: rgba(255, 107, 107, 0.15);
-  border-color: rgba(255, 120, 120, 0.36);
+  transform: translateY(-2px);
+  background: rgba(177, 38, 51, 0.58);
+  border-color: rgba(255, 171, 179, 0.7);
 }
 
 .savedResults {
@@ -213,7 +214,7 @@
 }
 
 .savedExerciseCard .exerciseOverlay {
-  right: 6.5rem;
+  right: 7.3rem;
 }
 
 .savedRemoveButton {
@@ -221,12 +222,16 @@
   top: 0.9rem;
   right: 0.9rem;
   z-index: 3;
-  min-height: 2.5rem;
-  padding: 0.55rem 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.58rem 0.8rem 0.58rem 0.62rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  background: rgba(7, 14, 21, 0.82);
-  color: var(--text-strong);
+  border: 1px solid rgba(255, 165, 174, 0.58);
+  background: linear-gradient(
+    135deg,
+    rgba(177, 38, 51, 0.94),
+    rgba(122, 25, 37, 0.96)
+  );
+  color: #fff;
   font-size: 0.8rem;
   font-weight: 700;
   backdrop-filter: blur(12px);
@@ -239,8 +244,13 @@
 
 .savedRemoveButton:hover {
   transform: translateY(-2px);
-  background: rgba(174, 57, 57, 0.88);
-  border-color: rgba(255, 170, 170, 0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(209, 51, 66, 0.98),
+    rgba(153, 31, 44, 0.98)
+  );
+  border-color: rgba(255, 202, 207, 0.82);
+  box-shadow: 0 12px 24px rgba(92, 13, 23, 0.42);
 }
 
 .savedNotice {
