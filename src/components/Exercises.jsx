@@ -2,7 +2,26 @@ import { useState, useEffect } from "react";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import { formatLabel } from "../utils/formatters";
 import ExerciseBox from "./ExerciseBox";
-import ReactPaginate from "react-paginate";
+
+const getVisiblePages = (pageCount, currentPage) => {
+  const pages = new Set([
+    0,
+    pageCount - 1,
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+  ]);
+  const visiblePages = [...pages]
+    .filter((page) => page >= 0 && page < pageCount)
+    .sort((a, b) => a - b);
+
+  return visiblePages.flatMap((page, index) => {
+    const previousPage = visiblePages[index - 1];
+    return index > 0 && page - previousPage > 1
+      ? [`ellipsis-${previousPage}`, page]
+      : [page];
+  });
+};
 
 const Exercises = ({
   exercises,
@@ -27,8 +46,8 @@ const Exercises = ({
         .map((exercise) => <ExerciseBox key={exercise.id} exercise={exercise} />)
     : [];
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
+  const changePage = (selectedPage) => {
+    setPageNumber(selectedPage);
     requestAnimationFrame(() => {
       resultsRef?.current?.scrollIntoView({
         behavior: "smooth",
@@ -140,6 +159,7 @@ const Exercises = ({
 
   const showingFrom = exercises.length === 0 ? 0 : pagesVisited + 1;
   const showingTo = Math.min(pagesVisited + exercisesPerPage, exercises.length);
+  const visiblePages = getVisiblePages(pageCount, pageNumber);
 
   return (
     <section
@@ -190,23 +210,52 @@ const Exercises = ({
       )}
 
       {exercises.length > 0 && pageCount > 1 ? (
-        <ReactPaginate
-          previousLabel={"Previous"}
-          nextLabel={"Next"}
-          pageCount={pageCount}
-          onPageChange={changePage}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={1}
-          containerClassName="paginationButtons"
-          previousLinkClassName="previousButton"
-          nextLinkClassName="nextButton"
-          activeClassName="paginationActive"
-          pageLinkClassName="pageButtons"
-          forcePage={pageNumber}
-          ariaLabelBuilder={(page) => `Go to page ${page}`}
-          previousAriaLabel="Go to previous page"
-          nextAriaLabel="Go to next page"
-        />
+        <nav className="pagination" aria-label="Exercise results pages">
+          <ul className="paginationButtons">
+            <li>
+              <button
+                type="button"
+                className="previousButton"
+                onClick={() => changePage(pageNumber - 1)}
+                disabled={pageNumber === 0}
+              >
+                Previous
+              </button>
+            </li>
+            {visiblePages.map((page) =>
+              typeof page === "string" ? (
+                <li className="paginationEllipsis" key={page} aria-hidden="true">
+                  &hellip;
+                </li>
+              ) : (
+                <li
+                  className={page === pageNumber ? "paginationActive" : ""}
+                  key={page}
+                >
+                  <button
+                    type="button"
+                    className="pageButtons"
+                    aria-label={`Go to page ${page + 1}`}
+                    aria-current={page === pageNumber ? "page" : undefined}
+                    onClick={() => changePage(page)}
+                  >
+                    {page + 1}
+                  </button>
+                </li>
+              )
+            )}
+            <li>
+              <button
+                type="button"
+                className="nextButton"
+                onClick={() => changePage(pageNumber + 1)}
+                disabled={pageNumber === pageCount - 1}
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
       ) : null}
     </section>
   );

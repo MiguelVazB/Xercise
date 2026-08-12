@@ -1,4 +1,4 @@
-import MainPic from "../assets/manExercising.png";
+import MainPic from "../assets/manExercising.webp";
 import { Link } from "react-router-dom";
 
 const HeroComponent = () => {
@@ -58,8 +58,10 @@ const HeroComponent = () => {
             className="mainPic"
             src={MainPic}
             alt="Athletic person performing dumbbell renegade row exercise"
-            width="800"
-            height="800"
+            width="1093"
+            height="1062"
+            loading="eager"
+            fetchpriority="high"
             decoding="async"
           />
         </div>

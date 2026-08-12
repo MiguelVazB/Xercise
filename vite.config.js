@@ -13,7 +13,7 @@ export default defineConfig({
         manualChunks: {
           'router': ['react-router-dom'],
           'animation': ['framer-motion'],
-          'ui-components': ['react-horizontal-scrolling-menu', 'react-paginate'],
+          'ui-components': ['react-horizontal-scrolling-menu'],
         },
       },
     },

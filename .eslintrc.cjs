@@ -15,6 +15,9 @@ module.exports = {
     // This JavaScript project relies on API response shapes rather than
     // runtime PropTypes. Data is normalized at component boundaries.
     'react/prop-types': 'off',
+    // Supported by modern browsers but not yet recognized by this ESLint
+    // plugin version. React forwards the lowercase HTML attribute.
+    'react/no-unknown-property': ['error', { ignore: ['fetchpriority'] }],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
