@@ -38,6 +38,9 @@ function Footer() {
         </div>
       </div>
       <div className="footerActions">
+        <Link to="/workout" className="footerLink">
+          Quick workout
+        </Link>
         <Link to="/saved" className="footerLink">
           Saved exercises
         </Link>

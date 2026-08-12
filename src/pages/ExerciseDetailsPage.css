@@ -372,6 +372,12 @@
   border-color: var(--accent);
 }
 
+.detailActionButton.isInWorkout {
+  color: #062112;
+  background: #63de9b;
+  border-color: #63de9b;
+}
+
 .shareStatus {
   min-width: 5rem;
   color: var(--text-muted);

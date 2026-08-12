@@ -5,6 +5,7 @@ import {
   getSavedExerciseIds,
   subscribeToSavedExercises,
 } from "../utils/savedExercises";
+import { getWorkoutItems, subscribeToWorkout } from "../utils/workout";
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -13,6 +14,9 @@ const NavBar = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [savedCount, setSavedCount] = useState(
     () => getSavedExerciseIds().length
+  );
+  const [workoutCount, setWorkoutCount] = useState(
+    () => getWorkoutItems().length
   );
 
   useEffect(() => {
@@ -49,6 +53,12 @@ const NavBar = () => {
     []
   );
 
+  useEffect(
+    () =>
+      subscribeToWorkout(() => setWorkoutCount(getWorkoutItems().length)),
+    []
+  );
+
   return (
     <nav
       className={`siteNav ${isHidden ? "navHidden" : ""}`}
@@ -70,7 +80,7 @@ const NavBar = () => {
         <NavLink to="/" end>
           Home
         </NavLink>
-        <NavLink to="/muscles">Muscle Map</NavLink>
+        <NavLink to="/muscles">Muscles</NavLink>
         <NavLink to="/saved">
           Saved
           {savedCount > 0 ? (
@@ -79,9 +89,20 @@ const NavBar = () => {
             </span>
           ) : null}
         </NavLink>
+        <NavLink to="/workout">
+          Workout
+          {workoutCount > 0 ? (
+            <span
+              className="navSavedCount"
+              aria-label={`${workoutCount} exercises in workout`}
+            >
+              {workoutCount > 99 ? "99+" : workoutCount}
+            </span>
+          ) : null}
+        </NavLink>
       </div>
-      <Link to="/muscles" className="navCta">
-        Open Library
+      <Link to="/workout" className="navCta">
+        Quick Workout
       </Link>
     </nav>
   );

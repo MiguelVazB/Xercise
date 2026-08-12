@@ -1,0 +1,518 @@
+.workoutPage {
+  width: var(--content-width);
+  min-height: calc(100vh - 8rem);
+  margin: 0 auto;
+  padding: clamp(5.5rem, 9vw, 8rem) 0 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.workoutHero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border-radius: 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.35fr);
+  align-items: end;
+  gap: 2rem;
+  background:
+    radial-gradient(circle at 85% 5%, rgba(89, 171, 255, 0.2), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+}
+
+.workoutHeroCopy {
+  max-width: 45rem;
+}
+
+.workoutHero h1 {
+  margin: 0.6rem 0 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.065em;
+  color: var(--text-strong);
+}
+
+.workoutHeroCopy > p:last-child {
+  max-width: 39rem;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.workoutProgressCard {
+  padding: 1.35rem;
+  border-radius: 26px;
+  background: rgba(7, 15, 23, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(16px);
+}
+
+.workoutProgressValue {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.workoutProgressValue strong {
+  font-family: var(--font-display);
+  font-size: 2.7rem;
+  color: var(--accent);
+}
+
+.workoutProgressValue span,
+.workoutProgressCard small {
+  color: var(--text-muted);
+}
+
+.workoutProgressTrack {
+  height: 0.55rem;
+  margin: 0.8rem 0 0.65rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.workoutProgressTrack span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-strong), var(--accent));
+  transition: width 0.3s ease;
+}
+
+.workoutToolbar {
+  padding: 1rem 1.15rem;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+}
+
+.workoutMetric {
+  min-width: 7rem;
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.workoutMetric strong {
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+}
+
+.workoutMetric span {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.workoutToolbarActions {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+
+.workoutToolbarActions button,
+.workoutCompleteButton,
+.workoutRemoveButton {
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-strong);
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.workoutClearButton,
+.workoutRemoveButton {
+  border-color: rgba(255, 145, 155, 0.48);
+  background: linear-gradient(
+    135deg,
+    rgba(177, 38, 51, 0.92),
+    rgba(122, 25, 37, 0.96)
+  );
+  color: #fff;
+}
+
+.workoutList {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 32px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+}
+
+.workoutListHeader {
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.workoutListHeader h2,
+.workoutEmptyState h2 {
+  margin: 0.45rem 0 0;
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  letter-spacing: -0.045em;
+}
+
+.workoutListHeader h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+.workoutListHeader > p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.workoutList ol {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  list-style: none;
+}
+
+.workoutItem {
+  min-width: 0;
+  padding: 0.9rem;
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: auto minmax(17rem, 1fr) auto auto;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition:
+    opacity 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.workoutItem.isComplete {
+  background: rgba(72, 190, 128, 0.08);
+  border-color: rgba(99, 222, 155, 0.25);
+}
+
+.workoutOrder {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 179, 71, 0.14);
+  color: #ffd89a;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.workoutExerciseLink {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.workoutExerciseLink img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 18px;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.workoutExerciseCopy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.workoutExerciseCopy strong {
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  overflow-wrap: anywhere;
+}
+
+.workoutExerciseCopy small {
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.workoutExerciseCopy > span {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.workoutPrescription {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.workoutPrescription label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.workoutPrescription input {
+  width: 4.5rem;
+  height: 3rem;
+  padding: 0 0.5rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 12, 19, 0.72);
+  color: var(--text-strong);
+  text-align: center;
+  font-weight: 700;
+}
+
+.workoutItemActions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.workoutCompleteButton {
+  min-width: 9.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.workoutCompleteButton > span {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.workoutCompleteButton[aria-pressed="true"] {
+  background: rgba(72, 190, 128, 0.2);
+  border-color: rgba(99, 222, 155, 0.42);
+  color: #c8ffe0;
+}
+
+.workoutCompleteButton[aria-pressed="true"] > span {
+  border-color: #63de9b;
+  background: #63de9b;
+  color: #062112;
+}
+
+.workoutRemoveButton {
+  min-height: 2.65rem;
+  padding-block: 0.55rem;
+}
+
+.workoutEmptyState {
+  min-height: 28rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border-radius: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.075),
+    rgba(255, 255, 255, 0.025)
+  );
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+}
+
+.workoutEmptyIcon {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1.3rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #241400;
+  font-size: 2.5rem;
+  box-shadow: 0 20px 40px rgba(240, 138, 24, 0.25);
+}
+
+.workoutEmptyState h2 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+.workoutEmptyState > p:not(.sectionEyebrow) {
+  max-width: 36rem;
+  margin: 1rem 0 1.4rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.workoutEmptyState > a {
+  min-height: 3.4rem;
+  padding: 0.9rem 1.25rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #1e1201;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+@media (max-width: 1050px) {
+  .workoutItem {
+    grid-template-columns: auto minmax(15rem, 1fr) auto;
+  }
+
+  .workoutItemActions {
+    grid-column: 2 / -1;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 760px) {
+  .workoutPage {
+    width: calc(100vw - 1.5rem);
+    padding-top: 5.75rem;
+  }
+
+  .workoutHero {
+    grid-template-columns: 1fr;
+    align-items: start;
+    border-radius: 28px;
+  }
+
+  .workoutToolbar {
+    flex-wrap: wrap;
+  }
+
+  .workoutToolbarActions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: stretch;
+  }
+
+  .workoutToolbarActions button {
+    flex: 1 1 10rem;
+  }
+
+  .workoutListHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .workoutItem {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .workoutExerciseLink,
+  .workoutPrescription,
+  .workoutItemActions {
+    grid-column: 2;
+  }
+
+  .workoutItemActions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .workoutPage {
+    width: calc(100vw - 1rem);
+    padding-top: 5.25rem;
+  }
+
+  .workoutHero,
+  .workoutList,
+  .workoutEmptyState {
+    border-radius: 24px;
+  }
+
+  .workoutHero,
+  .workoutList {
+    padding: 1rem;
+  }
+
+  .workoutHero h1 {
+    font-size: clamp(2.45rem, 15vw, 3.2rem);
+  }
+
+  .workoutMetric {
+    flex: 1 1 7rem;
+  }
+
+  .workoutItem {
+    padding: 0.8rem;
+    gap: 0.75rem;
+  }
+
+  .workoutOrder {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.85rem;
+  }
+
+  .workoutExerciseLink {
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .workoutExerciseLink img {
+    width: 4.75rem;
+    height: 4.75rem;
+    border-radius: 15px;
+  }
+
+  .workoutPrescription,
+  .workoutItemActions {
+    width: 100%;
+  }
+
+  .workoutPrescription label {
+    flex: 1;
+  }
+
+  .workoutPrescription input {
+    width: 100%;
+  }
+
+  .workoutItemActions {
+    flex-direction: column;
+  }
+
+  .workoutItemActions button {
+    width: 100%;
+  }
+}

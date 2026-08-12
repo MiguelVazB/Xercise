@@ -8,6 +8,12 @@ import {
   subscribeToSavedExercises,
 } from "../utils/savedExercises";
 import { recordRecentlyViewedExercise } from "../utils/recentExercises";
+import {
+  addExerciseToWorkout,
+  isExerciseInWorkout,
+  removeExerciseFromWorkout,
+  subscribeToWorkout,
+} from "../utils/workout";
 
 const ExerciseDetail = ({ exercise }) => {
   const navigate = useNavigate();
@@ -16,6 +22,9 @@ const ExerciseDetail = ({ exercise }) => {
   const secondaryMuscles = exercise.secondaryMuscles ?? [];
   const instructions = exercise.instructions ?? [];
   const [isSaved, setIsSaved] = useState(() => isExerciseSaved(exercise.id));
+  const [isInWorkout, setIsInWorkout] = useState(() =>
+    isExerciseInWorkout(exercise.id)
+  );
   const [shareStatus, setShareStatus] = useState("");
 
   useEffect(() => {
@@ -32,6 +41,14 @@ const ExerciseDetail = ({ exercise }) => {
     recordRecentlyViewedExercise(exercise);
   }, [exercise]);
 
+  useEffect(() => {
+    const syncWorkoutState = () =>
+      setIsInWorkout(isExerciseInWorkout(exercise.id));
+
+    syncWorkoutState();
+    return subscribeToWorkout(syncWorkoutState);
+  }, [exercise.id]);
+
   const goBack = () => {
     if (location.key !== "default") {
       navigate(-1);
@@ -45,6 +62,14 @@ const ExerciseDetail = ({ exercise }) => {
       removeSavedExercise(exercise.id);
     } else {
       saveExercise(exercise);
+    }
+  };
+
+  const toggleWorkout = () => {
+    if (isInWorkout) {
+      removeExerciseFromWorkout(exercise.id);
+    } else {
+      addExerciseToWorkout(exercise);
     }
   };
 
@@ -113,6 +138,16 @@ const ExerciseDetail = ({ exercise }) => {
             aria-pressed={isSaved}
           >
             {isSaved ? "Saved" : "Save exercise"}
+          </button>
+          <button
+            type="button"
+            className={`detailActionButton ${
+              isInWorkout ? "isInWorkout" : ""
+            }`}
+            onClick={toggleWorkout}
+            aria-pressed={isInWorkout}
+          >
+            {isInWorkout ? "In workout" : "Add to workout"}
           </button>
           <button
             type="button"
