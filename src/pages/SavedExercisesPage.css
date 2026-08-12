@@ -1,0 +1,477 @@
+.savedExercisesPage {
+  width: var(--content-width);
+  min-height: calc(100vh - 8rem);
+  margin: 0 auto;
+  padding: clamp(5.5rem, 9vw, 8rem) 0 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.savedHero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at 85% 5%, rgba(255, 179, 71, 0.19), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+}
+
+.savedHero::after {
+  content: "";
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  right: -7rem;
+  bottom: -10rem;
+  border-radius: 50%;
+  background: rgba(240, 138, 24, 0.12);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.savedHeroCopy {
+  position: relative;
+  z-index: 1;
+  max-width: 45rem;
+}
+
+.savedHero h1 {
+  margin: 0.6rem 0 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.065em;
+  color: var(--text-strong);
+}
+
+.savedHeroCopy > p:last-child {
+  max-width: 39rem;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.savedSummary {
+  position: relative;
+  z-index: 1;
+  min-width: 12rem;
+  padding: 1.3rem 1.4rem;
+  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: rgba(7, 15, 23, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(16px);
+}
+
+.savedSummary strong {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  line-height: 0.9;
+  color: var(--accent);
+}
+
+.savedSummary span {
+  margin-top: 0.6rem;
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.savedSummary small {
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+}
+
+.savedControls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.35fr) auto;
+  align-items: end;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 28px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 18px 44px rgba(4, 10, 18, 0.24);
+}
+
+.savedSearchField,
+.savedFilterField {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.savedSearchField label,
+.savedFilterField label {
+  color: var(--text-strong);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.savedSearchField input,
+.savedFilterField select {
+  width: 100%;
+  min-height: 3.5rem;
+  padding: 0 1rem;
+  border-radius: 17px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(6, 14, 22, 0.76);
+  color: var(--text-strong);
+  outline: none;
+}
+
+.savedSearchField input:focus,
+.savedFilterField select:focus {
+  border-color: rgba(255, 179, 71, 0.58);
+  box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.1);
+}
+
+.savedSearchField input::placeholder {
+  color: rgba(149, 165, 185, 0.72);
+}
+
+.clearSavedButton,
+.savedErrorState button,
+.savedNoMatches button,
+.savedNotice button {
+  min-height: 3.5rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 17px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.clearSavedButton {
+  border: 1px solid rgba(255, 120, 120, 0.22);
+  background: rgba(255, 107, 107, 0.09);
+  color: #ffc5c5;
+}
+
+.clearSavedButton:hover {
+  background: rgba(255, 107, 107, 0.15);
+  border-color: rgba(255, 120, 120, 0.36);
+}
+
+.savedResults {
+  min-width: 0;
+}
+
+.savedResultsHeader {
+  margin-bottom: 1.3rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.savedResultsHeader h2,
+.savedEmptyState h2,
+.savedErrorState h2 {
+  margin: 0.45rem 0 0;
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  letter-spacing: -0.045em;
+}
+
+.savedResultsHeader h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+.savedResultsHeader > span {
+  flex-shrink: 0;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  color: var(--text-muted);
+}
+
+.savedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.savedExerciseCard {
+  position: relative;
+  min-width: 0;
+}
+
+.savedExerciseCard .exerciseBox {
+  height: 100%;
+}
+
+.savedExerciseCard .exerciseOverlay {
+  right: 6.5rem;
+}
+
+.savedRemoveButton {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 3;
+  min-height: 2.5rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(7, 14, 21, 0.82);
+  color: var(--text-strong);
+  font-size: 0.8rem;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.savedRemoveButton:hover {
+  transform: translateY(-2px);
+  background: rgba(174, 57, 57, 0.88);
+  border-color: rgba(255, 170, 170, 0.35);
+}
+
+.savedNotice {
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgba(255, 179, 71, 0.09);
+  border: 1px solid rgba(255, 179, 71, 0.2);
+  color: #f2d3a5;
+}
+
+.savedNotice button {
+  min-height: auto;
+  padding: 0.55rem 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-strong);
+}
+
+.savedEmptyState,
+.savedErrorState,
+.savedNoMatches {
+  min-height: 27rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border-radius: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.075),
+    rgba(255, 255, 255, 0.025)
+  );
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+}
+
+.savedEmptyIcon {
+  width: 4.5rem;
+  height: 5.2rem;
+  margin-bottom: 1.4rem;
+  padding: 0.8rem;
+  border-radius: 1.2rem 1.2rem 1.6rem 1.6rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 20px 40px rgba(240, 138, 24, 0.25);
+}
+
+.savedEmptyIcon span {
+  width: 1.5rem;
+  height: 2.25rem;
+  border: 3px solid #2b1902;
+  border-bottom: 0;
+  border-radius: 0.25rem 0.25rem 0;
+  position: relative;
+}
+
+.savedEmptyIcon span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.45rem;
+  width: 1rem;
+  height: 1rem;
+  border-right: 3px solid #2b1902;
+  border-bottom: 3px solid #2b1902;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.savedEmptyState h2,
+.savedErrorState h2 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+.savedEmptyState > p:not(.sectionEyebrow),
+.savedErrorState > p:not(.sectionEyebrow),
+.savedNoMatches p {
+  max-width: 36rem;
+  margin: 1rem 0 1.4rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.savedEmptyState > a,
+.savedErrorState button,
+.savedNoMatches button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.4rem;
+  padding: 0.9rem 1.25rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #1e1201;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.savedNoMatches {
+  min-height: 20rem;
+}
+
+.savedNoMatches h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  font-size: 1.8rem;
+}
+
+.savedLoading {
+  min-height: 35rem;
+}
+
+@media (max-width: 960px) {
+  .savedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .savedControls {
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.55fr);
+  }
+
+  .clearSavedButton {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+
+@media (max-width: 700px) {
+  .savedExercisesPage {
+    width: calc(100vw - 1.5rem);
+    padding-top: 5.75rem;
+  }
+
+  .savedHero {
+    grid-template-columns: 1fr;
+    align-items: start;
+    border-radius: 28px;
+  }
+
+  .savedSummary {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 1rem;
+  }
+
+  .savedSummary strong {
+    grid-row: 1 / 3;
+  }
+
+  .savedSummary span,
+  .savedSummary small {
+    margin-top: 0;
+  }
+
+  .savedControls {
+    grid-template-columns: 1fr;
+  }
+
+  .clearSavedButton {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .savedNotice {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .savedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .savedResultsHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .savedResultsHeader > span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .savedExercisesPage {
+    width: calc(100vw - 1rem);
+    gap: 1.25rem;
+  }
+
+  .savedHero,
+  .savedControls,
+  .savedEmptyState,
+  .savedErrorState,
+  .savedNoMatches {
+    border-radius: 24px;
+  }
+
+  .savedHero,
+  .savedControls {
+    padding: 1rem;
+  }
+
+  .savedHero h1 {
+    font-size: clamp(2.45rem, 15vw, 3.2rem);
+  }
+
+  .savedExerciseCard .exerciseOverlay {
+    right: 5.8rem;
+  }
+
+  .savedRemoveButton {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding-inline: 0.65rem;
+  }
+}
+
+@media (hover: none) {
+  .savedRemoveButton:hover {
+    transform: none;
+  }
+}

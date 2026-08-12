@@ -9,6 +9,7 @@ import "./App.css";
 
 const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
 const MusclesPage = lazy(() => import("./pages/MusclesPage"));
+const SavedExercisesPage = lazy(() => import("./pages/SavedExercisesPage"));
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/exercises/:id" element={<ExerciseDetailsPage />} />
               <Route path="/muscles" element={<MusclesPage />} />
+              <Route path="/saved" element={<SavedExercisesPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

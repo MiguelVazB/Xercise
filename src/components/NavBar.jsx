@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/XerciseLogo_transparent.png";
+import {
+  getSavedExerciseIds,
+  subscribeToSavedExercises,
+} from "../utils/savedExercises";
 import "./NavBar.css";
 
 const NavBar = () => {
   const location = useLocation();
   const lastScrollPosition = useRef(0);
   const [isHidden, setIsHidden] = useState(false);
+  const [savedCount, setSavedCount] = useState(
+    () => getSavedExerciseIds().length
+  );
 
   useEffect(() => {
     lastScrollPosition.current = window.scrollY;
@@ -34,6 +41,14 @@ const NavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
+  useEffect(
+    () =>
+      subscribeToSavedExercises(() =>
+        setSavedCount(getSavedExerciseIds().length)
+      ),
+    []
+  );
+
   return (
     <nav
       className={`siteNav ${isHidden ? "navHidden" : ""}`}
@@ -56,6 +71,14 @@ const NavBar = () => {
           Home
         </NavLink>
         <NavLink to="/muscles">Muscle Map</NavLink>
+        <NavLink to="/saved">
+          Saved
+          {savedCount > 0 ? (
+            <span className="navSavedCount" aria-label={`${savedCount} saved`}>
+              {savedCount > 99 ? "99+" : savedCount}
+            </span>
+          ) : null}
+        </NavLink>
       </div>
       <Link to="/muscles" className="navCta">
         Open Library

@@ -1,14 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { formatLabel } from "../utils/formatters";
-
-const getSavedExerciseIds = () => {
-  try {
-    return JSON.parse(localStorage.getItem("savedExerciseIds")) ?? [];
-  } catch {
-    return [];
-  }
-};
+import {
+  isExerciseSaved,
+  removeSavedExercise,
+  saveExercise,
+  subscribeToSavedExercises,
+} from "../utils/savedExercises";
 
 const ExerciseDetail = ({ exercise }) => {
   const navigate = useNavigate();
@@ -16,10 +14,18 @@ const ExerciseDetail = ({ exercise }) => {
   const demoDialogRef = useRef(null);
   const secondaryMuscles = exercise.secondaryMuscles ?? [];
   const instructions = exercise.instructions ?? [];
-  const [isSaved, setIsSaved] = useState(() =>
-    getSavedExerciseIds().includes(exercise.id)
-  );
+  const [isSaved, setIsSaved] = useState(() => isExerciseSaved(exercise.id));
   const [shareStatus, setShareStatus] = useState("");
+
+  useEffect(() => {
+    const syncSavedState = () =>
+      setIsSaved(isExerciseSaved(exercise.id));
+
+    syncSavedState();
+    setShareStatus("");
+
+    return subscribeToSavedExercises(syncSavedState);
+  }, [exercise.id]);
 
   const goBack = () => {
     if (location.key !== "default") {
@@ -30,13 +36,11 @@ const ExerciseDetail = ({ exercise }) => {
   };
 
   const toggleSaved = () => {
-    const savedIds = getSavedExerciseIds();
-    const nextSavedIds = isSaved
-      ? savedIds.filter((exerciseId) => exerciseId !== exercise.id)
-      : [...new Set([...savedIds, exercise.id])];
-
-    localStorage.setItem("savedExerciseIds", JSON.stringify(nextSavedIds));
-    setIsSaved((current) => !current);
+    if (isSaved) {
+      removeSavedExercise(exercise.id);
+    } else {
+      saveExercise(exercise);
+    }
   };
 
   const shareExercise = async () => {
