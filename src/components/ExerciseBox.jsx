@@ -1,44 +1,26 @@
-import { React, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { formatLabel } from "../utils/formatters";
 
 const ExerciseBox = ({ exercise }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [imageLoading, setImageLoading] = useState(true);
-  const [pulsing, setPulsing] = useState(true);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (loaded) {
-      setImageLoading(false);
-      setPulsing(false);
-    }
-  }, [loaded]);
-
-  const handleClick = () => {
-    navigate(`/exercises/${exercise.id}`, { state: exercise });
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleClick();
-    }
-  };
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const visibleMuscles = [exercise.target, ...(exercise.secondaryMuscles ?? [])]
+    .filter(Boolean)
+    .slice(0, 3);
 
   return (
-    <div
+    <Link
       className="exerciseBox"
-      onClick={() => handleClick()}
-      onKeyPress={handleKeyPress}
-      role="button"
-      tabIndex={0}
+      to={`/exercises/${exercise.id}`}
+      state={exercise}
       aria-label={`View details for ${exercise.name} exercise`}
     >
-      <div className={`imageContainer ${pulsing ? "pulse" : ""}`}>
+      <div className={`imageContainer ${imageLoaded ? "" : "pulse"}`}>
         <img
-          style={{ opacity: imageLoading ? 0 : 1, transition: 'opacity 0.2s ease' }}
-          onLoad={() => setLoaded(true)}
+          className={`exercisePreview ${
+            imageLoaded ? "exercisePreviewLoaded" : ""
+          }`}
+          onLoad={() => setImageLoaded(true)}
           src={exercise.gifUrl}
           alt={`${exercise.name} exercise demonstration`}
           width="300"
@@ -46,22 +28,23 @@ const ExerciseBox = ({ exercise }) => {
           loading="lazy"
           decoding="async"
         />
+        <div className="exerciseOverlay">
+          <span className="exerciseTag">{formatLabel(exercise.bodyPart)}</span>
+          <span className="exerciseTag">{formatLabel(exercise.equipment)}</span>
+        </div>
       </div>
       <div className="exerciseInfoContainer">
-        <div className="musclesInvolved">
-          {exercise.secondaryMuscles.map((muscle) => {
-            return (
-              <p key={`${muscle}${exercise.id}`}>
-                {muscle.charAt(0).toUpperCase() + muscle.slice(1)}
-              </p>
-            );
-          })}
-        </div>
-        <p className="exerciseName">
-          {exercise.name.charAt(0).toUpperCase() + exercise.name.slice(1)}
+        <p className="exerciseSubheading">
+          Targets {formatLabel(exercise.target)}
         </p>
+        <p className="exerciseName">{formatLabel(exercise.name)}</p>
+        <div className="musclesInvolved">
+          {visibleMuscles.map((muscle) => (
+            <span key={`${muscle}${exercise.id}`}>{formatLabel(muscle)}</span>
+          ))}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

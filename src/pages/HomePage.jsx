@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useRef } from "react";
 import HeroComponent from "../components/HeroComponent";
 import ExerciseSearch from "../components/ExerciseSearch";
@@ -11,24 +10,22 @@ const HomePage = () => {
   const resultsRef = useRef(null);
 
   return (
-    <main
-      id="main-content"
-      className="homePage"
-      role="main"
-    >
+    <main id="main-content" className="homePage" role="main">
       <HeroComponent />
-      <ExerciseSearch
-        setExercises={setExercises}
-        setSelectedBodyPart={setSelectedBodyPart}
-        selectedBodyPart={selectedBodyPart}
-        resultsRef={resultsRef}
-      />
-      <Exercises
-        exercises={exercises}
-        setExercises={setExercises}
-        selectedBodyPart={selectedBodyPart}
-        resultsRef={resultsRef}
-      />
+      <div className="homeContent">
+        <ExerciseSearch
+          setExercises={setExercises}
+          setSelectedBodyPart={setSelectedBodyPart}
+          selectedBodyPart={selectedBodyPart}
+          resultsRef={resultsRef}
+        />
+        <Exercises
+          exercises={exercises}
+          setExercises={setExercises}
+          selectedBodyPart={selectedBodyPart}
+          resultsRef={resultsRef}
+        />
+      </div>
     </main>
   );
 };

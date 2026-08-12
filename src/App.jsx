@@ -1,37 +1,42 @@
 import { lazy, Suspense } from "react";
-import NavBar from "./components/NavBar";
-import HomePage from "./pages/HomePage";
-import Footer from "./components/Footer";
+import { Route, Routes } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { Route, Routes, useLocation } from "react-router-dom";
+import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
-const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
-const MusclesPage = lazy(() => import("./pages/MusclesPage"));
+import HomePage from "./pages/HomePage";
 import "./App.css";
 
-function App() {
-  const location = useLocation();
+const ExerciseDetailsPage = lazy(() => import("./pages/ExerciseDetailsPage"));
+const MusclesPage = lazy(() => import("./pages/MusclesPage"));
 
+function App() {
   return (
     <ErrorBoundary>
-      <NavBar />
-      <Suspense
-        fallback={
-          <div className="loadingContainer">
-            <div className="loading"></div>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      <div className="appShell">
+        <NavBar />
+        <Suspense
+          fallback={
+            <div className="loadingContainer" role="status" aria-live="polite">
+              <div className="loading"></div>
+              <span className="visually-hidden">Loading page content</span>
+            </div>
+          }
+        >
+          <div className="pageShell">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/exercises/:id" element={<ExerciseDetailsPage />} />
+              <Route path="/muscles" element={<MusclesPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </div>
-        }
-      >
-        <Routes location={location}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="exercises" element={<ExerciseDetailsPage />}>
-            <Route path=":id" element={<ExerciseDetailsPage />} />
-          </Route>
-          <Route path="muscles" element={<MusclesPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-      <Footer />
+        </Suspense>
+        <Footer />
+      </div>
     </ErrorBoundary>
   );
 }

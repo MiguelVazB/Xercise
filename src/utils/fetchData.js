@@ -1,47 +1,25 @@
-export const exerciseOptions = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
-        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
-    }
-}
+const createApiOptions = (host) => ({
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
+    "X-RapidAPI-Host": host,
+  },
+});
 
-export const fetchData = async(url, options) => {
-    try {
-        const response = await fetch(url, options);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Fetch error:', error);
-        throw error;
-    }
-}
+export const exerciseOptions = createApiOptions("exercisedb.p.rapidapi.com");
+export const videoOptions = createApiOptions("youtube-v2.p.rapidapi.com");
 
-export const videoOptions = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
-        'X-RapidAPI-Host': 'youtube-v2.p.rapidapi.com'
-    }
-}
+export const fetchData = async (url, options) => {
+  try {
+    const response = await fetch(url, options);
 
-export const fetchVideoData = async(url, options) => {
-    try {
-        const response = await fetch(url, options);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Video fetch error:', error);
-        throw error;
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
     }
-}
+
+    return await response.json();
+  } catch (error) {
+    console.error("API request failed:", error);
+    throw error;
+  }
+};

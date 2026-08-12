@@ -1,25 +1,26 @@
-import React, { useContext, lazy, Suspense } from "react";
+import { lazy, Suspense, useContext } from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
-import BodyPart from "./BodyPart";
 import LeftArrowImg from "../assets/leftArrow.png";
-import rightArrowImg from "../assets/rightArrow.png";
+import RightArrowImg from "../assets/rightArrow.png";
+import BodyPart from "./BodyPart";
 import ExerciseBox from "./ExerciseBox";
+
 const VideoComponent = lazy(() => import("./VideoComponent"));
 
-const leftArrow = () => {
-  const { scrollPrev } = useContext(VisibilityContext);
+const ScrollArrow = ({ direction }) => {
+  const { scrollNext, scrollPrev } = useContext(VisibilityContext);
+  const isLeft = direction === "left";
 
   return (
     <button
-      onClick={() => scrollPrev()}
-      className="leftArrow"
-      aria-label="Scroll left"
+      onClick={() => (isLeft ? scrollPrev() : scrollNext())}
+      className={`iconButton ${isLeft ? "leftArrow" : "rightArrow"}`}
+      aria-label={`Scroll ${direction}`}
       type="button"
-      style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
     >
       <img
-        src={LeftArrowImg}
+        src={isLeft ? LeftArrowImg : RightArrowImg}
         alt=""
         aria-hidden="true"
         loading="lazy"
@@ -29,71 +30,52 @@ const leftArrow = () => {
   );
 };
 
-const rightArrow = () => {
-  const { scrollNext } = useContext(VisibilityContext);
-
-  return (
-    <button
-      onClick={() => scrollNext()}
-      className="rightArrow"
-      aria-label="Scroll right"
-      type="button"
-      style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
-    >
-      <img
-        src={rightArrowImg}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        decoding="async"
-      />
-    </button>
-  );
-};
+const LeftArrow = () => <ScrollArrow direction="left" />;
+const RightArrow = () => <ScrollArrow direction="right" />;
 
 const HorizontalScrollBar = ({
   componentToDisplay,
-  data,
+  data = [],
   selectedItem,
   setSelectedItem,
 }) => {
-  const componentsInScroll = () => {
+  const renderItems = () => {
     switch (componentToDisplay) {
       case "bodyPart":
-        return data?.map((item) => (
+        return data.map((part) => (
           <BodyPart
-            key={item}
-            part={item}
-            setSelectedBodyPart={setSelectedItem}
+            key={part}
+            part={part}
             selectedBodyPart={selectedItem}
+            setSelectedBodyPart={setSelectedItem}
           />
         ));
       case "exerciseVideos":
-        return data?.map((item) => (
+        return data.map((video) => (
           <VideoComponent
-            key={item.title}
-            video={item}
+            key={video.video_id ?? video.title}
+            video={video}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
           />
         ));
       case "exerciseBox":
-        return data?.map((item) => (
-          <ExerciseBox key={item.id} exercise={item} />
+        return data.map((exercise) => (
+          <ExerciseBox key={exercise.id} exercise={exercise} />
         ));
       default:
-        break;
+        return null;
     }
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="statusMessage">Loading content...</div>}>
       <ScrollMenu
-        LeftArrow={leftArrow}
-        RightArrow={rightArrow}
-        className="horizontalScrollBar"
+        LeftArrow={LeftArrow}
+        RightArrow={RightArrow}
+        wrapperClassName="horizontalScrollBar"
       >
-        {componentsInScroll()}
+        {renderItems()}
       </ScrollMenu>
     </Suspense>
   );

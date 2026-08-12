@@ -1,6 +1,6 @@
-import React from "react";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
+import { formatLabel } from "../utils/formatters";
 import HorizontalScrollBar from "./HorizontalScrollBar";
 
 const ExerciseSearch = ({
@@ -14,32 +14,32 @@ const ExerciseSearch = ({
   const [resultsReady, setResultsReady] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const searchInputRef = useRef(null);
 
   useEffect(() => {
     const fetchBodyParts = async () => {
       try {
-        const bodyParts = await fetchData(
+        const bodyPartsData = await fetchData(
           "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
           exerciseOptions
         );
 
-        if (bodyParts && Array.isArray(bodyParts)) {
-          setBodyParts(["all", ...bodyParts]);
-          localStorage.setItem("bodyParts", JSON.stringify(["all", ...bodyParts]));
+        if (bodyPartsData && Array.isArray(bodyPartsData)) {
+          const nextBodyParts = ["all", ...bodyPartsData];
+          setBodyParts(nextBodyParts);
+          localStorage.setItem("bodyParts", JSON.stringify(nextBodyParts));
         }
-      } catch (error) {
-        console.error("Error fetching body parts:", error);
+      } catch (fetchError) {
+        console.error("Error fetching body parts:", fetchError);
         setError("Failed to load body parts. Please refresh the page.");
       }
     };
 
     if (localStorage.getItem("bodyParts") != null) {
       try {
-        let bodyPartsLocal = JSON.parse(localStorage.getItem("bodyParts"));
+        const bodyPartsLocal = JSON.parse(localStorage.getItem("bodyParts"));
         setBodyParts(bodyPartsLocal);
-      } catch (error) {
-        console.error("Error parsing stored body parts:", error);
+      } catch (storageError) {
+        console.error("Error parsing stored body parts:", storageError);
         fetchBodyParts();
       }
     } else {
@@ -54,7 +54,8 @@ const ExerciseSearch = ({
   }, [resultsReady, resultsRef]);
 
   const handleSearch = useCallback(async () => {
-    let textInputWithoutSpaces = textInput.trim().toLowerCase();
+    const textInputWithoutSpaces = textInput.trim().toLowerCase();
+
     if (!textInputWithoutSpaces) {
       setError("Please enter a search term");
       return;
@@ -86,10 +87,12 @@ const ExerciseSearch = ({
       setResultsReady(true);
 
       if (searchedExercises.length === 0) {
-        setError(`No exercises found for "${textInputWithoutSpaces}". Try a different search term.`);
+        setError(
+          `No exercises found for "${textInputWithoutSpaces}". Try a different search term.`
+        );
       }
-    } catch (error) {
-      console.error("Search error:", error);
+    } catch (searchError) {
+      console.error("Search error:", searchError);
       setError("Failed to search exercises. Please try again.");
       setExercises([]);
     } finally {
@@ -97,59 +100,78 @@ const ExerciseSearch = ({
     }
   }, [textInput, setExercises]);
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleSearch();
   };
 
   return (
-    <>
-      <section className="searchContainer" role="search" aria-label="Exercise search">
-        <label htmlFor="exercise-search-input" className="visually-hidden">Search for exercises</label>
+    <section
+      id="exercise-search"
+      className="searchSection"
+      aria-labelledby="exercise-search-title"
+    >
+      <div className="sectionHeader searchHeader">
+        <p className="sectionEyebrow">Exercise explorer</p>
+        <h2 id="exercise-search-title" className="scrollHeading">
+          Search by movement, muscle group, or equipment
+        </h2>
+        <p className="sectionDescription">
+          Start with a keyword search or use the filters below to move through
+          the library faster.
+        </p>
+      </div>
+      <form
+        className="searchContainer"
+        role="search"
+        aria-label="Exercise search"
+        onSubmit={handleSubmit}
+      >
+        <label htmlFor="exercise-search-input" className="visually-hidden">
+          Search for exercises
+        </label>
         <input
           id="exercise-search-input"
-          ref={searchInputRef}
           type="search"
           placeholder="Search exercises by name, muscle, or equipment..."
           value={textInput}
-          onChange={(e) => setTextInput(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onChange={(event) => setTextInput(event.target.value)}
           aria-label="Search for exercises"
           aria-describedby={error ? "search-error" : undefined}
           disabled={isLoading}
         />
-        <button 
-          onClick={handleSearch} 
+        <button
           disabled={isLoading || !textInput.trim()}
           aria-label={isLoading ? "Searching..." : "Search exercises"}
+          type="submit"
         >
           {isLoading ? "Searching..." : "Search"}
         </button>
-      </section>
+      </form>
       {error && (
-        <div 
-          id="search-error" 
-          role="alert" 
-          style={{
-            color: "#ff6b6b",
-            textAlign: "center",
-            padding: "10px",
-            margin: "10px 0"
-          }}
-        >
+        <div id="search-error" role="alert" className="searchError">
           {error}
         </div>
       )}
-      <div className="scrollBarContainer">
+      <div className="filterIntro">
+        <div>
+          <p className="filterLabel">Body-part filters</p>
+          <p className="filterDescription">
+            Jump into a curated list of movements for the area you want to
+            train.
+          </p>
+        </div>
+        <div className="statusPill">Selected: {formatLabel(selectedBodyPart)}</div>
+      </div>
+      <div className="scrollBarContainer filterScrollBar">
         <HorizontalScrollBar
-          componentToDisplay={"bodyPart"}
+          componentToDisplay="bodyPart"
           data={bodyParts}
           setSelectedItem={setSelectedBodyPart}
           selectedItem={selectedBodyPart}
         />
       </div>
-    </>
+    </section>
   );
 };
 

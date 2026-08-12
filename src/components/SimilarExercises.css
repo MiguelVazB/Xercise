@@ -1,38 +1,151 @@
-/* Similar exercises */
-
-.similarExercises{
-    margin: 1rem;
-    margin-top: 5rem;
+﻿.similarExercises {
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border-radius: 32px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
 }
 
-.similarExercises .scrollBarContainer{
-    height: max-content;
-    padding-top: 2rem;
+.similarSectionDescription {
+  margin: 0;
+  max-width: 42rem;
+  color: var(--text-muted);
+  line-height: 1.7;
 }
 
-.similarExercises .exerciseBox{
-    width: 20rem;
-    height: 95%;
-    margin: 0 2rem;
-    transition: all 0.2s ease-in-out;
+.similarExercises .scrollBarContainer {
+  padding-top: 1.25rem;
 }
 
-.similarExercises .exerciseBox:hover{
-    scale: .93;
+.similarExercises .exerciseBox {
+  width: 20rem;
+  margin: 0 1rem;
 }
 
-@media (max-width:420px) {
-    .similarExercises .exerciseBox{
-        width: 15rem;
-        margin: 0 1rem;
-    }
+@media (max-width: 520px) {
+  .similarExercises {
+    border-radius: 26px;
+  }
+
+  .similarExercises .exerciseBox {
+    width: calc(100vw - 3.75rem);
+    margin: 0 0.5rem;
+  }
 }
 
-@media (max-width:300px) {
-    .similarExercises .exerciseBox{
-        width: 12rem;
-        height: 90%;
-        margin: 0 1rem;
-        transition: all 0.2s ease-in-out;
-    }
+.relatedExercises {
+  scroll-margin-top: 7rem;
+}
+
+.relatedHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.relatedTabs {
+  flex: 0 0 auto;
+  padding: 0.3rem;
+  border-radius: 999px;
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+}
+
+.relatedTabs button {
+  min-height: 2.85rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text-muted);
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.relatedTabs button span {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem;
+}
+
+.relatedTabs button.isActive {
+  color: #211301;
+  background: var(--accent);
+}
+
+.relatedTabs button.isActive span {
+  background: rgba(33, 19, 1, 0.14);
+}
+
+.relatedError {
+  padding: 1.25rem;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text-muted);
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.18);
+}
+
+.relatedError p {
+  margin: 0;
+}
+
+.relatedError button {
+  flex: 0 0 auto;
+  min-height: 2.85rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  color: #211301;
+  background: var(--accent);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .relatedHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .relatedTabs {
+    width: 100%;
+  }
+
+  .relatedTabs button {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .relatedTabs {
+    border-radius: 20px;
+  }
+
+  .relatedTabs button {
+    min-width: 0;
+    padding-inline: 0.65rem;
+    border-radius: 16px;
+    font-size: 0.82rem;
+  }
+
+  .relatedError {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

@@ -1,66 +1,283 @@
-.musclesPage{
-    margin-top: 4.5rem;
-    display: flex;
+﻿.musclesPage {
+  width: var(--content-width);
+  margin: 0 auto;
+  padding: 7.75rem 0 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.musclesHero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.musclesIntro h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: var(--text-strong);
+}
+
+.bodyExperience {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.bodyContainer {
+  min-height: 42rem;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border-radius: 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.bodyContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 179, 71, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 36%);
+}
+
+.bodyBack,
+.bodyFront {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.bodyBack svg,
+.bodyFront svg {
+  width: auto;
+  height: 100%;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.32));
+}
+
+.bodyContainer polygon {
+  fill: rgba(255, 255, 255, 0.08);
+  transition: fill 0.2s ease;
+}
+
+.bodyContainer g {
+  cursor: pointer;
+}
+
+.bodyContainer g:hover polygon {
+  fill: rgba(255, 211, 154, 0.92);
+}
+
+.muscleGroupSelected polygon {
+  fill: var(--accent);
+}
+
+.flip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  color: var(--text-strong);
+  box-shadow: 0 18px 30px rgba(4, 10, 18, 0.24);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.flip:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 179, 71, 0.24);
+}
+
+.flip img {
+  width: 1rem;
+  height: 1rem;
+  filter: brightness(0) invert(1);
+}
+
+.bodyContainer .flip {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+}
+
+.musclesHelperCard {
+  padding: 1.4rem;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.muscleQuickPick {
+  margin-top: 0.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.muscleQuickPick button {
+  min-height: 2.65rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 999px;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.muscleQuickPick button:hover,
+.muscleQuickPick button.isSelected {
+  color: #211301;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.helperLabel,
+.helperTitle,
+.exercises {
+  margin: 0;
+}
+
+.helperLabel {
+  font-size: 0.76rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.helperTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text-strong);
+}
+
+.exercises {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.musclesPage .similarExercises {
+  margin-top: 0;
+}
+
+@media (min-width: 1025px) {
+  .bodyBack,
+  .bodyFront {
+    width: 100%;
+    max-width: 36rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bodyExperience {
+    grid-template-columns: 1fr;
+  }
+
+  .bodyContainer {
+    min-height: 34rem;
+  }
+
+  .musclesHelperCard {
+    order: -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .musclesPage {
+    padding-top: 5.75rem;
+  }
+
+  .musclesHero {
     flex-direction: column;
-    justify-content: center;
-    height: fit-content;
-    position: relative;
+  }
+
+  .flip {
+    align-self: flex-start;
+  }
 }
 
-.bodyContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 92dvh;
-    width: 100%;
-    position: relative;
-}
+@media (max-width: 520px) {
+  .musclesPage,
+  .musclesHero,
+  .bodyExperience,
+  .bodyContainer,
+  .musclesHelperCard {
+    min-width: 0;
+    max-width: 100%;
+  }
 
-.bodyBack, .bodyFront{
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2rem;
-    width: 100%;
-    height: 90%;
+  .bodyContainer {
+    min-height: 28rem;
+    padding: 1rem;
+    border-radius: 26px;
+  }
+
+  .bodyContainer .flip {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .musclesHelperCard {
+    border-radius: 24px;
+  }
+
+  .helperTitle {
+    font-size: 1.5rem;
+  }
+
+  .muscleQuickPick {
+    flex-wrap: nowrap;
+    margin-inline: -1.4rem;
+    padding: 0.15rem 1.4rem 0.4rem;
     overflow-x: auto;
-    overflow-y: hidden;
-}
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
 
-.exercises{
-    font-size: clamp(1rem, 2vw, 5rem);
-    position: absolute;
-    bottom: 2rem;
-    right: 0;
-    left: 0;
-    text-align: center;
-}
+  .muscleQuickPick::-webkit-scrollbar {
+    display: none;
+  }
 
-.muscleGroupSelected polygon{
-    fill: #D57D00;
-}
-
-g{
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-g:hover{
-    fill: #FFC83D;
-}
-
-.flip{
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    width: 35px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.flip:hover{
-    scale: 1.1;
-}
-
-.musclesPage .similarExercises{
-    margin-top: 1rem;
+  .muscleQuickPick button {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
 }

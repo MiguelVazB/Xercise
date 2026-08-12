@@ -1,74 +1,133 @@
-import { React, useEffect, useState } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import ExerciseDetail from "../components/ExerciseDetail";
 import ExerciseVideos from "../components/ExerciseVideos";
-import { motion } from "framer-motion";
-import SimilarExercises from "../components/SimilarExercises";
+import RelatedExercises from "../components/RelatedExercises";
 import "./ExerciseDetailsPage.css";
 
 const ExerciseDetails = () => {
   const location = useLocation();
   const exerciseFromState = location.state;
   const { id } = useParams();
-  const navigate = useNavigate();
-
   const [exercise, setExercise] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
-    if (exerciseFromState != null) {
-      setExercise(exerciseFromState);
-    } else {
-      const fetchExercise = async () => {
-        let exerciseFetched = await fetchData(
+    let isSubscribed = true;
+
+    const loadExercise = async () => {
+      setIsLoading(true);
+      setError("");
+
+      if (exerciseFromState?.id === id) {
+        setExercise(exerciseFromState);
+        setIsLoading(false);
+        return;
+      }
+
+      const storageKey = `exerciseID_${id}`;
+      const cachedExercise = sessionStorage.getItem(storageKey);
+
+      if (cachedExercise) {
+        try {
+          const parsedExercise = JSON.parse(cachedExercise);
+          if (parsedExercise?.id) {
+            setExercise(parsedExercise);
+            setIsLoading(false);
+            return;
+          }
+        } catch {
+          sessionStorage.removeItem(storageKey);
+        }
+      }
+
+      try {
+        const exerciseFetched = await fetchData(
           `https://exercisedb.p.rapidapi.com/exercises/exercise/${id}`,
           exerciseOptions
         );
 
-        if (exerciseFetched == null) navigate("/*");
+        if (!exerciseFetched?.id) {
+          throw new Error("Exercise not found");
+        }
 
-        sessionStorage.setItem(
-          `exerciseID_${id}`,
-          JSON.stringify(exerciseFetched != null ? exerciseFetched : "dne")
-        );
-        setExercise(exerciseFetched);
-      };
-
-      let inSession = sessionStorage.getItem(`exerciseID_${id}`);
-      if (inSession === "undefined" || inSession == null) {
-        fetchExercise();
-      } else {
-        if (JSON.parse(inSession) == "dne") {
-          navigate("/*");
-        } else {
-          setExercise(JSON.parse(inSession));
+        if (isSubscribed) {
+          sessionStorage.setItem(storageKey, JSON.stringify(exerciseFetched));
+          setExercise(exerciseFetched);
+        }
+      } catch (fetchError) {
+        console.error("Error loading exercise details:", fetchError);
+        if (isSubscribed) {
+          setExercise(null);
+          setError(
+            "We could not load this exercise. Check the link or try again."
+          );
+        }
+      } finally {
+        if (isSubscribed) {
+          setIsLoading(false);
         }
       }
-    }
-  }, [id]);
+    };
+
+    loadExercise();
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [exerciseFromState, id, retryKey]);
 
   useEffect(() => {
-    window.scrollTo(0, 0, { behavior: "smooth" });
-  }, [location]);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [id]);
 
   return (
-    <motion.div
+    <motion.main
+      id="main-content"
       className="exerciseDetailsPage"
-      initial={{ width: 0 }}
-      animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
     >
-      {exercise != null ? (
+      {isLoading ? (
+        <div className="detailLoading" role="status" aria-live="polite">
+          <span className="visually-hidden">Loading exercise details</span>
+          <div className="detailSkeletonMedia"></div>
+          <div className="detailSkeletonContent">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      ) : error ? (
+        <section className="detailErrorState" role="alert">
+          <p className="sectionEyebrow">Exercise unavailable</p>
+          <h1>We could not open that exercise</h1>
+          <p>{error}</p>
+          <div className="detailErrorActions">
+            <button type="button" onClick={() => setRetryKey((key) => key + 1)}>
+              Try again
+            </button>
+            <Link to="/">Back to the library</Link>
+          </div>
+        </section>
+      ) : (
         <>
           <ExerciseDetail exercise={exercise} />
           <ExerciseVideos exerciseName={exercise.name} />
-          <SimilarExercises exercise={exercise.target} type={"target"} />
-          <SimilarExercises exercise={exercise.equipment} type={"equipment"} />
+          <RelatedExercises
+            target={exercise.target}
+            equipment={exercise.equipment}
+            currentExerciseId={exercise.id}
+          />
         </>
-      ) : (
-        ""
       )}
-    </motion.div>
+    </motion.main>
   );
 };
 

@@ -1,174 +1,999 @@
-.exerciseDetailsPage{
-    margin-top: 5.5rem;
-    height: fit-content;
+﻿.exerciseDetailsPage {
+  width: var(--content-width);
+  margin: 0 auto;
+  padding: 7.75rem 0 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* ExerciseDetail component */
+.exerciseDetailComponent {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 3vw, 2.3rem);
+  align-items: start;
+}
 
-.exerciseDetailComponent{
+.exerciseImgContainer {
+  position: sticky;
+  top: 6.5rem;
+}
+
+.exerciseMediaFrame {
+  padding: 1rem;
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.exerciseImgContainer img {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.detailCallout {
+  margin-top: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.detailsContainer {
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  border-radius: 32px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  backdrop-filter: blur(16px);
+}
+
+.detailsContainer h1,
+.detailsContainer h2,
+.detailsContainer h3,
+.detailsContainer h4 {
+  margin: 0;
+  color: var(--text-strong);
+}
+
+.detailsContainer h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.2vw, 3.9rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.exerciseLead {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.detailHighlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.detailHighlight {
+  padding: 1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+}
+
+.detailHighlight span {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.detailHighlight strong {
+  display: block;
+  color: var(--text-strong);
+  line-height: 1.45;
+}
+
+.instructionsPanel {
+  padding: 1.25rem;
+  border-radius: 24px;
+  background: rgba(6, 14, 22, 0.62);
+  border: 1px solid var(--surface-border);
+}
+
+.instructionList {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+.instructionList li::marker {
+  color: var(--accent);
+}
+
+.musclesUsed {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.muscleColumn {
+  padding: 1.1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+}
+
+.muscleColumn ul {
+  margin: 0.8rem 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.55rem;
+  color: var(--text-main);
+}
+
+.exerciseVideos {
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border-radius: 32px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.videoSectionDescription {
+  margin: 0;
+  max-width: 42rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.exerciseVideos .scrollBarContainer {
+  padding-top: 1.25rem;
+}
+
+.videoComponentContainer {
+  width: min(22rem, calc(100vw - 4rem));
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(6, 14, 22, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 35px rgba(4, 10, 18, 0.22);
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.videoComponentContainer:hover,
+.videoComponentContainer:focus-visible,
+.selectedContainer {
+  transform: translateY(-6px);
+  border-color: rgba(255, 179, 71, 0.4);
+  box-shadow: 0 28px 45px rgba(4, 10, 18, 0.32);
+}
+
+.thumbnail {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.thumbnailImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.videoComponentContainer:hover .thumbnailImg {
+  transform: scale(1.04);
+}
+
+.thumbnail .length {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #ffffff;
+  font-size: 0.78rem;
+}
+
+.videoInfo {
+  padding: 1rem 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.videoInfo p {
+  margin: 0;
+}
+
+.videoTitle {
+  color: var(--text-strong);
+  font-weight: 700;
+  line-height: 1.5;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.channelAndViewsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.videoChannel,
+.videoViews {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.videoViews {
+  flex-shrink: 0;
+}
+
+.exerciseDetailComponent {
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+  grid-template-areas:
+    "breadcrumb breadcrumb"
+    "media title"
+    "media details";
+  gap: 1.25rem clamp(1.5rem, 3vw, 2.3rem);
+}
+
+.detailBreadcrumb {
+  grid-area: breadcrumb;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-muted);
+}
+
+.detailBackButton {
+  min-height: 2.85rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text-strong);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.detailBackButton:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 179, 71, 0.3);
+}
+
+.breadcrumbCurrent {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.exerciseTitlePanel {
+  grid-area: title;
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.exerciseTitlePanel h1 {
+  margin: 0;
+  max-width: 15ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.65rem, 4.5vw, 4.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  color: var(--text-strong);
+}
+
+.detailHighlights {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.detailHighlight {
+  min-width: 0;
+}
+
+.detailHighlight strong {
+  overflow-wrap: anywhere;
+}
+
+.detailActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.detailActionButton {
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  color: var(--text-strong);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.detailActionButton:hover,
+.detailActionButton.isSaved {
+  color: #211301;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.shareStatus {
+  min-width: 5rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.exerciseImgContainer {
+  grid-area: media;
+  align-self: start;
+}
+
+.exerciseMediaFrame {
+  position: relative;
+  overflow: hidden;
+}
+
+.exerciseImgContainer img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.mediaLabel,
+.expandDemo {
+  position: absolute;
+  z-index: 2;
+  border-radius: 999px;
+  color: var(--text-strong);
+  background: rgba(7, 14, 21, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.mediaLabel {
+  top: 1.75rem;
+  left: 1.75rem;
+  padding: 0.55rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mediaStatusDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(255, 179, 71, 0.15);
+}
+
+.expandDemo {
+  right: 1.75rem;
+  bottom: 1.75rem;
+  min-height: 2.8rem;
+  padding: 0.7rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.expandDemo:hover {
+  background: rgba(255, 179, 71, 0.94);
+  color: #211301;
+}
+
+.detailCallout {
+  margin-bottom: 0;
+  font-size: 0.92rem;
+}
+
+.detailsContainer {
+  grid-area: details;
+  gap: 1.25rem;
+}
+
+.detailSectionNav {
+  position: static;
+  margin: -0.45rem -0.45rem 0;
+  padding: 0.45rem;
+  border-radius: 999px;
+  display: flex;
+  gap: 0.3rem;
+  overflow-x: auto;
+  background: rgba(7, 15, 23, 0.92);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 14px 25px rgba(3, 9, 15, 0.24);
+  scrollbar-width: none;
+  backdrop-filter: blur(16px);
+}
+
+.detailSectionNav::-webkit-scrollbar {
+  display: none;
+}
+
+.detailSectionNav a {
+  flex: 0 0 auto;
+  min-height: 2.6rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.detailSectionNav a:hover,
+.detailSectionNav a:focus-visible {
+  color: var(--text-strong);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.instructionsPanel,
+.musclesUsed {
+  scroll-margin-top: 7rem;
+}
+
+.detailSectionHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.instructionList {
+  margin-top: 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.instructionList li {
+  padding: 1rem;
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+}
+
+.instructionNumber {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #211301;
+  background: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.musclesUsed {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.primaryMuscleColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.primaryMuscleChip {
+  padding: 0.7rem 0.85rem;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #211301;
+  background: var(--accent);
+  font-weight: 800;
+}
+
+.primaryMuscleChip small {
+  padding-left: 0.6rem;
+  border-left: 1px solid rgba(33, 19, 1, 0.22);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.secondaryMuscleList {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.secondaryMuscleList span {
+  padding: 0.6rem 0.75rem;
+  border-radius: 999px;
+  color: #ffd89a;
+  background: rgba(255, 179, 71, 0.14);
+  border: 1px solid rgba(255, 179, 71, 0.2);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.secondaryMuscleList p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.demoDialog {
+  width: min(42rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 1rem;
+  border-radius: 28px;
+  color: var(--text-main);
+  background: var(--bg-900);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.62);
+}
+
+.demoDialog::backdrop {
+  background: rgba(2, 7, 12, 0.84);
+  backdrop-filter: blur(10px);
+}
+
+.demoDialogHeader {
+  padding: 0 0 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.demoDialogHeader strong {
+  color: var(--text-strong);
+}
+
+.demoDialogHeader button {
+  min-height: 2.6rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  color: var(--text-strong);
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+}
+
+.demoDialog img {
+  width: 100%;
+  max-height: calc(100vh - 7rem);
+  border-radius: 20px;
+  object-fit: contain;
+  background: #ffffff;
+}
+
+.detailLoading {
+  min-height: 42rem;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+  gap: 2rem;
+}
+
+.detailSkeletonMedia,
+.detailSkeletonContent {
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+}
+
+.detailSkeletonMedia::after,
+.detailSkeletonContent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 48%,
+    transparent 76%
+  );
+  animation: skeletonSweep 1.8s infinite;
+}
+
+.detailSkeletonContent {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.detailSkeletonContent span {
+  height: 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.detailSkeletonContent span:first-child {
+  width: 35%;
+}
+
+.detailSkeletonContent span:nth-child(2) {
+  width: 84%;
+  height: 4rem;
+}
+
+.detailSkeletonContent span:nth-child(3) {
+  width: 100%;
+}
+
+.detailSkeletonContent span:nth-child(4) {
+  width: 72%;
+}
+
+.detailErrorState {
+  min-height: 32rem;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+}
+
+.detailErrorState h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  color: var(--text-strong);
+  letter-spacing: -0.05em;
+}
+
+.detailErrorState > p:not(.sectionEyebrow) {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.detailErrorActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.detailErrorActions button,
+.detailErrorActions a,
+.videoError button {
+  min-height: 3rem;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #211301;
+  background: var(--accent);
+  text-decoration: none;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.detailErrorActions a {
+  color: var(--text-strong);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--surface-border);
+}
+
+.videoError {
+  padding: 1.25rem;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text-muted);
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.18);
+}
+
+.videoError p {
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .exerciseDetailComponent {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "breadcrumb"
+      "title"
+      "media"
+      "details";
+  }
+
+  .exerciseImgContainer {
+    position: static;
+  }
+
+  .exerciseMediaFrame {
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  .detailCallout {
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  .detailLoading {
+    grid-template-columns: 1fr;
+  }
+
+  .detailSkeletonMedia {
+    min-height: 32rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .exerciseDetailsPage {
+    padding-top: 5.75rem;
+    gap: 1.25rem;
+  }
+
+  .exerciseTitlePanel,
+  .detailsContainer {
+    border-radius: 26px;
+  }
+
+  .exerciseTitlePanel h1 {
+    font-size: clamp(2.45rem, 12vw, 3.6rem);
+  }
+
+  .detailHighlights {
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
     display: flex;
-    justify-content: space-around;
-    padding: 1rem;
-    flex-direction: column;
-    font-size: clamp(1rem, 0.5rem + 0.7018vw, 2rem);
-}
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
 
-.exerciseImgContainer{
-    overflow: hidden;
-    margin: 1rem;
-}
+  .detailHighlights::-webkit-scrollbar {
+    display: none;
+  }
 
-.exerciseImgContainer img{
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
-}
+  .detailHighlight {
+    flex: 0 0 10rem;
+    scroll-snap-align: start;
+  }
 
-@media (min-width: 500px){
-    .exerciseDetailComponent{
-        flex-direction: column-reverse;
-        padding: 1rem 3rem;
-    }
-    .exerciseImgContainer{
-        margin: 2rem;
-    }
-}
+  .detailActions {
+    align-items: stretch;
+  }
 
-@media (min-width: 1024px){
-    .exerciseDetailComponent{
-        align-items: center;
-        flex-direction: row;
-        gap: 1rem;
-        padding: 2rem 5rem;
-    }
-    .exerciseImgContainer{
-        width: 50%;
-        margin: 0;
-    }
-}
-
-@media (min-width: 1300px){
-    .exerciseImgContainer{
-        width: 35%;
-        margin: 0;
-    }
-}
-
-/* ExerciseVideos component */
-
-.exerciseVideos{
-    margin: 1rem;
-    margin-top: 3rem;
-}
-
-@media (max-width: 320px) {
-    .exerciseVideos{
-        margin: 1rem 0.3rem;
-    }
-}
-
-.videoComponentContainer{
-    background-color: rgb(25, 26, 31);
-    border: 1px solid rgb(25, 26, 31);
-    height: 16rem;
-    width: 20rem;
-    margin: 2rem;
-    padding: 0.2rem;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.selectedContainer{
-    border: 0.1px solid #C77B00;
-}
-
-.videoComponentContainer:hover{
-    border: 0.1px solid #C77B00;
-    scale: 1.01;
-}
-
-@media (max-width: 768px) {
-    .videoComponentContainer{
-        height: 15rem;
-        width: 19rem;
-    }
-}
-
-@media (max-width: 425px) {
-    .videoComponentContainer{
-        height: 14rem;
-        width: 18rem;
-        margin: 2rem 1rem;
-    }
-}
-
-@media (max-width: 320px) {
-    .videoComponentContainer{
-        height: 11rem;
-        width: 15rem;
-        margin: 2rem 0.5rem;
-    }
-}
-
-.thumbnail{
-    position: relative;
-    height: 70%;
-    width: 100%;
-}
-
-.thumbnailImg{
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.thumbnail .length{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 0.2rem;
-    background-color: black;
-    border-radius: 10px;
-    padding: 0.5rem;
-}
-
-.videoInfo{
-    display: flex;
-    flex-direction: column;
+  .detailActionButton {
     flex: 1;
-    border-radius: 10px;
-    margin: 0 0.5rem;
-    padding: 0.5rem;
-    justify-content: space-between;
+  }
+
+  .shareStatus {
+    width: 100%;
+    min-height: 1.1rem;
+  }
+
+  .breadcrumbCurrent {
+    display: none;
+  }
+
+  .musclesUsed {
+    grid-template-columns: 1fr;
+  }
+
+  .videoError {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
-.videoInfo p{
-    margin: 0;
+@media (min-width: 1025px) {
+  .exerciseImgContainer {
+    top: 8rem;
+  }
 }
 
-.videoTitle{
-    font-size: large;
-    text-overflow: ellipsis;
+@media (max-width: 520px) {
+  .exerciseDetailsPage {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0.5rem;
+  }
+
+  .exerciseDetailComponent,
+  .exerciseDetailComponent > *,
+  .exerciseTitlePanel,
+  .detailsContainer,
+  .exerciseImgContainer,
+  .exerciseMediaFrame,
+  .instructionsPanel,
+  .musclesUsed,
+  .muscleColumn,
+  .exerciseVideos,
+  .exerciseDetailsPage .similarExercises {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .exerciseMediaFrame,
+  .exerciseVideos {
+    border-radius: 26px;
+  }
+
+  .exerciseTitlePanel,
+  .detailsContainer {
+    padding: 1rem;
+  }
+
+  .exerciseMediaFrame {
+    padding: 0.7rem;
+  }
+
+  .exerciseImgContainer img {
+    border-radius: 20px;
+  }
+
+  .mediaLabel {
+    top: 1.25rem;
+    left: 1.25rem;
+  }
+
+  .expandDemo {
+    right: 1.25rem;
+    bottom: 1.25rem;
+  }
+
+  .detailsContainer {
+    gap: 1rem;
+  }
+
+  .detailHighlights {
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+  }
+
+  .exerciseTitlePanel h1,
+  .exerciseLead,
+  .detailHighlight,
+  .instructionList li,
+  .muscleColumn {
+    overflow-wrap: anywhere;
+  }
+
+  .detailSectionNav {
+    margin-inline: -0.6rem;
+    width: auto;
+    max-width: none;
+  }
+
+  .instructionsPanel {
+    padding: 1rem;
+  }
+
+  .instructionList li {
+    padding: 0.85rem;
+  }
+
+  .detailSkeletonMedia {
+    min-height: calc(100vw - 1.5rem);
+  }
+
+  .detailActions > * {
+    min-width: 0;
+  }
+
+  .relatedTabs {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .relatedTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .exerciseVideos,
+  .exerciseDetailsPage .similarExercises {
+    width: 100%;
+    padding-inline: 0.75rem;
     overflow: hidden;
-    white-space: nowrap;
-    font-weight: bold;
-}
+  }
 
-.channelAndViewsContainer{
+  .exerciseVideos .scrollBarContainer,
+  .exerciseDetailsPage .similarExercises .scrollBarContainer {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .channelAndViewsContainer {
+    gap: 0.5rem;
+    font-size: 0.84rem;
+  }
+
+  .videoComponentContainer,
+  .exerciseDetailsPage .similarExercises .exerciseBox {
+    flex: 0 0 calc(100% - 0.5rem);
+    width: calc(100% - 0.5rem);
+    max-width: calc(100% - 0.5rem);
+    margin-inline: 0.25rem;
+  }
+
+  .exerciseDetailsPage
+    .relatedExercises
+    .react-horizontal-scrolling-menu--item {
+    flex: 0 0 min(20rem, calc(100vw - 3rem));
+    width: min(20rem, calc(100vw - 3rem));
+    min-width: 0;
     display: flex;
-    justify-content: space-between;
-    font-size: medium;
-}
+  }
 
-.videoChannel{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 50%;
+  .exerciseDetailsPage .relatedExercises .exerciseBox {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
 }

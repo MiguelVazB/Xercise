@@ -1,41 +1,39 @@
-import React from "react";
+import { formatViews } from "../utils/formatters";
 
 const VideoComponent = ({ video, selectedItem, setSelectedItem }) => {
-  const formatViews = (views) => {
-    return Number(views).toLocaleString();
-  };
+  const videoUrl = `https://www.youtube.com/watch?v=${video.video_id}`;
 
   return (
-    <div
+    <a
       className={`videoComponentContainer ${
-        video == selectedItem ? "selectedContainer" : ""
+        video.title === selectedItem ? "selectedContainer" : ""
       }`}
-      onClick={() => {
-        setSelectedItem(video.title);
-        window.open(
-          `https://www.youtube.com/watch?v=${video.video_id}`,
-          "_blank"
-        );
-      }}
+      href={videoUrl}
+      target="_blank"
+      rel="noreferrer"
+      onClick={() => setSelectedItem(video.title)}
+      aria-label={`Open ${video.title} on YouTube`}
     >
       <div className="thumbnail">
         <img
           className="thumbnailImg"
-          alt={`${video?.title} video`}
-          src={video.thumbnails[0].url}
+          alt=""
+          src={video.thumbnails?.[0]?.url}
+          loading="lazy"
+          decoding="async"
         />
         <div className="length">{video.video_length}</div>
       </div>
       <div className="videoInfo">
-        <p className="videoTitle">{video?.title}</p>
+        <p className="videoTitle">{video.title}</p>
         <div className="channelAndViewsContainer">
-          <p className="videoChannel">{video?.author}</p>
+          <p className="videoChannel">{video.author}</p>
           <p className="videoViews">
             {formatViews(video.number_of_views)} views
           </p>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 

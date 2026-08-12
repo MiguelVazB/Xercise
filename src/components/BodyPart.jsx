@@ -1,28 +1,34 @@
-import React from "react";
+import { formatLabel } from "../utils/formatters";
 
-const BodyPart = ({ part, selectedBodyPart, setSelectedBodyPart }) => {
-  return (
-    <div
-      className={`bodyPart ${
-        selectedBodyPart == part ? "categorySelected" : ""
-      }`}
-      onClick={() => setSelectedBodyPart(part)}
-    >
-      <img
-        src={`./bodyParts/${
-          part == "lower arms" || part == "upper arms"
-            ? "arm"
-            : part == "lower legs" || part == "upper legs"
-            ? "legs"
-            : part
-        }.png`}
-        alt={`${part} body part icon`}
-        loading="lazy"
-        decoding="async"
-      />
-      <p>{part.charAt(0).toUpperCase() + part.slice(1)}</p>
-    </div>
-  );
+const getBodyPartImage = (part) => {
+  if (part === "lower arms" || part === "upper arms") {
+    return "arm";
+  }
+
+  if (part === "lower legs" || part === "upper legs") {
+    return "legs";
+  }
+
+  return part;
 };
+
+const BodyPart = ({ part, selectedBodyPart, setSelectedBodyPart }) => (
+  <button
+    type="button"
+    className={`bodyPart ${selectedBodyPart === part ? "categorySelected" : ""}`}
+    onClick={() => setSelectedBodyPart(part)}
+    aria-pressed={selectedBodyPart === part}
+    aria-label={`Filter exercises by ${formatLabel(part)}`}
+  >
+    <img
+      src={`./bodyParts/${getBodyPartImage(part)}.png`}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+    />
+    <p>{formatLabel(part)}</p>
+  </button>
+);
 
 export default BodyPart;

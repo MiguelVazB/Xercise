@@ -1,498 +1,801 @@
-.homePage{
-    margin-top: 4.5rem;
-    display: flex;
-    flex-direction: column;
+﻿.homePage {
+  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 }
 
-/* HeroComponent */
+.homeContent {
+  width: var(--content-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
 
-.heroComponent{
-    z-index: 1;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    height: 100svh;
+.heroComponent {
+  width: var(--content-width);
+  min-height: calc(100vh - 2rem);
+  margin: 0 auto;
+  padding: 8rem 0 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4.75rem);
+  position: relative;
+}
+
+.heroGlow {
+  position: absolute;
+  inset: 7rem auto auto 0;
+  width: 26rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgba(255, 179, 71, 0.18), transparent 72%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
 }
 
 .homePageHook {
-    z-index: 1;
-    margin: 0;
-    font-size: clamp(1.5rem, 3vw, 6rem);
-    padding: 1rem;
-    word-wrap: normal;
-    text-shadow: -8px 4px 5px black;
-    margin-right: 2rem;
-    text-align: center;
+  margin: 0;
+  max-width: 11ch;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.8vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  color: var(--text-strong);
 }
 
-.brandName{
-    color: #D57D00;
-    font-size: clamp(2rem, 4vw, 6.2rem);
+.brandName {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #ffd89a;
 }
 
 .tagline {
-    color: #cedad4;
+  margin: 0;
+  max-width: 36rem;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
 }
 
-.mainPic{
-    z-index: 1;
-    width: auto;
-    height: clamp(10rem, 70vw, 40rem);
-    max-width: 100%;
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.25rem;
 }
 
-.exploreBtn{
-    text-decoration: none;
-    color: #ffffff;
-    text-shadow: none;
-    background-color: #D57D00;
-    padding: 1rem 1.5rem;
-    border-radius: 20px;
-    display: inline-block;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+.exploreBtn,
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  padding: 0.95rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.exploreBtn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #1d1201;
+  box-shadow: 0 18px 32px rgba(240, 138, 24, 0.25);
 }
 
 .exploreBtn:hover {
-    background-color: #B86A00;
-    transform: translateY(-2px);
+  transform: translateY(-2px);
+  box-shadow: 0 24px 38px rgba(240, 138, 24, 0.3);
 }
 
-.exploreBtn:focus {
-    outline: 3px solid #ffffff;
-    outline-offset: 2px;
+.secondaryBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-strong);
 }
 
-.backSlogan{
-    z-index: 0;
-    margin: 0;
-    position: absolute;
-    bottom: 2rem;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.04);
-    font-size: clamp(1.5rem, 8vw, 30rem);
+.secondaryBtn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 179, 71, 0.24);
 }
 
-@media (max-width: 1000px) {
-    .homePage{
-        flex-direction: column;
-        justify-content: center;
-    }
-    .mainPic{
-        z-index: 1;
-        width: auto;
-        height: clamp(5rem, 50vw, 30rem);
-        max-width: 100%;
-    }
-    .homePageHook{
-        margin: 0;
-        margin-bottom: 3rem;
-    }
+.heroStats {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
-@media (max-width: 1000px) and (orientation: portrait) {
-    .heroComponent{
-        flex-direction: column;
-    }
+.heroStat {
+  padding: 1rem 1.1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
 }
 
-/* ExerciseSearch component */
-
-.searchContainer{
-    display: flex;
-    flex-direction: row;
-    height: 1.5em;
-    margin: 1rem 3rem;
-    border-radius: 20px;
-    overflow: hidden;
-    font-size: clamp(1.5rem, 3vw, 5rem);
+.heroStat span {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
-@media (max-width: 360px){
-    .searchContainer{
-        display: flex;
-        flex-direction: column;
-        height: 4em;
-        margin: 1.5rem 0.5rem;
-        border-radius: 0;
-    }
-    .searchContainer input{
-        flex: 1 !important;
-        text-align: center !important;
-        margin-bottom: 1rem;
-        border-radius: 10px;
-        padding: 0 !important;
-    }
-    .searchContainer button{
-        width: 50% !important;
-        align-self: center;
-        border-radius: 10px;
-        flex: 1 !important;
-    }
+.heroStat strong {
+  display: block;
+  color: var(--text-strong);
+  line-height: 1.4;
 }
 
-.searchContainer input{
-    flex: 1;
-    padding-left: 0.5rem;
-    font-size: clamp(0.8rem, 1.4vw, 2em);
+.heroVisual {
+  position: relative;
+  min-height: 36rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.searchContainer button{
-    width: max-content;
-    padding: 0px 1em;
-    background-color: #D57D00;
-    color: #ffffff;
-    font-weight: bold;
-    border: 0;
-    cursor: pointer;
-    font-size: clamp(1rem, 3vw, 5rem);
-    transition: background-color 0.3s ease;
+.heroImageFrame {
+  position: relative;
+  width: min(100%, 33rem);
+  padding: 1.7rem 1rem 0;
+  border-radius: 2.5rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.heroImageFrame::before {
+  content: "";
+  position: absolute;
+  inset: 1rem 1rem auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+}
+
+.mainPic {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 25px 60px rgba(0, 0, 0, 0.55));
+}
+
+.heroCard {
+  position: absolute;
+  max-width: 15rem;
+  padding: 1rem 1.15rem;
+  border-radius: 24px;
+  background: rgba(9, 18, 27, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 50px rgba(4, 10, 18, 0.32);
+  backdrop-filter: blur(18px);
+}
+
+.heroCardTop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin-bottom: 0.8rem;
+}
+
+.heroCardLabel {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.heroCardValue {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--text-strong);
+  letter-spacing: -0.04em;
+}
+
+.heroCard p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.heroCardPrimary {
+  top: 8%;
+  right: -1.25rem;
+  animation: heroFloat 5s ease-in-out infinite;
+}
+
+.heroCardSecondary {
+  bottom: 10%;
+  left: -1rem;
+  animation: heroFloat 6.5s ease-in-out infinite reverse;
+}
+
+.backSlogan {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 8rem);
+  letter-spacing: -0.08em;
+  color: rgba(255, 255, 255, 0.04);
+  user-select: none;
+  pointer-events: none;
+}
+
+.searchSection,
+.exercisesComponent {
+  padding: clamp(1.5rem, 3vw, 2.3rem);
+  border-radius: 32px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.exercisesComponent {
+  scroll-margin-top: 7rem;
+}
+
+.searchContainer {
+  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.9rem;
+}
+
+.searchContainer input {
+  min-height: 4rem;
+  width: 100%;
+  padding: 0 1.2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(6, 14, 22, 0.72);
+  color: var(--text-strong);
+}
+
+.searchContainer input::placeholder {
+  color: rgba(149, 165, 185, 0.72);
+}
+
+.searchContainer button {
+  min-height: 4rem;
+  padding: 0 1.5rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #1d1201;
+  font-weight: 700;
+  box-shadow: 0 16px 28px rgba(240, 138, 24, 0.22);
 }
 
 .searchContainer button:hover:not(:disabled) {
-    background-color: #B86A00;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 34px rgba(240, 138, 24, 0.28);
 }
 
-.searchContainer button:focus {
-    outline: 3px solid #D57D00;
-    outline-offset: 2px;
+.searchContainer button:disabled {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.45);
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
-/* HorizontalScrollBar component */
-
-
-.scrollBarContainer{
-    position: relative;
+.filterIntro {
+  margin-top: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
 }
 
-.leftArrow, .rightArrow{
-    z-index: 1;
-    height: 40px;
-    cursor: pointer;
-    position: absolute;
-    top: -1rem;
+.filterIntro > :first-child {
+  min-width: 0;
 }
 
-.rightArrow{
-    right: 20px;
+.filterLabel,
+.filterDescription {
+  margin: 0;
 }
 
-.leftArrow{
-    left: 20px;
+.filterLabel {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-strong);
 }
 
-
-/* BodyPart component */
-.bodyPart{
-    margin: 4em;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.25s ease-in-out;
+.filterDescription {
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
-.bodyPart:hover{
-    border-bottom: 3px solid rgba(199, 123, 0, 70%);
-    padding-bottom: 5px;
-    scale: 1.1;
+.filterScrollBar {
+  margin-top: 1rem;
+  padding-top: 3.25rem;
 }
 
-.bodyPart p{
-    font-size: x-large;
-    margin: 0;
+.filterScrollBar .leftArrow,
+.filterScrollBar .rightArrow {
+  top: 0;
 }
 
-.bodyPart img{
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
+.filterScrollBar .react-horizontal-scrolling-menu--scroll-container {
+  padding-right: 0.5rem;
 }
 
-@media (max-width: 550px) {
-    .bodyPart{
-        margin: 2em;
-    }
-    .bodyPart img{
-        width: 60px;
-        height: 60px;
-    }
-    .bodyPart p{
-        font-size: larger;
-        margin: 0;
-    }
-    .leftArrow, .rightArrow{
-        height: 30px;
-    }
+.bodyPart {
+  min-width: 9rem;
+  margin: 0.75rem 1rem 0;
+  padding: 1.15rem 1rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  color: var(--text-main);
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-@media (max-width: 300px) {
-    .bodyPart{
-        margin: 1em;
-    }
-    .bodyPart img{
-        width: 40px;
-        height: 40px;
-    }
-    .bodyPart p{
-        font-size: large;
-        margin: 0;
-    }
-    .leftArrow, .rightArrow{
-        height: 20px;
-    }
+.bodyPart:hover,
+.bodyPart:focus-visible {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 179, 71, 0.45);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
 }
 
-.categorySelected{
-    border-bottom: 3px solid rgba(199, 123, 0, 70%);
-    padding-bottom: 5px;
+.bodyPart p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
-/* Exercises Component */
+.bodyPart img {
+  width: 4.1rem;
+  height: 4.1rem;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.24));
+}
 
-.exercisesComponent{
-    margin: 3em 1em;
-    display: flex;
+.categorySelected {
+  background: linear-gradient(180deg, rgba(255, 179, 71, 0.2), rgba(255, 255, 255, 0.03));
+  border-color: rgba(255, 179, 71, 0.65);
+  box-shadow: 0 18px 34px rgba(240, 138, 24, 0.16);
+}
+
+.resultsHeader {
+  margin-bottom: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.resultsHeadingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.resultsCounter {
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.exercisesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.exercisesContainerLessThan4 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
+  justify-content: center;
+}
+
+.exerciseBox {
+  min-width: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 24px 45px rgba(4, 10, 18, 0.28);
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.exerciseBox:hover,
+.exerciseBox:focus-visible {
+  transform: translateY(-8px);
+  border-color: rgba(255, 179, 71, 0.35);
+  box-shadow: 0 34px 65px rgba(4, 10, 18, 0.38);
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(145deg, rgba(255, 179, 71, 0.12), rgba(255, 255, 255, 0.03));
+}
+
+.pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.18) 48%, transparent 78%);
+  animation: skeletonSweep 1.8s infinite;
+}
+
+.exercisePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition:
+    opacity 0.24s ease,
+    transform 0.45s ease;
+}
+
+.exercisePreviewLoaded {
+  opacity: 1;
+}
+
+.exerciseBox:hover .exercisePreview {
+  transform: scale(1.04);
+}
+
+.exerciseOverlay {
+  position: absolute;
+  inset: 1rem 1rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.exerciseTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(7, 14, 21, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  color: var(--text-strong);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.exerciseInfoContainer {
+  padding: 1.25rem 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exerciseSubheading {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.exerciseName {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.42rem;
+  line-height: 1.08;
+  color: var(--text-strong);
+}
+
+.musclesInvolved {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.musclesInvolved span {
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 179, 71, 0.16);
+  color: #ffd89a;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.exerciseSkeleton {
+  min-height: 26rem;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.exerciseSkeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.12) 50%, transparent 80%);
+  animation: skeletonSweep 1.8s infinite;
+  transform: translateX(-100%);
+}
+
+.paginationButtons {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pageButtons,
+.previousButton,
+.nextButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.85rem;
+  min-height: 2.85rem;
+  padding: 0.85rem 1.05rem;
+  border-radius: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pageButtons:hover,
+.previousButton:hover,
+.nextButton:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 179, 71, 0.25);
+  color: var(--text-strong);
+}
+
+.previousButton,
+.nextButton {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #1a1001;
+}
+
+.paginationActive .pageButtons {
+  background: rgba(255, 179, 71, 0.22);
+  border-color: rgba(255, 179, 71, 0.45);
+  color: var(--text-strong);
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes skeletonSweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 1100px) {
+  .heroComponent {
+    grid-template-columns: 1fr;
+    padding-top: 7.5rem;
+    min-height: auto;
+  }
+
+  .heroContent {
+    max-width: 44rem;
+  }
+
+  .homePageHook {
+    max-width: 12ch;
+  }
+
+  .heroVisual {
+    min-height: 30rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .exercisesContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .heroStats {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCardPrimary,
+  .heroCardSecondary,
+  .backSlogan {
+    display: none;
+  }
+
+  .heroVisual {
+    min-height: auto;
+  }
+
+  .resultsHeader,
+  .filterIntro {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    align-items: flex-start;
+  }
+
+  .resultsCounter {
+    white-space: normal;
+  }
+
+  .heroActions > * {
+    flex: 1 1 12rem;
+  }
 }
 
-.exercisesComponent h2{
-    margin: 2em;
-    font-size: clamp(1rem, 2vw, 5rem);
-}
+@media (max-width: 640px) {
+  .filterScrollBar {
+    padding-top: 0;
+  }
 
-.exercisesContainer{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 4em;
-    grid-row-gap: 3em;
-    min-height: 100vh;
-}
+  .searchContainer {
+    grid-template-columns: 1fr;
+  }
 
-.exercisesContainerLessThan4{
-    grid-template-columns: repeat(3, 1fr) !important;
-    grid-template-rows: auto !important;
-    min-height: 0;
-}
-
-@media (max-width: 800px) {
-    .exercisesContainer{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        grid-column-gap: 3em;
-        grid-row-gap: 2em;
-    }
-}
-
-@media (max-width: 550px) {
-    .exercisesContainerLessThan4{
-        grid-template-columns: repeat(1, 1fr) !important;
-        grid-template-rows: auto !important;
-    }
-    .exercisesContainer{
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-column-gap: 3em;
-        grid-row-gap: 2em;
-    }
-    .pulse{
-        flex: none !important;
-        height: 50dvh !important;
-    }
-}
-
-.paginationButtons{
-    margin-top: 3em;
-    display: flex;
-    font-size: 2vh;
+  .searchContainer button {
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
-    list-style: none;
-    z-index: 10;
-    padding: 0;
+  }
+
+  .exercisesContainer,
+  .exercisesContainerLessThan4 {
+    grid-template-columns: 1fr;
+  }
+
+  .bodyPart {
+    min-width: 7.5rem;
+    margin: 0.75rem 0.65rem 0;
+    padding: 1rem 0.8rem;
+  }
+
+  .bodyPart img {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .paginationButtons {
+    gap: 0.45rem;
+  }
+
+  .pageButtons,
+  .previousButton,
+  .nextButton {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }
 
-@media (max-width: 880px){
-    .paginationButtons{
-        gap: 1em;
-    }
-}
+@media (max-width: 480px) {
+  .homePage {
+    gap: 3rem;
+  }
 
-@media (max-width: 700px){
-    .paginationButtons{
-        gap: 0.5em;
-        font-size: 1.8vh;
-    }
-}
+  .heroComponent {
+    padding-top: 5.75rem;
+  }
 
-@media (max-width: 540px){
-    .paginationButtons{
-        font-size: 1.2vh;
-    }
-}
+  .homePageHook {
+    font-size: clamp(2.4rem, 14vw, 3.15rem);
+  }
 
-@media (max-width: 440px){
-    .pageButtons, .break{
-        display: none;
-    }
-    .paginationButtons{
-        font-size: 1.8vh;
-    }
-    .paginationActive .pageButtons{
-        display: flex;
-    }
-}
+  .tagline {
+    font-size: 0.98rem;
+  }
 
-.pageButtons{
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 10px;
-    transition-property: background-color, color;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-}
+  .heroImageFrame {
+    border-radius: 2rem;
+    padding-top: 1.3rem;
+  }
 
-.pageButtons:hover{
-    background-color: #1a1b20;
-    color: #ffffff;
-}
+  .searchSection,
+  .exercisesComponent {
+    padding: 1.2rem;
+    border-radius: 26px;
+  }
 
-.previousButton, .nextButton{
-    cursor: pointer;
-    color: #ffffff;
-    background-color: #D57D00;
-    padding: 10px 12px;
-    border-radius: 10px;
-    transition-property: background-color, color;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-}
+  .exerciseInfoContainer {
+    padding: 1.1rem;
+  }
 
-.paginationActive{
-    display: inline-flex;
-    background-color: #D57D00;
-    border-radius: 10px;
-    color: #ffffff;
-}
+  .exerciseName {
+    font-size: 1.26rem;
+  }
 
-.previousButton:hover, .nextButton:hover{
-    background-color: #FFA500;
-    color: #000000;
-}
-
-/* ExerciseBox Component */
-
-.exerciseBox{
-    display: flex;
+  .heroActions {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    color: black;
-    font-weight: bold;
-    border-radius: 20px;
-    overflow: hidden;
-    max-width: 360px;
-    max-height: 440px;
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-}
+  }
 
-.exerciseBox:hover{
-    scale: 1.05;
-}
-
-.pulse {
+  .heroActions > * {
     width: 100%;
-    height: 100%;
-    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    flex-basis: auto;
+  }
+
+  .searchContainer input,
+  .searchContainer button {
+    min-height: 3.5rem;
+  }
 }
 
-@keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-      background-color: lightgrey;
-    }
-    50% {
-      opacity: 0.5;
-      background-color: white;
-    }
-}
-
-.imageContainer{
-    flex: 2;
-    object-fit: cover;
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-}
-
-.exerciseBox img{
-    background-color: white;
-    height: 100%;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-}
-
-/* Ensure logos scale properly with CSS */
-.logoContainer img {
-    width: auto;
-    height: 100%;
-    max-width: 100%;
-}
-
-.exerciseInfoContainer{
-    display: flex;
-    flex: 1;
-    height: 50%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border-top: 5px solid #D57D00;
-}
-
-.musclesInvolved{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 0.5em;
-    margin: 0px 10px;
-    overflow: auto;
-    width: 100%;
-}
-
-.musclesInvolved p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: small;
-    background-color: #C77B00;
-    padding: 8px 10px;
-    border-radius: 20px;
-}
-
-.exerciseName{
-    width: 95%;
-    text-align: center;
-    word-break: normal;
-    font-size: x-large;
-    margin: 10px 0px;
-}
-
-@media (max-width: 700px) {
-    .exerciseName{
-        font-size: large;
-        margin: 5px 0px;
-    }
+@media (hover: none) {
+  .exploreBtn:hover,
+  .secondaryBtn:hover,
+  .bodyPart:hover,
+  .exerciseBox:hover,
+  .searchContainer button:hover:not(:disabled),
+  .pageButtons:hover,
+  .previousButton:hover,
+  .nextButton:hover {
+    transform: none;
+  }
 }

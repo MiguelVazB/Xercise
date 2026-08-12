@@ -11,7 +11,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
           'router': ['react-router-dom'],
           'animation': ['framer-motion'],
           'ui-components': ['react-horizontal-scrolling-menu', 'react-paginate'],

@@ -1,101 +1,103 @@
-import { React, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { exerciseOptions, fetchData } from "../utils/fetchData";
+import { formatLabel } from "../utils/formatters";
 import HorizontalScrollBar from "./HorizontalScrollBar";
-import { fetchData, exerciseOptions } from "../utils/fetchData";
 import "./SimilarExercises.css";
 
-const SimilarExercises = ({ exercise, type }) => {
-  const [selected, setSelected] = useState();
+const filterExercises = (exercises, searchTerm) => {
+  const normalizedTerm = searchTerm.toLowerCase();
+
+  return (Array.isArray(exercises) ? exercises : [])
+    .filter((item) =>
+      [item.name, item.target, item.equipment, item.bodyPart].some((value) =>
+        value?.toLowerCase().includes(normalizedTerm)
+      )
+    )
+    .slice(0, 10);
+};
+
+const getCachedExercises = (storageKey) => {
+  try {
+    return JSON.parse(sessionStorage.getItem(storageKey));
+  } catch {
+    sessionStorage.removeItem(storageKey);
+    return null;
+  }
+};
+
+const SimilarExercises = ({ exercise }) => {
   const [similarExercises, setSimilarExercises] = useState([]);
-
-  const filterSearch = async (similarExercises) => {
-    const searchedExercises = similarExercises.filter(
-      (exerciseInSearch) =>
-        exerciseInSearch.name.toLowerCase().includes(exercise) ||
-        exerciseInSearch.target.toLowerCase().includes(exercise) ||
-        exerciseInSearch.equipment.toLowerCase().includes(exercise) ||
-        exerciseInSearch.bodyPart.toLowerCase().includes(exercise)
-    );
-    return searchedExercises.slice(0, 10);
-  };
-
-  const filterLocal = async (exercisesLocal) => {
-    let filteredLocal = await filterSearch(exercisesLocal);
-    setSimilarExercises(filteredLocal.slice(0, 10));
-  };
-
-  const getSimilarExercises = async () => {
-    let link;
-    if (type == "target") {
-      link = `https://exercisedb.p.rapidapi.com/exercises/target/${exercise}?limit=10`;
-    } else if (type == "search") {
-      link = `https://exercisedb.p.rapidapi.com/exercises?limit=-1`;
-    } else {
-      link = `https://exercisedb.p.rapidapi.com/exercises/equipment/${exercise}?limit=10`;
-    }
-    let similarExercises = await fetchData(link, exerciseOptions);
-
-    if (type == "search") {
-      similarExercises = await filterSearch(similarExercises);
-    }
-
-    sessionStorage.setItem(
-      `${
-        type == "search" || type == "target" ? "target" : "equipment"
-      }_${exercise}`,
-      JSON.stringify(similarExercises)
-    );
-    setSimilarExercises(similarExercises);
-  };
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    if (exercise) {
-      let inSession = sessionStorage.getItem(
-        `${
-          type == "search" || type == "target" ? "target" : "equipment"
-        }_${exercise}`
-      );
-      if (type == "search" && inSession == null) {
-        let inLocalStorage = localStorage.getItem("all_exercises");
-        if (inLocalStorage != null) {
-          if (new Date().getTime() > JSON.parse(inLocalStorage).expiry) {
-            getSimilarExercises();
-          } else {
-            let exercisesLocal = JSON.parse(inLocalStorage);
-            filterLocal(exercisesLocal.value);
-          }
+    let isSubscribed = true;
+
+    const loadExercises = async () => {
+      const storageKey = `muscle_${exercise}`;
+      const cached = getCachedExercises(storageKey);
+
+      if (cached) {
+        setSimilarExercises(cached);
+        return;
+      }
+
+      try {
+        let allExercises;
+        const localCache = JSON.parse(
+          localStorage.getItem("all_exercises") || "null"
+        );
+
+        if (localCache?.value && Date.now() <= localCache.expiry) {
+          allExercises = localCache.value;
         } else {
-          getSimilarExercises();
+          allExercises = await fetchData(
+            "https://exercisedb.p.rapidapi.com/exercises?limit=-1",
+            exerciseOptions
+          );
         }
-      } else {
-        if (inSession != null) {
-          setSimilarExercises(JSON.parse(inSession));
-        } else {
-          getSimilarExercises();
+
+        const filtered = filterExercises(allExercises, exercise);
+        sessionStorage.setItem(storageKey, JSON.stringify(filtered));
+
+        if (isSubscribed) {
+          setSimilarExercises(filtered);
+        }
+      } catch (loadError) {
+        console.error("Error loading muscle exercises:", loadError);
+        if (isSubscribed) {
+          setError("Exercises for this muscle group are unavailable right now.");
         }
       }
-    }
+    };
+
+    loadExercises();
+    return () => {
+      isSubscribed = false;
+    };
   }, [exercise]);
 
   return (
-    <div className="similarExercises">
-      <div className="scrollHeading">
-        {type == "target"
-          ? `Similar exercises that target ${
-              exercise.toUpperCase().charAt(0) + exercise.slice(1)
-            }`
-          : type == "search"
-          ? `${exercise.toUpperCase().charAt(0) + exercise.slice(1)} Exercises`
-          : `Exercises that use the similar equipment`}
+    <section className="similarExercises">
+      <div className="sectionHeader">
+        <p className="sectionEyebrow">Muscle group</p>
+        <h2 className="scrollHeading">{formatLabel(exercise)} exercises</h2>
+        <p className="similarSectionDescription">
+          A curated set of exercises connected to the selected region.
+        </p>
       </div>
       <div className="scrollBarContainer">
-        <HorizontalScrollBar
-          componentToDisplay="exerciseBox"
-          data={similarExercises}
-          setSelectedItem={setSelected}
-          selectedItem={selected}
-        />
+        {error ? (
+          <div className="emptyState">{error}</div>
+        ) : similarExercises.length > 0 ? (
+          <HorizontalScrollBar
+            componentToDisplay="exerciseBox"
+            data={similarExercises}
+          />
+        ) : (
+          <div className="emptyState">Loading related exercises...</div>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 
