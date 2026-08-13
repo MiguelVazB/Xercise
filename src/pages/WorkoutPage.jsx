@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { formatLabel } from "../utils/formatters";
+import ExerciseImage from "../components/ExerciseImage";
 import {
   clearWorkout,
   getWorkoutItems,
@@ -157,8 +158,8 @@ const WorkoutPage = () => {
                       to={`/exercises/${exercise.id}`}
                       state={exercise}
                     >
-                      <img
-                        src={exercise.gifUrl}
+                      <ExerciseImage
+                        exercise={exercise}
                         alt=""
                         width="150"
                         height="150"

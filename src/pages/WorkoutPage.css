@@ -235,7 +235,8 @@
   text-decoration: none;
 }
 
-.workoutExerciseLink img {
+.workoutExerciseLink img,
+.workoutExerciseLink .exerciseMediaFallback {
   width: 6rem;
   height: 6rem;
   border-radius: 18px;
@@ -489,7 +490,8 @@
     gap: 0.75rem;
   }
 
-  .workoutExerciseLink img {
+  .workoutExerciseLink img,
+  .workoutExerciseLink .exerciseMediaFallback {
     width: 4.75rem;
     height: 4.75rem;
     border-radius: 15px;

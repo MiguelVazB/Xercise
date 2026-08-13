@@ -8,6 +8,7 @@ import {
   subscribeToSavedExercises,
 } from "../utils/savedExercises";
 import { recordRecentlyViewedExercise } from "../utils/recentExercises";
+import ExerciseImage from "./ExerciseImage";
 import {
   addExerciseToWorkout,
   isExerciseInWorkout,
@@ -168,8 +169,8 @@ const ExerciseDetail = ({ exercise }) => {
             <span className="mediaStatusDot" aria-hidden="true"></span>
             Looping demonstration
           </div>
-          <img
-            src={exercise.gifUrl}
+          <ExerciseImage
+            exercise={exercise}
             alt={`${exercise.name} exercise demonstration`}
             decoding="async"
           />
@@ -266,8 +267,8 @@ const ExerciseDetail = ({ exercise }) => {
             Close
           </button>
         </div>
-        <img
-          src={exercise.gifUrl}
+        <ExerciseImage
+          exercise={exercise}
           alt={`${exercise.name} exercise demonstration enlarged`}
           decoding="async"
         />

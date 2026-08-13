@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { formatLabel } from "../utils/formatters";
+import ExerciseImage from "./ExerciseImage";
 
 const ExerciseBox = ({ exercise }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -16,12 +17,12 @@ const ExerciseBox = ({ exercise }) => {
       aria-label={`View details for ${exercise.name} exercise`}
     >
       <div className={`imageContainer ${imageLoaded ? "" : "pulse"}`}>
-        <img
+        <ExerciseImage
+          exercise={exercise}
           className={`exercisePreview ${
             imageLoaded ? "exercisePreviewLoaded" : ""
           }`}
           onLoad={() => setImageLoaded(true)}
-          src={exercise.gifUrl}
           alt={`${exercise.name} exercise demonstration`}
           width="300"
           height="300"
